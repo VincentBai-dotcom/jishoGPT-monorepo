@@ -23,7 +23,7 @@ export default function RootLayout({
   params: { lang: Locale };
 }) {
   return (
-    <html lang={params.lang} data-theme="valentine">
+    <html lang={params.lang}>
       <body className={inter.className}>
         <NavBar params={{ lang: params.lang }}></NavBar>
         {children}
