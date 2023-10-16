@@ -1,0 +1,12 @@
+{ 
+  "navigation": {
+    "blog": "Blog"
+    
+  },
+  "account": {
+    "signIn": "Log In",
+    "signUp": "Sign Up",
+    "upgrade": "Upgrade",
+    "logOut": "Log Out"
+  }
+}

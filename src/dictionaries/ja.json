@@ -1,0 +1,12 @@
+{
+  "navigation": {
+    "blog": "ブルグ"
+    
+  },
+  "account": {
+    "signIn": "ログイン",
+    "signUp": "登録",
+    "upgrade": "アップグレード",
+    "logOut": "ログアウト"
+  }
+}

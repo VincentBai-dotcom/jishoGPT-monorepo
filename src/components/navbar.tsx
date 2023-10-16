@@ -1,4 +1,8 @@
-export default function NavBar() {
+import { Locale } from "../../i18n.config";
+import { getDictionary } from "@/lib/dictionaries";
+
+export default async function NavBar({ params }: { params: { lang: Locale } }) {
+  const dict = await getDictionary(params.lang);
   return (
     <div className="navbar bg-base-100 absolute">
       <div className="navbar-start">
@@ -7,14 +11,11 @@ export default function NavBar() {
       <div className="navbar-end">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Blog</a>
-          </li>
-          <li>
-            <a>About</a>
+            <a>{dict.navigation.blog}</a>
           </li>
         </ul>
-        <a className="btn mx-2">Sign In</a>
-        <a className="btn mx-2">Upgrade</a>
+        <a className="btn mx-2">{dict.account.signIn}</a>
+        <a className="btn mx-2">{dict.account.signUp}</a>
       </div>
     </div>
   );
