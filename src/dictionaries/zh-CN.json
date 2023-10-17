@@ -1,7 +1,9 @@
 { 
   "navigation": {
     "signInModule":{
-      "signIn": "登陆"
+      "signIn": "登陆",
+      "email": "邮箱",
+      "password": "密码"
     },
     "blog": "博客",
     "signUp": "注册",

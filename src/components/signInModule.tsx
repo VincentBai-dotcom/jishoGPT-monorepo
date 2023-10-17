@@ -1,8 +1,16 @@
 "use client";
 import { useState } from "react";
+import TextInputBox from "./textInputBox";
+import React from "react";
 
-export default function SignInModule({ dict }: { dict: { signIn: string } }) {
+export default function SignInModule({
+  dict,
+}: {
+  dict: { signIn: string; email: string; password: string };
+}) {
   const [showModal, setShowModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <>
@@ -21,8 +29,25 @@ export default function SignInModule({ dict }: { dict: { signIn: string } }) {
           >
             ✕
           </button>
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+          <div></div>
+          <article className="prose">
+            <h2 className="my-3">{dict.email}</h2>
+            <TextInputBox
+              value={email}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <h2 className="my-3">{dict.password}</h2>
+            <TextInputBox
+              value={password}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setPassword(e.target.value);
+              }}
+            />
+            <div></div>
+            <button className="btn btn-primary mt-5">{dict.signIn}</button>
+          </article>
         </div>
       </dialog>
     </>

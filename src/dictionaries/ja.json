@@ -1,7 +1,9 @@
 {
   "navigation": {
     "signInModule":{
-      "signIn": "ログイン"
+      "signIn": "ログイン",
+      "email": "メールアドレス:",
+      "password": "パスワード:"
     },
     "blog": "ブルグ",
     "signUp": "登録",
