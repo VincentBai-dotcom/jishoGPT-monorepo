@@ -1,4 +1,3 @@
-import "server-only";
 import type { Locale } from "../../i18n.config";
 
 const dictionaries = {
@@ -10,3 +9,9 @@ const dictionaries = {
 
 export const getDictionary = async (locale: Locale) =>
   dictionaries[locale]?.() ?? dictionaries.en();
+
+export const localeNameToLangName: Record<Locale, string> = {
+  en: "English",
+  ja: "日本語",
+  "zh-CN": "简体中文",
+};

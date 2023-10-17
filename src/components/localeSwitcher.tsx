@@ -3,6 +3,7 @@ import { Locale } from "../../i18n.config";
 import { i18n } from "../../i18n.config";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { localeNameToLangName } from "@/lib/dictionaries";
 
 export default function LangSwitcher({ params }: { params: { lang: Locale } }) {
   const pathName = usePathname();
@@ -20,7 +21,9 @@ export default function LangSwitcher({ params }: { params: { lang: Locale } }) {
         {locales.map((locale: Locale, index) => {
           return (
             <li key={index}>
-              <Link href={getNewLink(locale)}>{locale}</Link>
+              <Link href={getNewLink(locale)}>
+                {localeNameToLangName[locale]}
+              </Link>
             </li>
           );
         })}
@@ -29,13 +32,13 @@ export default function LangSwitcher({ params }: { params: { lang: Locale } }) {
   };
 
   return (
-    <div className="dropdown dropdown-end">
+    <div className="dropdown dropdown-bottom">
       <label tabIndex={0} className="btn btn-ghost rounded-btn mx-2">
-        Dropdown
+        {localeNameToLangName[params.lang]}
       </label>
       <ul
         tabIndex={0}
-        className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
       >
         {getLangLists()}
       </ul>
