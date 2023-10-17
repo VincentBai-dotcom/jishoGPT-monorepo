@@ -2,8 +2,8 @@
   "navigation": {
     "signInModule":{
       "signIn": "Log In",
-      "email": "Email:",
-      "password": "Password:"
+      "email": "Email",
+      "password": "Password"
     },
     "blog": "Blog",
     "signUp": "Sign Up",
