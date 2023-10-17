@@ -1,9 +1,6 @@
 {
   "navigation": {
-    "blog": "ブルグ"
-    
-  },
-  "account": {
+    "blog": "ブルグ",
     "signIn": "ログイン",
     "signUp": "登録",
     "upgrade": "アップグレード",

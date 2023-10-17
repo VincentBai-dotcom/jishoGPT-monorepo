@@ -7,7 +7,7 @@ export default async function Home({ params }: { params: { lang: Locale } }) {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <article className="prose lg:prose-xl">
-        <h1>{dict.account.upgrade}</h1>
+        <h1>{dict.navigation.upgrade}</h1>
         <SearchBar />
       </article>
     </main>

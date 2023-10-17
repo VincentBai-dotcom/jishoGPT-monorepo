@@ -1,9 +1,6 @@
 { 
   "navigation": {
-    "blog": "Blog"
-    
-  },
-  "account": {
+    "blog": "Blog",
     "signIn": "Log In",
     "signUp": "Sign Up",
     "upgrade": "Upgrade",
