@@ -1,5 +1,4 @@
 import Image from "next/image";
-import SearchBar from "@/components/searchBar";
 import { Locale } from "../../../i18n.config";
 import { getDictionary } from "@/lib/dictionaries";
 import HomePage from "@/components/homePage";

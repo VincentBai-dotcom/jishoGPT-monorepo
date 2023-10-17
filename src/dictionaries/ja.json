@@ -1,7 +1,9 @@
 {
   "navigation": {
+    "signInModule":{
+      "signIn": "ログイン"
+    },
     "blog": "ブルグ",
-    "signIn": "ログイン",
     "signUp": "登録",
     "upgrade": "アップグレード",
     "logOut": "ログアウト"

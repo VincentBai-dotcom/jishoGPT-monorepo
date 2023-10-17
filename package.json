@@ -13,7 +13,8 @@
     "negotiator": "^0.6.3",
     "next": "13.5.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-icons": "^4.11.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",

@@ -4,6 +4,7 @@ import { i18n } from "../../i18n.config";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { localeNameToLangName } from "@/lib/dictionaries";
+import { HiLanguage } from "react-icons/hi2";
 
 export default function LangSwitcher({ params }: { params: { lang: Locale } }) {
   const pathName = usePathname();
@@ -34,6 +35,7 @@ export default function LangSwitcher({ params }: { params: { lang: Locale } }) {
   return (
     <div className="dropdown dropdown-bottom">
       <label tabIndex={0} className="btn btn-ghost rounded-btn mx-2">
+        <HiLanguage />
         {localeNameToLangName[params.lang]}
       </label>
       <ul
