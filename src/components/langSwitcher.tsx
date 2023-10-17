@@ -1,12 +1,11 @@
 "use client";
 import { Locale } from "../../i18n.config";
 import { i18n } from "../../i18n.config";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function LangSwitcher({ params }: { params: { lang: Locale } }) {
   const pathName = usePathname();
-
   const getNewLink = (locale: Locale) => {
     const pathSegments = pathName.split("/");
     pathSegments[1] = locale;
