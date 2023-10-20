@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import TextInputBox from "./textInputBox";
 import React from "react";
 
@@ -8,27 +8,26 @@ export default function SignInModule({
 }: {
   dict: { signIn: string; email: string; password: string };
 }) {
-  const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const signInModal = useRef<HTMLDialogElement>(null);
 
   return (
     <>
-      <a className="btn mx-2" onClick={() => setShowModal(true)}>
+      <button className="btn" onClick={() => signInModal.current?.showModal()}>
         {dict.signIn}
-      </a>
+      </button>
       <dialog
         id="my_modal_1"
+        ref={signInModal}
         className="modal backdrop-blur-md backdrop-brightness-50"
-        open={showModal}
       >
         <div className="modal-box">
-          <button
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            onClick={() => setShowModal(false)}
-          >
-            ✕
-          </button>
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
           <div></div>
           <article className="prose">
             <h2 className="my-3">{dict.email}</h2>
@@ -49,6 +48,11 @@ export default function SignInModule({
             <button className="btn btn-primary mt-5">{dict.signIn}</button>
           </article>
         </div>
+
+        {/* Make sure clicking somewhere outside of the modal will close it */}
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
       </dialog>
     </>
   );

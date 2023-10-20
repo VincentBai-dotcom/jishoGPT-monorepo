@@ -22,7 +22,10 @@ export default function LangSwitcher({ params }: { params: { lang: Locale } }) {
         {locales.map((locale: Locale, index) => {
           return (
             <li key={index}>
-              <Link href={getNewLink(locale)}>
+              <Link
+                href={getNewLink(locale)}
+                className={locale == params.lang ? "active" : ""}
+              >
                 {localeNameToLangName[locale]}
               </Link>
             </li>
