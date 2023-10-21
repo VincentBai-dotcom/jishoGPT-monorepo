@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NavBar from "@/components/navbar";
 import { Locale, i18n } from "../../../i18n.config";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <NavBar params={{ lang: params.lang }}></NavBar>
         <div>{children}</div>
+        <Footer />
       </body>
     </html>
   );

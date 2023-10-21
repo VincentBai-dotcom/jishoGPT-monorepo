@@ -7,7 +7,9 @@ export default async function Page() {
           backgroundImage:
             "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
         }}
-      ></div>
+      >
+        fdsa
+      </div>
     </main>
   );
 }
