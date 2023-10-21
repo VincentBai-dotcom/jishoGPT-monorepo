@@ -26,7 +26,7 @@ export default async function RootLayout({
     <html lang={params.lang}>
       <body className={inter.className}>
         <NavBar params={{ lang: params.lang }}></NavBar>
-        {children}
+        <div>{children}</div>
       </body>
     </html>
   );
