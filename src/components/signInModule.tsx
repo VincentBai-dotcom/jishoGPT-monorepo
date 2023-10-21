@@ -1,6 +1,7 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import TextInputBox from "./textInputBox";
+import PasswordInputBox from "./passwordInputBox";
 import React from "react";
 
 export default function SignInModule({
@@ -12,9 +13,30 @@ export default function SignInModule({
   const [password, setPassword] = useState("");
   const signInModal = useRef<HTMLDialogElement>(null);
 
+  const handleEmailChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEmail(e.target.value);
+    },
+    []
+  );
+
+  const handlePasswordChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.target.value);
+    },
+    []
+  );
+
   return (
     <>
-      <button className="btn" onClick={() => signInModal.current?.showModal()}>
+      <button
+        className="btn"
+        onClick={() => {
+          signInModal.current?.showModal();
+          setEmail("");
+          setPassword("");
+        }}
+      >
         {dict.signIn}
       </button>
       <dialog
@@ -27,25 +49,26 @@ export default function SignInModule({
               ✕
             </button>
           </form>
-          <div className="h-80">
-            <h1 className="">{dict.email}</h1>
-            <TextInputBox
-              value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setEmail(e.target.value);
-              }}
-            />
+          <div className="flex flex-col gap-3">
+            <label className="font-bold">{dict.email}</label>
+            <TextInputBox value={email} onChange={handleEmailChange} />
 
-            <h1 className="">{dict.password}</h1>
+            <label className="font-bold">{dict.password}</label>
 
-            <TextInputBox
+            <PasswordInputBox
               value={password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setPassword(e.target.value);
-              }}
+              onChange={handlePasswordChange}
             />
-            <div className="">
-              <button className="btn btn-primary">{dict.signIn}</button>
+
+            {/* Make sure sign in button is disablled when either of the fields are not filled */}
+            <div className="ml-auto">
+              <button
+                className={`btn btn-primary ${
+                  email !== "" && password !== "" ? "" : "btn-disabled"
+                }`}
+              >
+                {dict.signIn}
+              </button>
             </div>
           </div>
         </div>
