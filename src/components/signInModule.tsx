@@ -18,7 +18,6 @@ export default function SignInModule({
         {dict.signIn}
       </button>
       <dialog
-        id="my_modal_1"
         ref={signInModal}
         className="modal backdrop-blur-md backdrop-brightness-50"
       >
@@ -28,25 +27,27 @@ export default function SignInModule({
               ✕
             </button>
           </form>
-          <div></div>
-          <article className="prose">
-            <h2 className="my-3">{dict.email}</h2>
+          <div className="h-80">
+            <h1 className="">{dict.email}</h1>
             <TextInputBox
               value={email}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setEmail(e.target.value);
               }}
             />
-            <h2 className="my-3">{dict.password}</h2>
+
+            <h1 className="">{dict.password}</h1>
+
             <TextInputBox
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setPassword(e.target.value);
               }}
             />
-            <div></div>
-            <button className="btn btn-primary mt-5">{dict.signIn}</button>
-          </article>
+            <div className="">
+              <button className="btn btn-primary">{dict.signIn}</button>
+            </div>
+          </div>
         </div>
 
         {/* Make sure clicking somewhere outside of the modal will close it */}

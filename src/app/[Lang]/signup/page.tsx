@@ -1,15 +1,13 @@
 export default async function Page() {
   return (
-    <main>
-      <div
-        className="hero min-h-screen"
-        style={{
-          backgroundImage:
-            "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
-        }}
-      >
-        fdsa
-      </div>
+    <main className="bg-base-100">
+      <article className="prose flex">
+        <div>
+          <h1 className="flex-1">Username</h1>
+          <h1 className="flex-1">Username</h1>
+          <h1 className="flex-1">Username</h1>
+        </div>
+      </article>
     </main>
   );
 }
