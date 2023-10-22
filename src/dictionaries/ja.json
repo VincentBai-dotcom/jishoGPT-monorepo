@@ -14,6 +14,9 @@
     "username": "Username",
     "email": "Email",
     "password": "Password",
-    "languagePreference": "Which language are you studying?"
+    "languagePreference": "Which language are you studying?",
+    "signUp": "Sign Up",
+    "nextStep": "Next Step",
+    "back": "Back"
   }
 }

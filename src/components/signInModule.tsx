@@ -16,7 +16,7 @@ export default function SignInModule({
   return (
     <>
       <button
-        className="btn"
+        className="btn mx-1"
         onClick={() => {
           signInModal.current?.showModal();
           setEmail("");
