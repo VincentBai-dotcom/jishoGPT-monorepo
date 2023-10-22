@@ -9,5 +9,11 @@
     "signUp": "注册",
     "upgrade": "升级",
     "logOut": "登出"
+  },
+  "signUpPage": {
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "languagePreference": "Which language are you studying?"
   }
 }

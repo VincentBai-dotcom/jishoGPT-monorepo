@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useCallback } from "react";
-import TextInputBox from "./textInputBox";
+import TextInputBox, { getTextInputBoxOnChange } from "./textInputBox";
 import PasswordInputBox from "./passwordInputBox";
 import React from "react";
 
@@ -12,20 +12,6 @@ export default function SignInModule({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const signInModal = useRef<HTMLDialogElement>(null);
-
-  const handleEmailChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setEmail(e.target.value);
-    },
-    []
-  );
-
-  const handlePasswordChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPassword(e.target.value);
-    },
-    []
-  );
 
   return (
     <>
@@ -51,13 +37,16 @@ export default function SignInModule({
           </form>
           <div className="flex flex-col gap-3">
             <label className="font-bold">{dict.email}</label>
-            <TextInputBox value={email} onChange={handleEmailChange} />
+            <TextInputBox
+              value={email}
+              onChange={getTextInputBoxOnChange(setEmail)}
+            />
 
             <label className="font-bold">{dict.password}</label>
 
             <PasswordInputBox
               value={password}
-              onChange={handlePasswordChange}
+              onChange={getTextInputBoxOnChange(setPassword)}
             />
 
             {/* Make sure sign in button is disablled when either of the fields are not filled */}

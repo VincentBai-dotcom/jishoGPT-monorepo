@@ -16,3 +16,11 @@ export default function TextInputBox({
     />
   );
 }
+
+export const getTextInputBoxOnChange = (
+  setState: React.Dispatch<React.SetStateAction<string>>
+) => {
+  return (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState(e.target.value);
+  };
+};

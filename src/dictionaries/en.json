@@ -9,5 +9,11 @@
     "signUp": "Sign Up",
     "upgrade": "Upgrade",
     "logOut": "Log Out"
+  },
+  "signUpPage": {
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "languagePreference": "Which language are you studying?"
   }
 }
