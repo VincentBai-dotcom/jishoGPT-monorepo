@@ -22,8 +22,12 @@ export default function RegistrationModule({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [page, setPage] = useState(1);
+
+  const onClose = () => {
+    setEmail("");
+    setPassword("");
+    setUsername("");
+  };
 
   const page1 = (
     <div className="flex flex-col gap-3">
@@ -39,6 +43,11 @@ export default function RegistrationModule({
         value={username}
         onChange={getTextInputBoxOnChange(setUsername)}
       />
+      <label className="font-bold">{dict.password}</label>
+      <PasswordInputBox
+        value={password}
+        onChange={getTextInputBoxOnChange(setPassword)}
+      />
 
       {/* Make sure sign in button is disablled when either of the fields are not filled */}
       <div className="ml-auto">
@@ -46,33 +55,6 @@ export default function RegistrationModule({
           className={`btn btn-primary ${
             username !== "" && email !== "" ? "" : "btn-disabled"
           }`}
-          onClick={() => {
-            setPage(page + 1);
-          }}
-        >
-          {dict.nextStep}
-        </button>
-      </div>
-    </div>
-  );
-
-  const page2 = (
-    <div className="flex flex-col gap-3">
-      <label className="font-bold">{dict.email}</label>
-      <PasswordInputBox
-        value={password}
-        onChange={getTextInputBoxOnChange(setPassword)}
-      />
-
-      <label className="font-bold">{dict.password}</label>
-
-      {/* Make sure sign in button is disablled when either of the fields are not filled */}
-      <div className="ml-auto">
-        <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
-          {dict.back}
-        </button>
-        <button
-          className={`btn btn-primary ${password !== "" ? "" : "btn-disabled"}`}
         >
           {dict.signUp}
         </button>
@@ -80,58 +62,38 @@ export default function RegistrationModule({
     </div>
   );
 
-  const pages = [page1, page2];
-
-  const renderModal = (isOpen: boolean) => {
-    if (isOpen) {
-      return (
-        <dialog
-          className="modal backdrop-blur-md backdrop-brightness-50"
-          open={isModalOpen}
-        >
-          <div className="modal-box">
-            <form
-              method="dialog"
-              onClick={() => {
-                setIsModalOpen(false);
-              }}
-            >
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
-
-            {pages[page]}
-          </div>
-
-          {/* Make sure clicking somewhere outside of the modal will close it */}
-          <form
-            method="dialog"
-            className="modal-backdrop"
-            onClick={() => {
-              setIsModalOpen(false);
-            }}
-          >
-            <button>close</button>
-          </form>
-        </dialog>
-      );
-    }
-
-    return;
-  };
-
   return (
     <>
       <button
         className="btn mx-1"
         onClick={() => {
-          setIsModalOpen(true);
+          (
+            document.getElementById("registrationModal") as HTMLDialogElement
+          )?.showModal();
         }}
       >
         {dict.signUp}
       </button>
-      {renderModal(isModalOpen)}
+
+      <dialog
+        className="modal backdrop-blur-md backdrop-brightness-50"
+        id="registrationModal"
+        onClose={onClose}
+      >
+        <div className="modal-box">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          {page1}
+        </div>
+
+        {/* Make sure clicking somewhere outside of the modal will close it */}
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </>
   );
 }

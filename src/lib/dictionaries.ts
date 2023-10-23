@@ -15,3 +15,9 @@ export const localeNameToLangName: Record<Locale, string> = {
   // ja: "日本語",
   // "zh-CN": "简体中文",
 };
+
+export const langNameToLocaleName: Record<string, Locale> = {
+  English: "en",
+};
+
+export const listOfLangName = ["English"];

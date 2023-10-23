@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, use } from "react";
 import TextInputBox, { getTextInputBoxOnChange } from "./textInputBox";
 import PasswordInputBox from "./passwordInputBox";
 import React from "react";
@@ -11,23 +11,28 @@ export default function SignInModule({
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const signInModal = useRef<HTMLDialogElement>(null);
+
+  const onClose = () => {
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <>
       <button
         className="btn mx-1"
         onClick={() => {
-          signInModal.current?.showModal();
-          setEmail("");
-          setPassword("");
+          (
+            document.getElementById("signInModal") as HTMLDialogElement
+          )?.showModal();
         }}
       >
         {dict.signIn}
       </button>
       <dialog
-        ref={signInModal}
+        id="signInModal"
         className="modal backdrop-blur-md backdrop-brightness-50"
+        onClose={onClose}
       >
         <div className="modal-box">
           <form method="dialog">
