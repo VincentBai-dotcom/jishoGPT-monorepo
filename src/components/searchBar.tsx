@@ -46,7 +46,7 @@ export default function SearchBar() {
         <summary className="btn btn-neutral rounded-btn">
           {selectedSearchType}
         </summary>
-        <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+        <ul className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-box w-52">
           {getSearchTypesDropDown()}
         </ul>
       </details>

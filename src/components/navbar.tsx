@@ -14,7 +14,7 @@ export default async function NavBar({ params }: { params: { lang: Locale } }) {
           href={`/${params.lang}`}
           className="btn btn-ghost normal-case text-xl"
         >
-          ChatJisho.ai
+          JishoGPT
         </Link>
         <LocaleSwitcher params={{ lang: params.lang }}></LocaleSwitcher>
       </div>

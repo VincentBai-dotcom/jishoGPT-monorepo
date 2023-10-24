@@ -27,7 +27,7 @@ export default async function RootLayout({
     <html lang={params.lang}>
       <body className={inter.className}>
         <NavBar params={{ lang: params.lang }}></NavBar>
-        <div className=" bg-base-100">{children}</div>
+        <div className=" bg-base-100 z-0">{children}</div>
       </body>
     </html>
   );
