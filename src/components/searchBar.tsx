@@ -12,7 +12,7 @@ export default function SearchBar() {
   const [selectedSearchType, setSelectedSearchType] =
     useState<SearchType>("All");
 
-  const dropdownContentRef = useRef<HTMLDetailsElement>(null);
+  const UListRef = useRef<HTMLUListElement>(null);
 
   const handleSubmit = () => {
     alert("submitted");
@@ -30,7 +30,7 @@ export default function SearchBar() {
             className={searchType == selectedSearchType ? "active" : ""}
             onClick={() => {
               setSelectedSearchType(searchType);
-              dropdownContentRef.current?.removeAttribute("open");
+              UListRef.current?.blur();
             }}
           >
             {searchType}
@@ -42,14 +42,18 @@ export default function SearchBar() {
 
   return (
     <div className="flex relative navbar bg-base-300 rounded-box w-full gap-2 shadow-2xl">
-      <details className="dropdown dropdown-bottom" ref={dropdownContentRef}>
-        <summary className="btn btn-neutral rounded-btn">
+      <div className="dropdown dropdown-bottom">
+        <label tabIndex={0} className="btn btn-neutral rounded-btn">
           {selectedSearchType}
-        </summary>
-        <ul className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-box w-52">
+        </label>
+        <ul
+          tabIndex={0}
+          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+          ref={UListRef}
+        >
           {getSearchTypesDropDown()}
         </ul>
-      </details>
+      </div>
       <form className="w-full" onSubmit={handleSubmit}>
         <input
           type="text"
