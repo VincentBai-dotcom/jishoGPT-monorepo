@@ -12,13 +12,13 @@ export default async function Home({ params }: { params: { lang: Locale } }) {
         alt="Cartoon graduates jump with happiness"
         layout="fill"
       /> */}
-      <div className="flex min-h-max justify-center items-start relative py-12">
+      <div className="flex justify-center items-start relative py-12">
         <Image
           src={homeBackground}
           alt="homeBackground"
           layout="fill"
           objectFit="cover"
-          className=" opacity-50 overflow-hidden "
+          className=" opacity-60 overflow-hidden "
         />
         <div className="max-w-screen-md text-center z-10">
           <h1 className="mb-5 text-5xl font-bold text-neutral">JishoGPT</h1>
