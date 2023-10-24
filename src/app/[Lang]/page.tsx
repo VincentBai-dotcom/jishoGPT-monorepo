@@ -14,15 +14,20 @@ export default async function Home({ params }: { params: { lang: Locale } }) {
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-center text-neutral-content">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-            <p className="mb-5">
+        <div className="hero-content text-center ">
+          <div className=" max-w-screen-md">
+            <h1 className="mb-5 text-5xl font-bold text-neutral-content">
+              Hello there
+            </h1>
+            <SearchBar />
+            <p className="mb-5 text-neutral-content">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
-            <SearchBar />
+            <button className="btn btn-primary text-neutral-content">
+              Get Started
+            </button>
           </div>
         </div>
       </div>
