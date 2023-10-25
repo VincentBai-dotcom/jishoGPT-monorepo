@@ -13,12 +13,14 @@ export default async function Home({ params }: { params: { lang: Locale } }) {
       >
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center ">
-          <div className="max-w-md">
+          <div className=" max-w-3xl">
             <h1 className="mb-5 text-5xl font-bold text-neutral-content">
               JishoGPT
             </h1>
-            <p className="mb-5 text-neutral-content">
-              Get the most informative definitions for Japanese vocabulary
+            <p className="mb-5 text-lg text-neutral-content">
+              Unlock the full potential of Japanese language exploration with
+              our online dictionary. Empowered by the intelligence of ChatGPT to
+              deliver in-depth definitions.
             </p>
             <SearchBar />
           </div>
