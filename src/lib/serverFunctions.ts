@@ -3,7 +3,14 @@ import { json } from "stream/consumers";
 
 const endpoint = "http://localhost:8000/";
 
-export const isAuthenticated = async () => {};
+export const isAuthenticated = async () => {
+  const url = endpoint + "auth/is-authenticated";
+  const response = await fetch(url, {
+    method: "POST",
+  });
+
+  return response.ok;
+};
 
 export const signIn = async (email: string, password: string) => {
   const url = endpoint + "auth/signin";
@@ -39,6 +46,15 @@ export const signUp = async (
       username: username,
       password: password,
     }),
+  });
+
+  return response.json();
+};
+
+export const logOut = async () => {
+  const url = endpoint + "auth/logout";
+  const response = await fetch(url, {
+    method: "POST",
   });
 
   return response.json();
