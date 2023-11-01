@@ -3,6 +3,7 @@ import { useState, useRef, useCallback, use } from "react";
 import TextInputBox, { getTextInputBoxOnChange } from "./textInputBox";
 import PasswordInputBox from "./passwordInputBox";
 import React from "react";
+import { signIn } from "@/lib/serverFunctions";
 
 export default function SignInModule({
   dict,
@@ -15,6 +16,11 @@ export default function SignInModule({
   const onClose = () => {
     setEmail("");
     setPassword("");
+  };
+
+  const onSubmit = async () => {
+    const response = await signIn(email, password);
+    console.log(response);
   };
 
   return (
@@ -60,6 +66,7 @@ export default function SignInModule({
                 className={`btn btn-primary ${
                   email !== "" && password !== "" ? "" : "btn-disabled"
                 }`}
+                onClick={onSubmit}
               >
                 {dict.signIn}
               </button>
