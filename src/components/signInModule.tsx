@@ -66,6 +66,7 @@ export default function SignInModule({
                 className={`btn btn-primary ${
                   email !== "" && password !== "" ? "" : "btn-disabled"
                 }`}
+                onClick={onSubmit}
               >
                 {dict.signIn}
               </button>
