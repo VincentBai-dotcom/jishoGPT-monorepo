@@ -22,4 +22,40 @@ export const signIn = async (email: string, password: string) => {
   return response.json();
 };
 
-export const search = async (searchWord: string) => {};
+export const signUp = async (
+  email: string,
+  username: string,
+  password: string
+) => {
+  const url = endpoint + "auth/signup";
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+    },
+    body: JSON.stringify({
+      email: email,
+      username: username,
+      password: password,
+    }),
+  });
+
+  return response.json();
+};
+
+export const search = async (searchString: string) => {
+  const url = endpoint + "dict/search";
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+    },
+    body: JSON.stringify({
+      searchString: searchString,
+    }),
+  });
+
+  return response.json();
+};
