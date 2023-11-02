@@ -9,6 +9,7 @@ export const isAuthenticated = async () => {
     },
     credentials: "include",
   });
+
   console.log(response.status);
   return response;
 };
