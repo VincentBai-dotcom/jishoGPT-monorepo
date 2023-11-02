@@ -1,0 +1,22 @@
+{ 
+  "navigation": {
+    "signInModule":{
+      "signIn": "Log In",
+      "email": "Email",
+      "password": "Password"
+    },
+    "signUpPage": {
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "languagePreference": "Which language are you studying?",
+      "signUp": "Sign Up",
+      "nextStep": "Next Step",
+      "back": "Back"
+    },
+    "blog": "Blog",
+    "signUp": "Sign Up",
+    "upgrade": "Upgrade",
+    "logOut": "Log Out"
+  }
+}
