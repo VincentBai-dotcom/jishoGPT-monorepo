@@ -1,9 +1,8 @@
 import { Locale } from "../../i18n.config";
 import { getDictionary } from "@/lib/dictionaries";
 import LocaleSwitcher from "./localeSwitcher";
-import SignInModule from "./signInModule";
 import Link from "next/link";
-import RegistrationModule from "./registrationModule";
+import UserOperationModule from "./userOperationModule";
 
 export default async function NavBar() {
   return (
@@ -19,8 +18,7 @@ export default async function NavBar() {
             <a>Blog</a>
           </li>
         </ul>
-        <SignInModule />
-        <RegistrationModule />
+        <UserOperationModule />
       </div>
     </div>
   );

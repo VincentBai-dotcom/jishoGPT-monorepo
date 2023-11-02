@@ -15,7 +15,8 @@ export default function SearchBar() {
   const UListRef = useRef<HTMLUListElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
-    console.log("fdsa");
+    e.preventDefault();
+    alert("Submitted");
   };
 
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {

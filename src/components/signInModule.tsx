@@ -1,13 +1,15 @@
 "use client";
-import { useState, useRef, useCallback, use } from "react";
+import { useState } from "react";
 import TextInputBox, { getTextInputBoxOnChange } from "./textInputBox";
 import PasswordInputBox from "./passwordInputBox";
 import React from "react";
 import { signIn } from "@/lib/serverFunctions";
+import { useRouter } from "next/navigation";
 
 export default function SignInModule() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const onClose = () => {
     setEmail("");
@@ -16,7 +18,12 @@ export default function SignInModule() {
 
   const onSubmit = async () => {
     const response = await signIn(email, password);
-    console.log(response);
+    const resJson = await response.json();
+    console.log(resJson);
+    if (response.ok) {
+      router.refresh();
+      (document.getElementById("signInModal") as HTMLDialogElement)?.close();
+    }
   };
 
   return (

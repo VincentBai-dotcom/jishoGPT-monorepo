@@ -1,6 +1,3 @@
-import { url } from "inspector";
-import { json } from "stream/consumers";
-
 const endpoint = "http://localhost:8000/";
 
 export const isAuthenticated = async () => {
@@ -8,8 +5,8 @@ export const isAuthenticated = async () => {
   const response = await fetch(url, {
     method: "POST",
   });
-
-  return response.ok;
+  console.log(response.status);
+  return response;
 };
 
 export const signIn = async (email: string, password: string) => {
@@ -26,7 +23,7 @@ export const signIn = async (email: string, password: string) => {
     }),
   });
 
-  return response.json();
+  return response;
 };
 
 export const signUp = async (
@@ -48,7 +45,7 @@ export const signUp = async (
     }),
   });
 
-  return response.json();
+  return response;
 };
 
 export const logOut = async () => {
@@ -57,7 +54,7 @@ export const logOut = async () => {
     method: "POST",
   });
 
-  return response.json();
+  return response;
 };
 
 export const search = async (searchString: string) => {
@@ -73,5 +70,5 @@ export const search = async (searchString: string) => {
     }),
   });
 
-  return response.json();
+  return response;
 };
