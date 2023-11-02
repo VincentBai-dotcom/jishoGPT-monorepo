@@ -4,6 +4,10 @@ export const isAuthenticated = async () => {
   const url = endpoint + "auth/is-authenticated";
   const response = await fetch(url, {
     method: "POST",
+    headers: {
+      mode: "cors",
+    },
+    credentials: "include",
   });
   console.log(response.status);
   return response;
@@ -17,6 +21,7 @@ export const signIn = async (email: string, password: string) => {
       "Content-Type": "application/json",
       mode: "cors",
     },
+    credentials: "include",
     body: JSON.stringify({
       email: email,
       password: password,
