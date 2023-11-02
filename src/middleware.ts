@@ -20,19 +20,19 @@ function getLocale(request: NextRequest): string {
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
+  // const { pathname } = request.nextUrl;
+  // const pathnameHasLocale = locales.some(
+  //   (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  // );
 
-  if (pathnameHasLocale) return;
+  // if (pathnameHasLocale) return;
 
-  // Redirect if there is no locale
-  const locale = getLocale(request);
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-  // e.g. incoming request is /products
-  // The new URL is now /en/products
-  return Response.redirect(request.nextUrl);
+  // // Redirect if there is no locale
+  // const locale = getLocale(request);
+  // request.nextUrl.pathname = `/${locale}${pathname}`;
+  // // e.g. incoming request is /products
+  // // The new URL is now /en/products
+  return;
 }
 
 // See "Matching Paths" below to learn more

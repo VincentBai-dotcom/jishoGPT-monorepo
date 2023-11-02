@@ -5,30 +5,22 @@ import SignInModule from "./signInModule";
 import Link from "next/link";
 import RegistrationModule from "./registrationModule";
 
-export default async function NavBar({ params }: { params: { lang: Locale } }) {
-  const dict = await getDictionary(params.lang);
+export default async function NavBar() {
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
-        <Link
-          href={`/${params.lang}`}
-          className="btn btn-ghost normal-case text-xl"
-        >
+        <Link href={`/`} className="btn btn-ghost normal-case text-xl">
           JishoGPT
         </Link>
-        <LocaleSwitcher params={{ lang: params.lang }}></LocaleSwitcher>
       </div>
       <div className="navbar-end">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>{dict.navigation.blog}</a>
+            <a>Blog</a>
           </li>
         </ul>
-        <SignInModule dict={dict.navigation.signInModule} />
-        <RegistrationModule
-          dict={dict.navigation.signUpPage}
-          lang={params.lang}
-        ></RegistrationModule>
+        <SignInModule />
+        <RegistrationModule />
       </div>
     </div>
   );

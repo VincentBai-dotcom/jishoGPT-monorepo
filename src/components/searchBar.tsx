@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const searchTypes = ["All", "Word", "Kanji"] as const;
@@ -14,8 +14,8 @@ export default function SearchBar() {
 
   const UListRef = useRef<HTMLUListElement>(null);
 
-  const handleSubmit = () => {
-    alert("submitted");
+  const handleSubmit = (e: React.FormEvent) => {
+    console.log("fdsa");
   };
 
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {

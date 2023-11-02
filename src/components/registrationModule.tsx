@@ -4,21 +4,7 @@ import TextInputBox, { getTextInputBoxOnChange } from "./textInputBox";
 import PasswordInputBox from "./passwordInputBox";
 import React from "react";
 
-export default function RegistrationModule({
-  dict,
-  lang,
-}: {
-  dict: {
-    username: string;
-    email: string;
-    password: string;
-    languagePreference: string;
-    signUp: string;
-    nextStep: string;
-    back: string;
-  };
-  lang: string;
-}) {
+export default function RegistrationModule() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -31,32 +17,32 @@ export default function RegistrationModule({
 
   const page1 = (
     <div className="flex flex-col gap-3">
-      <label className="font-bold">{dict.email}</label>
+      <label className="font-bold">Email</label>
       <TextInputBox
         value={email}
         onChange={getTextInputBoxOnChange(setEmail)}
       />
 
-      <label className="font-bold">{dict.username}</label>
+      <label className="font-bold">Username</label>
 
       <TextInputBox
         value={username}
         onChange={getTextInputBoxOnChange(setUsername)}
       />
-      <label className="font-bold">{dict.password}</label>
+      <label className="font-bold">Password</label>
       <PasswordInputBox
         value={password}
         onChange={getTextInputBoxOnChange(setPassword)}
       />
 
-      {/* Make sure sign in button is disablled when either of the fields are not filled */}
+      {/* Make sure sign in button is disablled when either onpf the fields are not filled */}
       <div className="ml-auto">
         <button
           className={`btn btn-primary ${
             username !== "" && email !== "" ? "" : "btn-disabled"
           }`}
         >
-          {dict.signUp}
+          Sign Up
         </button>
       </div>
     </div>
@@ -72,7 +58,7 @@ export default function RegistrationModule({
           )?.showModal();
         }}
       >
-        {dict.signUp}
+        Sign Up
       </button>
 
       <dialog

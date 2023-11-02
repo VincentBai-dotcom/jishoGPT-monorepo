@@ -5,11 +5,7 @@ import PasswordInputBox from "./passwordInputBox";
 import React from "react";
 import { signIn } from "@/lib/serverFunctions";
 
-export default function SignInModule({
-  dict,
-}: {
-  dict: { signIn: string; email: string; password: string };
-}) {
+export default function SignInModule() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,7 +29,7 @@ export default function SignInModule({
           )?.showModal();
         }}
       >
-        {dict.signIn}
+        Sign In
       </button>
       <dialog
         id="signInModal"
@@ -47,13 +43,13 @@ export default function SignInModule({
             </button>
           </form>
           <div className="flex flex-col gap-3">
-            <label className="font-bold">{dict.email}</label>
+            <label className="font-bold">Email</label>
             <TextInputBox
               value={email}
               onChange={getTextInputBoxOnChange(setEmail)}
             />
 
-            <label className="font-bold">{dict.password}</label>
+            <label className="font-bold">Password</label>
 
             <PasswordInputBox
               value={password}
@@ -68,7 +64,7 @@ export default function SignInModule({
                 }`}
                 onClick={onSubmit}
               >
-                {dict.signIn}
+                Sign In
               </button>
             </div>
           </div>
