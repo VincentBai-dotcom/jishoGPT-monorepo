@@ -7,13 +7,13 @@ declare global {
 let cached = global.mongoose;
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+  cached = global.mongoose = { connection: null, promise: null };
 }
 
 async function connectToDB() {
-  if (cached.conn) {
+  if (cached.connection) {
     console.log("⚡️[db]: Mongodb has been connected");
-    return cached.conn;
+    return cached.connection;
   }
 
   if (!cached.promise) {
@@ -25,8 +25,8 @@ async function connectToDB() {
       console.log("⚡️[db]: Mongodb connection failed");
     }
   }
-  cached.conn = await cached.promise;
-  return cached.conn;
+  cached.connection = await cached.promise;
+  return cached.connection;
 }
 
 export default connectToDB;
