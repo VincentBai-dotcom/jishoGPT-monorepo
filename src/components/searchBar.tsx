@@ -1,5 +1,6 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
@@ -8,7 +9,7 @@ const searchTypes = ["All", "Word", "Kanji"] as const;
 type SearchType = (typeof searchTypes)[number];
 
 export default function SearchBar() {
-  const [searchContent, setSearchContent] = useState("");
+  const [searchString, setSearchString] = useState("");
   const [selectedSearchType, setSelectedSearchType] =
     useState<SearchType>("All");
 
@@ -16,11 +17,12 @@ export default function SearchBar() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Submitted");
+    alert("submitted");
+    redirect(`/search/${searchString}`);
   };
 
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchContent(e.target.value);
+    setSearchString(e.target.value);
   };
 
   const getSearchTypesDropDown = () => {
@@ -60,7 +62,7 @@ export default function SearchBar() {
           type="text"
           placeholder="English, Japanese, or Kanji"
           className="input input-bordered input-neutral w-full"
-          value={searchContent}
+          value={searchString}
           onChange={onchange}
         />
         <button className="absolute right-7" type="submit">

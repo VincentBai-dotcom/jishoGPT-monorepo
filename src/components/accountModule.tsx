@@ -1,5 +1,4 @@
 "use client";
-import { logOut } from "@/lib/serverFunctions";
 import { useRouter } from "next/navigation";
 import { FaCircleUser } from "react-icons/fa6";
 
@@ -7,7 +6,6 @@ export default function AccountModule() {
   const router = useRouter();
 
   const handleLogOut = async (formData: FormData) => {
-    await logOut();
     router.refresh();
   };
 
