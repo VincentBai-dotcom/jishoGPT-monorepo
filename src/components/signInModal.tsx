@@ -3,7 +3,6 @@ import { useState } from "react";
 import TextInputBox, { getTextInputBoxOnChange } from "./textInputBox";
 import PasswordInputBox from "./passwordInputBox";
 import React from "react";
-import { signIn } from "@/lib/serverFunctions";
 
 export default function SignInModule() {
   const [email, setEmail] = useState("");
