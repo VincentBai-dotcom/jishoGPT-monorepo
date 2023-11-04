@@ -4,25 +4,18 @@ import TextInputBox, { getTextInputBoxOnChange } from "./textInputBox";
 import PasswordInputBox from "./passwordInputBox";
 import React from "react";
 import { signIn } from "@/lib/serverFunctions";
-import { useRouter } from "next/navigation";
 
 export default function SignInModule() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   const onClose = () => {
     setEmail("");
     setPassword("");
   };
 
-  async function onSubmit(formData: FormData) {
-    const response = await signIn(email, password);
-    const resJson = await response.json();
-    console.log(resJson);
-    if (response.ok) {
-      (document.getElementById("signInModal") as HTMLDialogElement)?.close();
-    }
+  async function onSubmit() {
+    alert("Submitted");
   }
 
   return (

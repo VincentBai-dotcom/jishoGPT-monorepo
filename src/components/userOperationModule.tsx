@@ -5,11 +5,10 @@ import RegistrationModal from "./registrationModal";
 import AccountModule from "./accountModule";
 
 export default async function UserOperationModule() {
-  const response = await isAuthenticated();
   return (
     <>
       {(function () {
-        if (response.ok) {
+        if (false) {
           return <AccountModule />;
         } else {
           return (
