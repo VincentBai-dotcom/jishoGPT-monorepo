@@ -19,7 +19,9 @@ async function connectToDB() {
   if (!cached.promise) {
     // mongoose.set("strictQuery", true);
     try {
-      cached.promise = await mongoose.connect("mongodb://localhost/jishoGPT");
+      cached.promise = await mongoose.connect(
+        process.env.MONGODB_URL || "mongodb://localhost/jishoGPT"
+      );
       console.log("⚡️[db]: Mongodb is successfully connected");
     } catch (err) {
       console.log("⚡️[db]: Mongodb connection failed");
