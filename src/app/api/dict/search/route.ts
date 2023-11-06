@@ -1,12 +1,11 @@
 import connectToDB from "@/lib/db";
 import WordEntry from "../../../../../models/WordEntry";
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
     await connectToDB();
     console.log("### Searching word...");
-    const body = await request.json();
-    const searchString = body.searchString;
+    const { searchString } = await req.json();
     const normalizedSearchString = searchString.toLowerCase();
     const searchResult = await WordEntry.find({
       $or: [
