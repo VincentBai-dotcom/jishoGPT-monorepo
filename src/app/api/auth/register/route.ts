@@ -1,5 +1,7 @@
 import connectToDB from "@/lib/db";
 import User from "../../../../../models/User";
+import generateRandomSalt from "@/lib/auth/generateRandomSalt";
+import hashPassword from "@/lib/auth/hashPassword";
 
 export async function POST(request: Request) {
   try {
@@ -21,7 +23,16 @@ export async function POST(request: Request) {
       );
     }
 
-    return Response.json({ userFound: true });
+    const salt = generateRandomSalt();
+    const userInfo = await User.create({
+      email,
+      username,
+      authInfo: {
+        salt,
+        password: hashPassword(password, salt),
+      },
+    });
+    return Response.json(userInfo);
   } catch (err) {
     console.log("Registration failed");
     return Response.json(err);
