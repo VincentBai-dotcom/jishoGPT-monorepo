@@ -32,6 +32,7 @@ const authOptions = {
           const expectedPassword = hashPassword(password, user.authInfo.salt);
 
           if (expectedPassword !== user.authInfo.password) {
+            console.log(expectedPassword);
             console.log("Password incorrect");
             return null;
           }
