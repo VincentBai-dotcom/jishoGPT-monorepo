@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 async function getSearchResults(searchString: string) {
-  const res = await fetch("http://localhost:3000/api/dict/search", {
+  const res = await fetch(process.env.API_PATH + "/api/dict/search", {
     method: "POST",
     body: JSON.stringify({
       searchString: searchString,

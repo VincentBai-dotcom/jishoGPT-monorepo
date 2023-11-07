@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const { email, username } = await request.json();
     console.log("### Checking if user exists");
     const user = await User.findOne({
-      $or: [{ email }, { username }],
+      $or: [{ email: email }, { username: username }],
     });
 
     if (user) {
@@ -17,6 +17,7 @@ export async function POST(request: Request) {
     console.log("User does not exist");
     return Response.json({ userFound: true });
   } catch (err) {
+    console.log(err);
     return Response.json(err);
   }
 }

@@ -9,11 +9,21 @@ export async function POST(request: Request) {
     console.log("### Registering...");
     const { email, username, password } = await request.json();
     console.log("### Checking if user exists");
-    const isUserExist = await fetch("api/auth/user-exists").then(
-      async (res) => await res.json()
-    );
+    const isUserExist = await fetch(
+      process.env.API_PATH + "/api/auth/user-exists",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+        }),
+      }
+    ).then(async (res) => await res.json());
 
-    if (isUserExist["userFound"]) {
+    if (!isUserExist["userFound"]) {
       console.log("Registration failed");
       return Response.json(
         {
@@ -34,6 +44,7 @@ export async function POST(request: Request) {
     });
     return Response.json(userInfo);
   } catch (err) {
+    console.log(err);
     console.log("Registration failed");
     return Response.json(err);
   }

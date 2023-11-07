@@ -16,8 +16,8 @@ export default function RegistrationModule() {
   };
 
   async function onSubmit() {
-    const res = await fetch("api/auth/register", {
-      method: "Post",
+    const res = await fetch("http://localhost:3000/api/auth/register", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
