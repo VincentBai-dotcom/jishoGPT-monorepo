@@ -15,26 +15,31 @@ export default function RegistrationModal() {
     setUsername("");
   };
 
-  async function onSubmit() {
-    const res = await fetch(process.env.API_PATH + "/api/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-      }),
-    });
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(process.env.API_PATH + "/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+        }),
+      });
 
-    console.log(res.status);
-    const resbody = await res.json();
-    console.log(resbody);
-  }
+      console.log(res.status);
+      const resbody = await res.json();
+      console.log(resbody);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const page1 = (
-    <form className="flex flex-col gap-3" action={onSubmit}>
+    <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
       <label className="font-bold">Email</label>
       <TextInputBox
         value={email}

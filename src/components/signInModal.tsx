@@ -3,19 +3,33 @@ import { useState } from "react";
 import PasswordInputBox from "./PasswordInputBox";
 import TextInputBox, { getTextInputBoxOnChange } from "./TextInputBox";
 import React from "react";
+import { signIn } from "next-auth/react";
 
 export default function SignInModal() {
-  const [email, setEmail] = useState("");
+  const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const onClose = () => {
-    setEmail("");
+    setEmailOrUsername("");
     setPassword("");
   };
 
-  async function onSubmit() {
-    alert("Submitted");
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const signInResponse = await signIn("credentials", {
+        emailOrUsername,
+        password,
+        redirect: false,
+      });
+      if (signInResponse?.error) {
+        console.log(signInResponse.error);
+      }
+      console.log(signInResponse?.status);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -40,11 +54,11 @@ export default function SignInModal() {
               ✕
             </button>
           </form>
-          <form className="flex flex-col gap-3" action={onSubmit}>
-            <label className="font-bold">Email</label>
+          <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+            <label className="font-bold">Email or Username</label>
             <TextInputBox
-              value={email}
-              onChange={getTextInputBoxOnChange(setEmail)}
+              value={emailOrUsername}
+              onChange={getTextInputBoxOnChange(setEmailOrUsername)}
             />
 
             <label className="font-bold">Password</label>
@@ -58,9 +72,15 @@ export default function SignInModal() {
             <div className="ml-auto">
               <button
                 className={`btn btn-primary ${
-                  email !== "" && password !== "" ? "" : "btn-disabled"
+                  emailOrUsername !== "" && password !== ""
+                    ? ""
+                    : "btn-disabled"
                 }`}
-                type={email !== "" && password !== "" ? "submit" : "button"}
+                type={
+                  emailOrUsername !== "" && password !== ""
+                    ? "submit"
+                    : "button"
+                }
               >
                 Sign In
               </button>

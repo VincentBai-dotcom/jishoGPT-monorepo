@@ -18,23 +18,27 @@ const authOptions = {
         }
         const { emailOrUsername, password } = credentials;
         try {
+          console.log("### Authorizing...");
           await connectToDB();
           const user = await User.findOne({
             $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
           }).select("+authInfo.salt +authInfo.password");
 
           if (!user) {
+            console.log("Email or Username not found in database");
             return null;
           }
 
           const expectedPassword = hashPassword(password, user.authInfo.salt);
 
-          if (expectedPassword !== user.authInfo.salt) {
+          if (expectedPassword !== user.authInfo.password) {
+            console.log("Password incorrect");
             return null;
           }
+          console.log("Authorization Success");
           return user;
         } catch (err) {
-          console.log("### Authorization failed");
+          console.log("Authorization failed");
           console.log(err);
         }
       },
