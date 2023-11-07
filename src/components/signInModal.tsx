@@ -40,7 +40,7 @@ export default function SignInModule() {
               ✕
             </button>
           </form>
-          <div className="flex flex-col gap-3">
+          <form className="flex flex-col gap-3" action={onSubmit}>
             <label className="font-bold">Email</label>
             <TextInputBox
               value={email}
@@ -55,17 +55,17 @@ export default function SignInModule() {
             />
 
             {/* Make sure sign in button is disablled when either of the fields are not filled */}
-            <form className="ml-auto" action={onSubmit}>
+            <div className="ml-auto">
               <button
                 className={`btn btn-primary ${
                   email !== "" && password !== "" ? "" : "btn-disabled"
                 }`}
-                type="submit"
+                type={email !== "" && password !== "" ? "submit" : "button"}
               >
                 Sign In
               </button>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
 
         {/* Make sure clicking somewhere outside of the modal will close it */}

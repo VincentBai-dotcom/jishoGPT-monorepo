@@ -9,9 +9,9 @@ export async function POST(request: Request) {
     console.log("### Registering...");
     const { email, username, password } = await request.json();
     console.log("### Checking if user exists");
-    const isUserExist = await fetch(
-      "http://localhost:3000/api/auth/user-exists"
-    ).then(async (res) => await res.json());
+    const isUserExist = await fetch("api/auth/user-exists").then(
+      async (res) => await res.json()
+    );
 
     if (isUserExist["userFound"]) {
       console.log("Registration failed");

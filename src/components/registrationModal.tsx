@@ -15,8 +15,26 @@ export default function RegistrationModule() {
     setUsername("");
   };
 
+  async function onSubmit() {
+    const res = await fetch("api/auth/register", {
+      method: "Post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+
+    console.log(res.status);
+    const resbody = await res.json();
+    console.log(resbody);
+  }
+
   const page1 = (
-    <div className="flex flex-col gap-3">
+    <form className="flex flex-col gap-3" action={onSubmit}>
       <label className="font-bold">Email</label>
       <TextInputBox
         value={email}
@@ -39,13 +57,20 @@ export default function RegistrationModule() {
       <div className="ml-auto">
         <button
           className={`btn btn-primary ${
-            username !== "" && email !== "" ? "" : "btn-disabled"
+            username !== "" && email !== "" && password !== ""
+              ? ""
+              : "btn-disabled"
           }`}
+          type={
+            username !== "" && email !== "" && password !== ""
+              ? "submit"
+              : "button"
+          }
         >
           Sign Up
         </button>
       </div>
-    </div>
+    </form>
   );
 
   return (

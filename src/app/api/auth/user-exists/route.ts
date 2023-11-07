@@ -11,9 +11,10 @@ export async function POST(request: Request) {
     });
 
     if (user) {
+      console.log("User exists");
       return Response.json({ userFound: false });
     }
-
+    console.log("User does not exist");
     return Response.json({ userFound: true });
   } catch (err) {
     return Response.json(err);
