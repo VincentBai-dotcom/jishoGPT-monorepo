@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import TextInputBox, { getTextInputBoxOnChange } from "./textInputBox";
-import PasswordInputBox from "./passwordInputBox";
+import PasswordInputBox from "./PasswordInputBox";
+import TextInputBox, { getTextInputBoxOnChange } from "./TextInputBox";
 import React from "react";
 
-export default function SignInModule() {
+export default function SignInModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

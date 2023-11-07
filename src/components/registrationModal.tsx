@@ -1,10 +1,10 @@
 "use client";
 import { useState, useRef } from "react";
-import TextInputBox, { getTextInputBoxOnChange } from "./textInputBox";
-import PasswordInputBox from "./passwordInputBox";
+import TextInputBox, { getTextInputBoxOnChange } from "./TextInputBox";
+import PasswordInputBox from "./PasswordInputBox";
 import React from "react";
 
-export default function RegistrationModule() {
+export default function RegistrationModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -16,7 +16,7 @@ export default function RegistrationModule() {
   };
 
   async function onSubmit() {
-    const res = await fetch("http://localhost:3000/api/auth/register", {
+    const res = await fetch(process.env.API_PATH + "/api/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

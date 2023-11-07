@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
-import SignInModal from "./signInModal";
-import RegistrationModal from "./registrationModal";
+import SignInModal from "./SignInModal";
+import RegistrationModal from "./RegistrationModal";
 import AccountModule from "./accountModule";
 
 export default async function UserOperationModule() {

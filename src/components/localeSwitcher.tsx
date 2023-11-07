@@ -6,7 +6,11 @@ import Link from "next/link";
 import { localeNameToLangName } from "@/lib/dictionaries";
 import { HiLanguage } from "react-icons/hi2";
 
-export default function LangSwitcher({ params }: { params: { lang: Locale } }) {
+export default function LocaleSwitcher({
+  params,
+}: {
+  params: { lang: Locale };
+}) {
   const pathName = usePathname();
   const getNewLink = (locale: Locale) => {
     const pathSegments = pathName.split("/");

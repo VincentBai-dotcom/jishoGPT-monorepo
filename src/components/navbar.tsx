@@ -2,7 +2,7 @@ import { Locale } from "../../i18n.config";
 import { getDictionary } from "@/lib/dictionaries";
 import LocaleSwitcher from "./localeSwitcher";
 import Link from "next/link";
-import UserOperationModule from "./userOperationModule";
+import UserOperationModule from "./UserOperationModule";
 
 export default async function NavBar() {
   return (
