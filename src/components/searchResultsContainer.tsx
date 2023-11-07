@@ -1,1 +1,1 @@
-export default function searchResultsContainer() {}
+export default function SearchResultsContainer() {}

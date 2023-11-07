@@ -1,6 +1,5 @@
 import { Locale } from "../../i18n.config";
 import { getDictionary } from "@/lib/dictionaries";
-import LocaleSwitcher from "./LocaleSwitcher";
 import Link from "next/link";
 import UserOperationModule from "./UserOperationModule";
 
