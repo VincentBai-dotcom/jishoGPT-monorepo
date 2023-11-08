@@ -21,10 +21,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           {
-            <>
+            <div className=" bg-base-100 ">
               <NavBar />
-              <div className=" bg-base-100 ">{children}</div>
-            </>
+              {children}
+            </div>
           }
         </AuthProvider>
       </body>
