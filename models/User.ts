@@ -1,9 +1,23 @@
 import { timeStamp } from "console";
-import mongoose, { model } from "mongoose";
+import mongoose, { model, Types } from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema(
+export interface IUser {
+  email: string;
+  username: string;
+  authInfo?: {
+    password: string;
+    salt: string;
+  };
+  userType: string;
+  isSubscribed: boolean;
+  starredWords: [Types.ObjectId];
+  subscriptionEndDate?: Date;
+  recentSearches: [string];
+}
+
+const UserSchema = new Schema<IUser>(
   {
     email: {
       type: String,
@@ -24,7 +38,6 @@ const UserSchema = new Schema(
       type: {
         password: { type: String, required: true, select: false },
         salt: { type: String, required: true, select: false },
-        sessionToken: { type: String, select: false },
       },
       required: true,
     },

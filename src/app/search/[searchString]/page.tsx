@@ -23,7 +23,9 @@ export default async function Page({
 }: {
   params: { searchString: string };
 }) {
-  const normalizedSearchString = decodeURIComponent(params.searchString);
+  const normalizedSearchString = decodeURIComponent(
+    params.searchString
+  ).toLowerCase();
   console.log(`SeachString: ${normalizedSearchString}`);
   const searchResults = await getSearchResults(normalizedSearchString);
   console.log(searchResults[0]["definitions"]);

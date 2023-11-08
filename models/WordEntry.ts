@@ -1,7 +1,16 @@
 import mongoose, { model } from "mongoose";
-import { DefinitionSchema } from "./Definition";
+import { DefinitionSchema, IDefinition } from "./Definition";
+
 const Schema = mongoose.Schema;
-const WordEntrySchema = new Schema({
+
+export interface IWordEntry {
+  word: string;
+  pronunciation: string;
+  definitions: [IDefinition];
+  description?: string;
+}
+
+const WordEntrySchema = new Schema<IWordEntry>({
   word: {
     type: String,
     required: true,
