@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     const { email, username, password } = await request.json();
     console.log("### Checking if user exists");
     const isUserExist = await fetch(
-      process.env.API_PATH + "/api/auth/user-exists",
+      process.env.NEXT_PUBLIC_API_PATH + "/api/auth/user-exists",
       {
         method: "POST",
         headers: {

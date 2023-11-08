@@ -1,12 +1,15 @@
 import { notFound } from "next/navigation";
 
 async function getSearchResults(searchString: string) {
-  const res = await fetch(process.env.API_PATH + "/api/dict/search", {
-    method: "POST",
-    body: JSON.stringify({
-      searchString: searchString,
-    }),
-  });
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_API_PATH + "/api/dict/search",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        searchString: searchString,
+      }),
+    }
+  );
 
   if (res.ok) {
     return res.json();
