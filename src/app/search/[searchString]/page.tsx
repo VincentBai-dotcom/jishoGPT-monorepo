@@ -1,4 +1,8 @@
+import SearchBar from "@/components/SearchBar";
+import WordEntryListElement from "@/components/WordEntryListElement";
 import { notFound } from "next/navigation";
+import { IWordEntry } from "../../../../models/WordEntry";
+import { Key } from "react";
 
 async function getSearchResults(searchString: string) {
   const res = await fetch(
@@ -27,7 +31,15 @@ export default async function Page({
     params.searchString
   ).toLowerCase();
   console.log(`SeachString: ${normalizedSearchString}`);
-  const searchResults = await getSearchResults(normalizedSearchString);
-  console.log(searchResults[0]["definitions"]);
-  return <h1>Search Page</h1>;
+  const searchResults: [IWordEntry] = await getSearchResults(
+    normalizedSearchString
+  );
+  return (
+    <div>
+      <SearchBar />
+      {searchResults.map((wordEntry, index) => {
+        return <WordEntryListElement wordEntry={wordEntry} key={index} />;
+      })}
+    </div>
+  );
 }

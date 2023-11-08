@@ -21,4 +21,5 @@ export const DefinitionSchema = new Schema<IDefinition>({
   ],
 });
 
-export const Definition = model("Definition", DefinitionSchema);
+export const Definition =
+  mongoose.models.Definition || model("Definition", DefinitionSchema);

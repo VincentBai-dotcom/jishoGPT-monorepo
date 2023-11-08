@@ -1,8 +1,7 @@
 "use client";
-
-import { redirect } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 
 const searchTypes = ["All", "Word", "Kanji"] as const;
 
@@ -15,10 +14,11 @@ export default function SearchBar() {
 
   const UListRef = useRef<HTMLUListElement>(null);
 
+  const router = useRouter();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("submitted");
-    redirect(`/search/${searchString}`);
+    router.replace(`/search/${searchString}`);
   };
 
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
