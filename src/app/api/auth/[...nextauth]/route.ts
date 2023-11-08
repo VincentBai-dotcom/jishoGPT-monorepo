@@ -4,7 +4,7 @@ import User from "../../../../../models/User";
 import connectToDB from "@/lib/db";
 import hashPassword from "@/lib/auth/hashPassword";
 
-const authOptions = {
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",

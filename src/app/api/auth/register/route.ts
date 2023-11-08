@@ -42,6 +42,7 @@ export async function POST(request: Request) {
         password: hashPassword(password, salt),
       },
     });
+    console.log("Registration success");
     return Response.json(userInfo);
   } catch (err) {
     console.log(err);

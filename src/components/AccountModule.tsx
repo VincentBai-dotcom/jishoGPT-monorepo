@@ -1,13 +1,10 @@
 "use client";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaCircleUser } from "react-icons/fa6";
 
 export default function AccountModule() {
   const router = useRouter();
-
-  const handleLogOut = async (formData: FormData) => {
-    router.refresh();
-  };
 
   return (
     <>
@@ -21,9 +18,14 @@ export default function AccountModule() {
           className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
         >
           <li>
-            <form action={handleLogOut}>
-              <button type="submit">Log Out</button>
-            </form>
+            <button
+              onClick={() => {
+                signOut();
+                router.refresh();
+              }}
+            >
+              Log Out
+            </button>
           </li>
         </ul>
       </div>

@@ -3,11 +3,14 @@ import { useState, useRef } from "react";
 import TextInputBox, { getTextInputBoxOnChange } from "./TextInputBox";
 import PasswordInputBox from "./PasswordInputBox";
 import React from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function RegistrationModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const router = useRouter();
 
   const onClose = () => {
     setEmail("");
@@ -32,10 +35,18 @@ export default function RegistrationModal() {
           }),
         }
       );
-
-      console.log(res.status);
-      const resbody = await res.json();
-      console.log(resbody);
+      if (res.status === 200) {
+        const signInResponse = await signIn("credentials", {
+          emailOrUsername: email,
+          password,
+          redirect: false,
+        });
+        if (signInResponse?.error) {
+          console.log(signInResponse.error);
+        }
+        console.log(signInResponse?.status);
+        router.refresh();
+      }
     } catch (err) {
       console.log(err);
     }

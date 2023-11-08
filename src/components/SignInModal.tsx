@@ -4,10 +4,12 @@ import PasswordInputBox from "./PasswordInputBox";
 import TextInputBox, { getTextInputBoxOnChange } from "./TextInputBox";
 import React from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function SignInModal() {
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const onClose = () => {
     setEmailOrUsername("");
@@ -26,6 +28,7 @@ export default function SignInModal() {
         console.log(signInResponse.error);
       }
       console.log(signInResponse?.status);
+      router.refresh();
     } catch (err) {
       console.log(err);
     }
