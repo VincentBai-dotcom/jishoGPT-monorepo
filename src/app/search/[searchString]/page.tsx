@@ -2,7 +2,8 @@ import SearchBar from "@/components/SearchBar";
 import WordEntryListElement from "@/components/WordEntryListElement";
 import { notFound } from "next/navigation";
 import { IWordEntry } from "../../../../models/WordEntry";
-import { Key } from "react";
+import homeBackground from "/public/homeBackground.jpg";
+import Image from "next/image";
 
 async function getSearchResults(searchString: string) {
   const res = await fetch(
@@ -35,11 +36,17 @@ export default async function Page({
     normalizedSearchString
   );
   return (
-    <div>
-      <SearchBar />
-      {searchResults.map((wordEntry, index) => {
-        return <WordEntryListElement wordEntry={wordEntry} key={index} />;
-      })}
+    <div className="grid grid-cols-10">
+      <div className="col-span-10 flex justify-center">
+        <div className=" w-2/3">
+          <SearchBar />
+        </div>
+      </div>
+      <div className="col-start-3 col-end-7">
+        {searchResults.map((wordEntry, index) => {
+          return <WordEntryListElement wordEntry={wordEntry} key={index} />;
+        })}
+      </div>
     </div>
   );
 }

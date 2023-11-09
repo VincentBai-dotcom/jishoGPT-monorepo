@@ -18,7 +18,9 @@ export default function SearchBar() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.replace(`/search/${searchString}`);
+    if (searchString !== "") {
+      router.replace(`/search/${searchString}`);
+    }
   };
 
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
