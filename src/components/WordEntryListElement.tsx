@@ -8,7 +8,7 @@ export default function WordEntryListElement({
 }) {
   return (
     <Link
-      href={`/word/${wordEntry.word}`}
+      href={`/dict/word/${wordEntry.word}`}
       className="card w-96 bg-base-100 shadow-xl"
     >
       <div className="card-body">

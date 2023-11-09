@@ -19,7 +19,7 @@ export default function SearchBar() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchString !== "") {
-      router.replace(`/search/${searchString}`);
+      router.replace(`/dict/search/${searchString}`);
     }
   };
 
