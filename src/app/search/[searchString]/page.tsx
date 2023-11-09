@@ -37,8 +37,17 @@ export default async function Page({
   );
   return (
     <div className="grid grid-cols-10">
-      <div className="col-span-10 flex justify-center">
-        <div className=" w-2/3">
+      <div
+        className="col-span-10 flex justify-center h-screen z-0 bg-cover bg-opacity-60 "
+        style={{
+          backgroundImage: `url(${homeBackground.src})`,
+        }}
+      >
+        <div className=" bg-opacity-70"></div>
+        <div className=" w-2/3 py-20 text-center">
+          <h1 className="mb-5 text-5xl font-bold text-neutral-content">
+            JishoGPT
+          </h1>
           <SearchBar />
         </div>
       </div>
