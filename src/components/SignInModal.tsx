@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 export default function SignInModal() {
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const onClose = () => {
