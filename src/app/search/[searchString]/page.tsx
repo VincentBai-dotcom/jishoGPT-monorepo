@@ -36,22 +36,22 @@ export default async function Page({
     normalizedSearchString
   );
   return (
-    <div className="grid grid-cols-10">
+    <div className="grid grid-cols-6">
       <div
-        className="col-span-10 flex justify-center h-screen z-0 bg-cover bg-opacity-60 "
+        className="col-span-6 grid grid-cols-4 bg-cover bg-center"
         style={{
           backgroundImage: `url(${homeBackground.src})`,
         }}
       >
-        <div className=" bg-opacity-70"></div>
-        <div className=" w-2/3 py-20 text-center">
+        <div className="col-start-1 col-span-4 row-start-1 bg-neutral bg-opacity-50"></div>
+        <div className="col-start-2 col-span-2 row-start-1 text-center z-20 py-10">
           <h1 className="mb-5 text-5xl font-bold text-neutral-content">
             JishoGPT
           </h1>
           <SearchBar />
         </div>
       </div>
-      <div className="col-start-3 col-end-7">
+      <div className="col-start-2 col-end-6">
         {searchResults.map((wordEntry, index) => {
           return <WordEntryListElement wordEntry={wordEntry} key={index} />;
         })}
