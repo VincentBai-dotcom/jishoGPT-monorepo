@@ -5,33 +5,39 @@ import TextInputBox, { getTextInputBoxOnChange } from "./TextInputBox";
 import React from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import ErrorAlert from "./alerts/ErrorAlert";
 
 export default function SignInModal() {
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const onClose = () => {
     setEmailOrUsername("");
     setPassword("");
+    setError("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const signInResponse = await signIn("credentials", {
         emailOrUsername,
         password,
         redirect: false,
       });
       if (signInResponse?.error) {
-        console.log(signInResponse.error);
+        setError("Credentials incorrect.");
+      } else {
+        router.refresh();
       }
-      console.log(signInResponse?.status);
-      router.refresh();
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,6 +65,11 @@ export default function SignInModal() {
             </button>
           </form>
           <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+            {error && (
+              <div className="mt-2">
+                <ErrorAlert message={error} />
+              </div>
+            )}
             <label className="font-bold">Email or Username</label>
             <TextInputBox
               value={emailOrUsername}
@@ -86,7 +97,11 @@ export default function SignInModal() {
                     : "button"
                 }
               >
-                Sign In
+                {loading ? (
+                  <span className="loading loading-spinner loading-md"></span>
+                ) : (
+                  "Sign In"
+                )}
               </button>
             </div>
           </form>

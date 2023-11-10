@@ -2,7 +2,7 @@ export const Errors = {
   emptyCredentialError: {
     errorId: 1,
     errorName: "emptyCredentialError",
-    errorMessage: "Please provide non-empty credentials",
+    errorMessage: "Please provide non-empty credentials.",
   },
 
   duplicativeEmailError: {
@@ -22,6 +22,6 @@ export const Errors = {
   loginCredentialError: {
     errorId: 4,
     errorName: "loginCredentialError",
-    errorMessage: "Wrong email or password",
+    errorMessage: "Wrong email or password.",
   },
 };

@@ -41,6 +41,8 @@ export async function POST(request: Request) {
   } catch (err) {
     console.log(err);
     console.log("Registration failed");
-    return Response.json(err);
+    return Response.json(err, {
+      status: 400,
+    });
   }
 }

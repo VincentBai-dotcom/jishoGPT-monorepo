@@ -5,23 +5,28 @@ import PasswordInputBox from "./PasswordInputBox";
 import React from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import ErrorAlert from "./alerts/ErrorAlert";
 
 export default function RegistrationModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const onClose = () => {
     setEmail("");
     setPassword("");
     setUsername("");
+    setError("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(
+      setLoading(true);
+      const registerRes = await fetch(
         process.env.NEXT_PUBLIC_API_PATH + "/api/auth/register",
         {
           method: "POST",
@@ -35,7 +40,8 @@ export default function RegistrationModal() {
           }),
         }
       );
-      if (res.status === 200) {
+      console.log(registerRes.status);
+      if (registerRes.status === 200) {
         const signInResponse = await signIn("credentials", {
           emailOrUsername: email,
           password,
@@ -46,14 +52,25 @@ export default function RegistrationModal() {
         }
         console.log(signInResponse?.status);
         router.refresh();
+      } else if (registerRes.status === 400) {
+        const resJson = await registerRes.json();
+        setError(resJson["errorMessage"]);
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   const page1 = (
     <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+      {error && (
+        <div className=" mt-2">
+          <ErrorAlert message={error} />
+        </div>
+      )}
+
       <label className="font-bold">Email</label>
       <TextInputBox
         value={email}
@@ -86,7 +103,11 @@ export default function RegistrationModal() {
               : "button"
           }
         >
-          Sign Up
+          {loading ? (
+            <span className="loading loading-spinner loading-md"></span>
+          ) : (
+            "Sign Up"
+          )}
         </button>
       </div>
     </form>
