@@ -1,4 +1,10 @@
-export const Errors = {
+export interface IErrorBody {
+  errorId: number;
+  errorName: string;
+  errorMessage: string;
+}
+
+export const Errors: Record<string, IErrorBody> = {
   // Auth error
   duplicativeEmailError: {
     errorId: 2,
@@ -15,4 +21,9 @@ export const Errors = {
   },
 
   // Dict error
+  wordEntryDoesNotExistError: {
+    errorId: 10,
+    errorName: "wordDoesNotExistError",
+    errorMessage: "The word entry does not exist in the database",
+  },
 };
