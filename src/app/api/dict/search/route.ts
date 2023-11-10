@@ -24,6 +24,10 @@ export async function POST(req: Request) {
       return Response.json(searchResult);
     }
   } catch (err) {
-    return Response.json({ err });
+    console.log("### Searching failed");
+    console.log(err);
+    return Response.json(err, {
+      status: 400,
+    });
   }
 }

@@ -1,10 +1,5 @@
 export const Errors = {
-  emptyCredentialError: {
-    errorId: 1,
-    errorName: "emptyCredentialError",
-    errorMessage: "Please provide non-empty credentials.",
-  },
-
+  // Auth error
   duplicativeEmailError: {
     errorId: 2,
     errorName: "duplicativeEmailError",
@@ -19,9 +14,5 @@ export const Errors = {
       "The username has been registered. Please provide a different one.",
   },
 
-  loginCredentialError: {
-    errorId: 4,
-    errorName: "loginCredentialError",
-    errorMessage: "Wrong email or password.",
-  },
+  // Dict error
 };
