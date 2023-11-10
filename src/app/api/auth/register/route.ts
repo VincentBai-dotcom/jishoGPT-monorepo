@@ -2,7 +2,7 @@ import connectToDB from "@/lib/db";
 import User from "../../../../../models/User";
 import generateRandomSalt from "@/lib/auth/generateRandomSalt";
 import hashPassword from "@/lib/auth/hashPassword";
-import { Errors } from "@/lib/errors";
+import { Errors } from "../../../../../errors";
 
 export async function POST(request: Request) {
   try {

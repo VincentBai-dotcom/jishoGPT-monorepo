@@ -1,11 +1,12 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import TextInputBox, { getTextInputBoxOnChange } from "./TextInputBox";
 import PasswordInputBox from "./PasswordInputBox";
 import React from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ErrorAlert from "./alerts/ErrorAlert";
+import { isEmail } from "@/lib/regexValidator";
 
 export default function RegistrationModal() {
   const [email, setEmail] = useState("");
@@ -26,6 +27,10 @@ export default function RegistrationModal() {
     e.preventDefault();
     try {
       setLoading(true);
+      if (!isEmail(email)) {
+        setError("Please enter a valie email address");
+        throw new Error("Invalid email address");
+      }
       const registerRes = await fetch(
         process.env.NEXT_PUBLIC_API_PATH + "/api/auth/register",
         {
