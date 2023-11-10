@@ -92,7 +92,7 @@ export default function SignInModal() {
                     : "btn-disabled"
                 }`}
                 type={
-                  emailOrUsername !== "" && password !== ""
+                  emailOrUsername !== "" && password !== "" && !loading
                     ? "submit"
                     : "button"
                 }

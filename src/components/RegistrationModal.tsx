@@ -103,7 +103,7 @@ export default function RegistrationModal() {
               : "btn-disabled"
           }`}
           type={
-            username !== "" && email !== "" && password !== ""
+            username !== "" && email !== "" && password !== "" && !loading
               ? "submit"
               : "button"
           }
