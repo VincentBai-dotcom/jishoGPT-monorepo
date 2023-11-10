@@ -2,6 +2,7 @@ import connectToDB from "@/lib/db";
 import User from "../../../../../models/User";
 import generateRandomSalt from "@/lib/auth/generateRandomSalt";
 import hashPassword from "@/lib/auth/hashPassword";
+import { Errors } from "@/lib/errors";
 
 export async function POST(request: Request) {
   try {
@@ -9,29 +10,22 @@ export async function POST(request: Request) {
     console.log("### Registering...");
     const { email, username, password } = await request.json();
     console.log("### Checking if user exists");
-    const isUserExist = await fetch(
-      process.env.NEXT_PUBLIC_API_PATH + "/api/auth/user-exists",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-        }),
-      }
-    ).then(async (res) => await res.json());
 
-    if (!isUserExist["userFound"]) {
-      console.log("Registration failed");
-      return Response.json(
-        {
-          message: "User with the same username or email already exists",
-        },
-        { status: 400 }
-      );
-    }
+    const emailValidationPromise = User.findOne({ email }).then((user) => {
+      if (user) {
+        return Promise.reject(Errors.duplicativeEmailError);
+      }
+    });
+
+    const usernameValidationPromise = User.findOne({ username }).then(
+      (user) => {
+        if (user) {
+          return Promise.reject(Errors.duplicativeUsernameError);
+        }
+      }
+    );
+
+    await Promise.all([emailValidationPromise, usernameValidationPromise]);
 
     const salt = generateRandomSalt();
     const userInfo = await User.create({
