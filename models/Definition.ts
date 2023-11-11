@@ -22,4 +22,5 @@ export const DefinitionSchema = new Schema<IDefinition>({
 });
 
 export const Definition =
-  mongoose.models.Definition || model("Definition", DefinitionSchema);
+  mongoose.models.Definition ||
+  model<IDefinition>("Definition", DefinitionSchema);

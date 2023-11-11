@@ -29,6 +29,6 @@ const WordEntrySchema = new Schema<IWordEntry>({
 WordEntrySchema.index({ word: 1, pronunciation: 1 }, { unique: true });
 
 const WordEntry =
-  mongoose.models.WordEntry || model("WordEntry", WordEntrySchema);
+  mongoose.models.WordEntry || model<IWordEntry>("WordEntry", WordEntrySchema);
 
 export default WordEntry;
