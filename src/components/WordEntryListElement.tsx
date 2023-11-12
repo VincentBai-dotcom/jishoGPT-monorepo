@@ -9,7 +9,7 @@ export default function WordEntryListElement({
   return (
     <Link
       href={`/dict/word/${wordEntry.word}`}
-      className="card w-96 bg-base-100 shadow-xl"
+      className="rounded-2xl relative flex flex-col w-full bg-base-100 shadow-xl"
     >
       <div className="card-body">
         <h2 className="card-title">{wordEntry.word}</h2>
