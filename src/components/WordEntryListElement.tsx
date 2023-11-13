@@ -1,5 +1,6 @@
 import { IWordEntry } from "../../models/WordEntry";
 import Link from "next/link";
+import WordDefinitionView from "./WordDefinitionView";
 
 export default function WordEntryListElement({
   wordEntry,
@@ -15,7 +16,7 @@ export default function WordEntryListElement({
         <h2 className="card-title">{wordEntry.word}</h2>
         <h5 className="card-title">{wordEntry.pronunciation}</h5>
         {wordEntry.definitions.map((definition, index) => {
-          return <div key={index}>{definition.definition.join(",")}</div>;
+          return <WordDefinitionView definition={definition} key={index} />;
         })}
       </div>
     </Link>
