@@ -8,9 +8,12 @@ export default function WordDefinitionView({
 }) {
   return (
     <div>
-      {definition.tags.map((tag, index) => {
-        return <TagBadge tag={tag} key={index} />;
-      })}
+      <div className="flex gap-2">
+        {definition.tags.map((tag, index) => {
+          return <TagBadge tag={tag} key={index} />;
+        })}
+      </div>
+
       <div>{definition.definition.join(",")}</div>
     </div>
   );

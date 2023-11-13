@@ -7,11 +7,13 @@ import {
 
 export default function TagBadge({ tag }: { tag: string }) {
   const renderBadge = () => {
-    let badgeColor = "badge-neutral";
+    let badgeColor;
     if (miscellaneousInfoTagsSet.has(tag)) {
-      badgeColor = "";
+      badgeColor = "badge-warning";
     } else if (partOfSpeechTagsSet.has(tag)) {
+      badgeColor = "badge-neutral";
     } else if (usageDomainTagsSet.has(tag)) {
+      badgeColor = "badge-success";
     } else {
       return;
     }

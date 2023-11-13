@@ -15,9 +15,11 @@ export default function WordEntryListElement({
       <div className="card-body">
         <h2 className="card-title">{wordEntry.word}</h2>
         <h5 className="card-title">{wordEntry.pronunciation}</h5>
-        {wordEntry.definitions.map((definition, index) => {
-          return <WordDefinitionView definition={definition} key={index} />;
-        })}
+        <div>
+          {wordEntry.definitions.map((definition, index) => {
+            return <WordDefinitionView definition={definition} key={index} />;
+          })}
+        </div>
       </div>
     </Link>
   );

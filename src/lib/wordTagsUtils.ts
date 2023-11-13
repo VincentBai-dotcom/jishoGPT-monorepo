@@ -79,7 +79,7 @@ export const wordTagsDescription: Record<string, string> = {
   ctr: "counter",
   exp: "expressions (phrases, clauses, etc.)",
   int: "interjection",
-  n: "noun (common)",
+  n: "noun",
   "n-adv": "adverbial noun",
   "n-pr": "proper noun",
   "n-pref": "noun, used as a prefix",

@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         }}
       >
         <div className="col-start-1 col-span-4 row-start-1 bg-neutral bg-opacity-50"></div>
-        <div className="col-start-2 col-span-2 row-start-1 text-center z-20 py-10">
+        <div className="col-start-2 col-span-2 row-start-1 text-center z-20 py-16">
           <h1 className="mb-5 text-5xl font-bold text-neutral-content">
             JishoGPT
           </h1>
