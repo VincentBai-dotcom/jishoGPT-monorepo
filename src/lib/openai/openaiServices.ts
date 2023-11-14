@@ -21,6 +21,7 @@ export const generateWordDescription = async (
       ],
       model: "gpt-3.5-turbo",
       temperature: 0.2,
+      max_tokens: 140,
     });
     return descriptions.choices[0].message.content;
   } catch (err) {

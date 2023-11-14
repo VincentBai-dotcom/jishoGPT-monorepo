@@ -1,7 +1,7 @@
 import { IDefinition } from "../../../models/Definition";
 import TagBadge from "../TagBadge";
 
-export default function WordDefinitionView({
+export default function WordDefinitionViewShort({
   definition,
 }: {
   definition: IDefinition;

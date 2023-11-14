@@ -20,7 +20,7 @@ export default function WordDescriptionLoader({
         setIsLoading(true);
         try {
           const generateDiscriptionRes = await fetch(
-            process.env.NEXT_PUBLIC_API_PATH + "/api/dict/generate-description",
+            process.env.NEXT_PUBLIC_API_PATH + "/api/dict/generate/description",
             {
               method: "POST",
               body: JSON.stringify({
@@ -61,9 +61,17 @@ export default function WordDescriptionLoader({
         </div>
       ) : (
         <div className="flex flex-col">
-          <p style={{ whiteSpace: "pre-line" }}>{description}</p>
+          <p
+            style={{
+              whiteSpace: "pre-line",
+              marginTop: "2px",
+              marginBottom: "8px",
+            }}
+          >
+            {description}
+          </p>
           <button
-            className="btn btn-primary ml-auto"
+            className="btn btn-sm btn-primary ml-auto"
             onClick={() => setDescription("")}
           >
             <FaArrowRotateLeft />
