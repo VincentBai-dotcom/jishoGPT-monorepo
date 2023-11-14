@@ -95,26 +95,24 @@ export default function RegistrationModal() {
       />
 
       {/* Make sure sign in button is disablled when either onpf the fields are not filled */}
-      <div className="ml-auto">
-        <button
-          className={`btn btn-primary ${
-            username !== "" && email !== "" && password !== ""
-              ? ""
-              : "btn-disabled"
-          }`}
-          type={
-            username !== "" && email !== "" && password !== "" && !loading
-              ? "submit"
-              : "button"
-          }
-        >
-          {loading ? (
-            <span className="loading loading-spinner loading-md"></span>
-          ) : (
-            "Sign Up"
-          )}
-        </button>
-      </div>
+      <button
+        className={`btn btn-neutral w-full mt-3 ${
+          username !== "" && email !== "" && password !== ""
+            ? ""
+            : "btn-disabled"
+        }`}
+        type={
+          username !== "" && email !== "" && password !== "" && !loading
+            ? "submit"
+            : "button"
+        }
+      >
+        {loading ? (
+          <span className="loading loading-spinner loading-md"></span>
+        ) : (
+          "Sign Up"
+        )}
+      </button>
     </form>
   );
 
