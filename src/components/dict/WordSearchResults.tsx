@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { IWordEntry } from "../../models/WordEntry";
+import { IWordEntry } from "../../../models/WordEntry";
 import WordEntryListElement from "./WordEntryListElement";
-import WarningAlert from "./alerts/WarningAlert";
-import InfoAlert from "./alerts/InfoAlert";
+import WarningAlert from "../alerts/WarningAlert";
+import InfoAlert from "../alerts/InfoAlert";
 
 async function getWordSearchResults(searchString: string) {
   const res = await fetch(

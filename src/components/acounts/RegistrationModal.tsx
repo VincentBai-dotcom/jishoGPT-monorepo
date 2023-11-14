@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import TextInputBox, { getTextInputBoxOnChange } from "./TextInputBox";
-import PasswordInputBox from "./PasswordInputBox";
+import TextInputBox, { getTextInputBoxOnChange } from "../TextInputBox";
+import PasswordInputBox from "../PasswordInputBox";
 import React from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import ErrorAlert from "./alerts/ErrorAlert";
+import ErrorAlert from "../alerts/ErrorAlert";
 import { isEmail } from "@/lib/regexValidator";
 
 export default function RegistrationModal() {

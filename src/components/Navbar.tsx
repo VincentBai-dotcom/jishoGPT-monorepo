@@ -1,7 +1,7 @@
 import { Locale } from "../../i18n.config";
 import { getDictionary } from "@/lib/dictionaries";
 import Link from "next/link";
-import UserOperationModule from "./UserOperationModule";
+import UserOperationModule from "./acounts/UserOperationModule";
 
 export default async function NavBar() {
   return (

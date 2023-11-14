@@ -1,6 +1,6 @@
 export default function SuccessAlert({ message }: { message: string }) {
   return (
-    <div className="alert alert-success">
+    <div className="alert alert-success　shadow-md">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="stroke-current shrink-0 h-6 w-6"

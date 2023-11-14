@@ -1,5 +1,5 @@
-import { IDefinition } from "../../models/Definition";
-import TagBadge from "./TagBadge";
+import { IDefinition } from "../../../models/Definition";
+import TagBadge from "../TagBadge";
 
 export default function WordDefinitionView({
   definition,

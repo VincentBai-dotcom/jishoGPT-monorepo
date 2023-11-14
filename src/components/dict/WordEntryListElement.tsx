@@ -1,4 +1,4 @@
-import { IWordEntry } from "../../models/WordEntry";
+import { IWordEntry } from "../../../models/WordEntry";
 import Link from "next/link";
 import WordDefinitionView from "./WordDefinitionView";
 

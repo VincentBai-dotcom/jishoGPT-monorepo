@@ -1,4 +1,4 @@
-import WordSearchResults from "@/components/WordSearchResults";
+import WordSearchResults from "@/components/dict/WordSearchResults";
 
 export default async function Page({
   params,
