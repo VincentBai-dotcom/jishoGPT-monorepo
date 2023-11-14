@@ -3,7 +3,7 @@ import SearchBar from "@/components/SearchBar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-6 ">
+    <div className="grid grid-cols-6 bg-base-300 pb-10 min-h-screen auto-rows-min">
       <div
         className="col-span-6 grid grid-cols-4 bg-cover bg-center"
         style={{

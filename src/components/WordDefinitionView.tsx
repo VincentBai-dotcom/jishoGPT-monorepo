@@ -14,7 +14,7 @@ export default function WordDefinitionView({
         })}
       </div>
 
-      <div>{definition.definition.join(",")}</div>
+      <div className=" text-lg">{definition.definition.join(", ")}</div>
     </div>
   );
 }
