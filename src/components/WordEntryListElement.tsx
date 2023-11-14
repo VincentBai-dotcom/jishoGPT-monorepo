@@ -9,7 +9,7 @@ export default function WordEntryListElement({
 }) {
   return (
     <Link
-      href={`/dict/word/${wordEntry.word}`}
+      href={`/dict/word/${wordEntry._id}`}
       className="rounded-2xl relative flex flex-col w-full bg-base-100 hover:bg-base-200 active:bg-base-300 shadow-xl"
     >
       <div className="card-body p-4">

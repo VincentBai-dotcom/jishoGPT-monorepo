@@ -4,6 +4,7 @@ import mongoose, { model, Types } from "mongoose";
 const Schema = mongoose.Schema;
 
 export interface IUser {
+  _id: number;
   email: string;
   username: string;
   authInfo?: {

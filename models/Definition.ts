@@ -2,6 +2,7 @@ import mongoose, { model } from "mongoose";
 const Schema = mongoose.Schema;
 
 export interface IDefinition {
+  _id: number;
   tags: [string];
   definition: [string];
 }
