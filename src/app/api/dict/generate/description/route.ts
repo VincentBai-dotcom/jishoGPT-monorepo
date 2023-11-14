@@ -19,13 +19,19 @@ export async function POST(req: Request) {
     }
     console.log("Word entry found in the database");
     console.log("generating...");
-    console.time(`Generation time for item$ ${wordID}: `);
-    const description = await generateWordDescription(
-      wordEntry.word,
-      wordEntry.pronunciation
-    );
+
+    const timeOutPromise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject("Reqeust time out");
+      }, 30000);
+    });
+
+    const description = await Promise.race([
+      generateWordDescription(wordEntry.word, wordEntry.pronunciation),
+      timeOutPromise,
+    ]);
+
     console.log("Description generated");
-    console.timeEnd(`Generation time for item$ ${wordID}: `);
     await WordEntry.updateOne({ _id: wordID }, { description });
     revalidatePath(`/dict/word/${wordEntry._id}`);
     return Response.json({ description });

@@ -52,9 +52,9 @@ export default function WordDescriptionLoader({
 
   return (
     <div>
+      <h3>Meaning</h3>
       {isLoading ? (
         <div className="flex flex-col gap-4 w-full mt-3">
-          <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
@@ -64,8 +64,6 @@ export default function WordDescriptionLoader({
           <p
             style={{
               whiteSpace: "pre-line",
-              marginTop: "2px",
-              marginBottom: "8px",
             }}
           >
             {description}
