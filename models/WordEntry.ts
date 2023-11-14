@@ -4,7 +4,7 @@ import { DefinitionSchema, IDefinition } from "./Definition";
 const Schema = mongoose.Schema;
 
 export interface IWordEntry {
-  _id: number;
+  _id: string;
   word: string;
   pronunciation: string;
   definitions: [IDefinition];
