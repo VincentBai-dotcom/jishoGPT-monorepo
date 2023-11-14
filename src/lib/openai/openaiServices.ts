@@ -14,7 +14,7 @@ export const generateWordDescription = async (
           role: "system",
           content: Prompts.wordDescriptionSystemPrompy,
         },
-        {
+        {fdsa
           role: "user",
           content: `${word}, pronounced as ${pronunciation}`,
         },
