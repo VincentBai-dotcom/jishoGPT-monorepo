@@ -16,7 +16,7 @@ export default function WordEntryListElement({
         <h2 className="card-title">{wordEntry.word}</h2>
         <h5 className="card-title">{wordEntry.pronunciation}</h5>
         <div className="flex flex-col gap-2">
-          {wordEntry.definitions.map((definition, index) => {
+          {wordEntry.definitions.slice(0, 3).map((definition, index) => {
             return <WordDefinitionView definition={definition} key={index} />;
           })}
         </div>
