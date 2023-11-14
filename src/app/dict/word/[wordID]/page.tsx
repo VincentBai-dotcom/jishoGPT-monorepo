@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { IWordEntry } from "../../../../../models/WordEntry";
+import WordDescriptionLoader from "@/components/dict/WordDescriptionLoader";
 
 async function getWordEntryInfo(wordID: string) {
   const res = await fetch(
@@ -10,6 +11,9 @@ async function getWordEntryInfo(wordID: string) {
       }),
     {
       method: "GET",
+      next: {
+        tags: ["wordEntryInfo"],
+      },
     }
   );
   if (res.ok) {
@@ -29,6 +33,7 @@ export default async function Page({ params }: { params: { wordID: string } }) {
         <h1 style={{ margin: "0" }}>{wordEntry.word}</h1>
         <div className="divider"></div>
         <h3 style={{ marginTop: "0" }}>Description</h3>
+        <WordDescriptionLoader wordEntry={wordEntry} />
       </article>
     </div>
   );

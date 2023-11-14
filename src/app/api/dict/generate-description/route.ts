@@ -2,15 +2,16 @@ import connectToDB from "@/lib/db";
 import WordEntry, { IWordEntry } from "../../../../../models/WordEntry";
 import { generateWordDescription } from "@/lib/openai/openaiServices";
 import { Errors } from "../../../../../errors";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: Request) {
   try {
     console.log("### Start generating description for word");
     await connectToDB();
-    const { wordId } = await req.json();
+    const { wordID } = await req.json();
     console.log("Checking if word exists in the database");
     const wordEntry = await WordEntry.findOne<IWordEntry>({
-      _id: wordId,
+      _id: wordID,
     });
     if (!wordEntry) {
       console.log("The word does not exist in the database. Generation failed");
@@ -23,8 +24,8 @@ export async function POST(req: Request) {
       wordEntry.pronunciation
     );
     console.log("Description generated");
-
-    await WordEntry.updateOne({ _id: wordId }, { description });
+    await WordEntry.updateOne({ _id: wordID }, { description });
+    revalidatePath(`/dict/word/${wordEntry._id}`);
     return Response.json({ description });
   } catch (err) {
     console.log("### Description generation failed");

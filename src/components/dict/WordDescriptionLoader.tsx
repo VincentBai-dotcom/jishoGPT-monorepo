@@ -8,36 +8,42 @@ export default function WordDescriptionLoader({
 }: {
   wordEntry: IWordEntry;
 }) {
-  const savedDescription = wordEntry.description || "";
+  const savedDescription =
+    wordEntry.description === undefined ? "" : wordEntry.description;
   const [isLoading, setIsLoading] = useState<boolean>(savedDescription === "");
   const [description, setDescription] = useState<string>(savedDescription);
 
   useEffect(() => {
-    if (!savedDescription) {
-      setIsLoading(true);
+    if (savedDescription === "") {
       const generateDescription = async (wordEntry: IWordEntry) => {
-        const generateDiscriptionRes = await fetch(
-          process.env.NEXT_PUBLIC_API_PATH + "/api/dict/generate-description",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              wordID: wordEntry._id,
-            }),
+        setIsLoading(true);
+        try {
+          const generateDiscriptionRes = await fetch(
+            process.env.NEXT_PUBLIC_API_PATH + "/api/dict/generate-description",
+            {
+              method: "POST",
+              body: JSON.stringify({
+                wordID: wordEntry._id,
+              }),
+            }
+          );
+
+          if (generateDiscriptionRes.ok) {
+            const generateDescription = await generateDiscriptionRes
+              .json()
+              .then((res_json) => res_json["description"]);
+
+            setDescription(generateDescription);
+          } else {
+            setDescription("Word description generation failed :(");
           }
-        );
-
-        if (generateDiscriptionRes.ok) {
-          const generateDescription = await generateDiscriptionRes
-            .json()
-            .then((res_json) => res_json["description"]);
-
-          setDescription(generateDescription);
-        } else {
+        } catch (err) {
           setDescription("Word description generation failed :(");
+        } finally {
+          setIsLoading(false);
         }
       };
       generateDescription(wordEntry);
-      setIsLoading(false);
     } else {
       setIsLoading(false);
     }
@@ -46,15 +52,14 @@ export default function WordDescriptionLoader({
   return (
     <div>
       {isLoading ? (
-        <div className="flex flex-col gap-4 w-52">
-          <div className="skeleton h-4 w-full"></div>
+        <div className="flex flex-col gap-4 w-full">
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
         </div>
       ) : (
-        <p>{description}</p>
+        <p style={{ whiteSpace: "pre-line" }}>{description}</p>
       )}
     </div>
   );
