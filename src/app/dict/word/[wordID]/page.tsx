@@ -4,7 +4,7 @@ import { IWordEntry } from "../../../../../models/WordEntry";
 async function getWordEntryInfo(wordID: string) {
   const res = await fetch(
     process.env.NEXT_PUBLIC_API_PATH +
-      "/api/word/get?" +
+      "/api/dict/word/get?" +
       new URLSearchParams({
         wordID,
       }),
@@ -12,7 +12,6 @@ async function getWordEntryInfo(wordID: string) {
       method: "GET",
     }
   );
-
   if (res.ok) {
     return res.json();
   } else {
@@ -24,9 +23,11 @@ export default async function Page({ params }: { params: { wordID: string } }) {
   const wordEntry: IWordEntry = await getWordEntryInfo(params.wordID);
 
   return (
-    <article className="prose lg:prose-xl">
-      <h1>{wordEntry.word}</h1>
-      <h2>{wordEntry.pronunciation}</h2>
-    </article>
+    <div>
+      <article className="prose lg:prose-xl ">
+        <h1>{wordEntry.word}</h1>
+        <h2>{wordEntry.pronunciation}</h2>
+      </article>
+    </div>
   );
 }

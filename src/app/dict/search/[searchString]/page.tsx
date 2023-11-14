@@ -11,7 +11,7 @@ export default async function Page({
   console.log(`SeachString: ${normalizedSearchString}`);
 
   return (
-    <div>
+    <div className="col-start-3 col-end-11">
       <WordSearchResults searchString={normalizedSearchString} />
     </div>
   );
