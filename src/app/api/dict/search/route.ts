@@ -17,7 +17,6 @@ export async function POST(req: Request) {
     // return the entry if it's stored in the database
     if (searchResult !== null) {
       console.log("word found in database");
-      console.log(searchResult);
       return Response.json(searchResult);
     } else {
       console.log("word not found");

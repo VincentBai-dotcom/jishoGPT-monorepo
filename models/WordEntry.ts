@@ -23,6 +23,7 @@ const WordEntrySchema = new Schema<IWordEntry>({
   definitions: [DefinitionSchema],
   description: {
     type: String,
+    select: false,
   }, // Description of the word in user's language
 });
 

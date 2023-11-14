@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     console.log("Checking if word exists in the database");
     const wordEntry = await WordEntry.findOne<IWordEntry>({
       _id: wordID,
-    });
+    }).select("+description");
     if (!wordEntry) {
       console.log("The word does not exist in the database. Generation failed");
       return Response.json(Errors.wordEntryDoesNotExistError, { status: 400 });
