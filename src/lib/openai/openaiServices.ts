@@ -16,7 +16,7 @@ export const generateWordDescription = async (
         },
         {
           role: "user",
-          content: `${word}, pronunced as ${pronunciation}`,
+          content: `${word}, pronounced as ${pronunciation}`,
         },
       ],
       model: "gpt-3.5-turbo",
