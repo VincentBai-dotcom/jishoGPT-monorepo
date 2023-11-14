@@ -15,7 +15,7 @@ export default function WordDescriptionLoader({
   const [description, setDescription] = useState<string>(savedDescription);
 
   useEffect(() => {
-    if (savedDescription === "") {
+    if (description === "") {
       const generateDescription = async (wordEntry: IWordEntry) => {
         setIsLoading(true);
         try {
@@ -48,12 +48,12 @@ export default function WordDescriptionLoader({
     } else {
       setIsLoading(false);
     }
-  }, [wordEntry, savedDescription]);
+  }, [wordEntry, description]);
 
   return (
     <div>
       {isLoading ? (
-        <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col gap-4 w-full mt-3">
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
