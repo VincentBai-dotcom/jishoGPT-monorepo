@@ -19,11 +19,13 @@ export async function POST(req: Request) {
     }
     console.log("Word entry found in the database");
     console.log("generating...");
+    console.time("Word description generation");
     const description = await generateWordDescription(
       wordEntry.word,
       wordEntry.pronunciation
     );
     console.log("Description generated");
+    console.timeEnd("Word description generation");
     await WordEntry.updateOne({ _id: wordID }, { description });
     revalidatePath(`/dict/word/${wordEntry._id}`);
     return Response.json({ description });
