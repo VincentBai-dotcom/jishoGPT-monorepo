@@ -7,10 +7,10 @@ export async function POST(req: Request) {
   try {
     console.log("### Start generating description for word");
     await connectToDB();
-    const { wordEntryId } = await req.json();
+    const { wordId } = await req.json();
     console.log("Checking if word exists in the database");
     const wordEntry = await WordEntry.findOne<IWordEntry>({
-      _id: wordEntryId,
+      _id: wordId,
     });
     if (!wordEntry) {
       console.log("The word does not exist in the database. Generation failed");
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     );
     console.log("Description generated");
 
-    await WordEntry.updateOne({ _id: wordEntryId }, { description });
+    await WordEntry.updateOne({ _id: wordId }, { description });
     return Response.json({ description });
   } catch (err) {
     console.log("### Description generation failed");
