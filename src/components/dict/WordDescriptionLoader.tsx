@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { IWordEntry } from "../../../models/WordEntry";
+import { FaArrowRotateLeft } from "react-icons/fa6";
 
 export default function WordDescriptionLoader({
   wordEntry,
@@ -59,7 +60,16 @@ export default function WordDescriptionLoader({
           <div className="skeleton h-4 w-full"></div>
         </div>
       ) : (
-        <p style={{ whiteSpace: "pre-line" }}>{description}</p>
+        <div className="flex flex-col">
+          <p style={{ whiteSpace: "pre-line" }}>{description}</p>
+          <button
+            className="btn btn-primary ml-auto"
+            onClick={() => setDescription("")}
+          >
+            <FaArrowRotateLeft />
+            Regenerate
+          </button>
+        </div>
       )}
     </div>
   );

@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: { wordID: string } }) {
         <h3 style={{ margin: "0" }}>{wordEntry.pronunciation}</h3>
         <h1 style={{ margin: "0" }}>{wordEntry.word}</h1>
         <div className="divider"></div>
-        <h3 style={{ marginTop: "0" }}>Description</h3>
+        <h3 style={{ margin: "0" }}>Description</h3>
         <WordDescriptionLoader wordEntry={wordEntry} />
       </article>
     </div>
