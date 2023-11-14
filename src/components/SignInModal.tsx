@@ -86,7 +86,7 @@ export default function SignInModal() {
             {/* Make sure sign in button is disablled when either of the fields are not filled */}
             <div className="ml-auto">
               <button
-                className={`btn btn-primary ${
+                className={`btn btn-primary btn-wide ${
                   emailOrUsername !== "" && password !== ""
                     ? ""
                     : "btn-disabled"
