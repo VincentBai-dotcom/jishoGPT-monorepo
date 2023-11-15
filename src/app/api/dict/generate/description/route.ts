@@ -7,9 +7,7 @@ import { revalidatePath } from "next/cache";
 export async function POST(req: Request) {
   try {
     console.log("### Start generating description for word");
-    console.time("Connect DB");
     await connectToDB();
-    console.timeLog("Connect DB");
     const { wordID } = await req.json();
     console.log("Checking if word exists in the database");
     const wordEntry = await WordEntry.findOne<IWordEntry>({
