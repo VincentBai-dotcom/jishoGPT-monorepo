@@ -8,7 +8,7 @@ export default async function Page({
   const normalizedSearchString = decodeURIComponent(
     params.searchString
   ).toLowerCase();
-  console.log(`SeachString: ${normalizedSearchString}`);
+  console.log(`SearchString: ${normalizedSearchString}`);
 
   return (
     <div className="col-start-3 col-end-11">
