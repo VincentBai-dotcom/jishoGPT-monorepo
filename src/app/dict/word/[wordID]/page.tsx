@@ -29,7 +29,7 @@ export default async function Page({ params }: { params: { wordID: string } }) {
 
   return (
     <div className="col-start-4 col-end-10">
-      <article className="prose lg:prose-lg mt-4 max-w-none prose-h3:m-0 prose-p:my-2">
+      <article className="prose lg:prose-lg mt-4 max-w-none prose-h3:m-0 prose-p:my-2 prose-li:my-0">
         <h3>{wordEntry.pronunciation}</h3>
         <h1 style={{ margin: "0" }}>{wordEntry.word}</h1>
         <div className="divider"></div>

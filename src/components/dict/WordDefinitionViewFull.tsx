@@ -7,14 +7,13 @@ export default function WordDefinitionViewFull({
   definition: IDefinition;
 }) {
   return (
-    <div>
+    <li>
       <div className="flex gap-2">
         {definition.tags.map((tag, index) => {
           return <TagBadge tag={tag} key={index} />;
         })}
       </div>
-
-      <div className=" text-lg">{definition.definition.join(", ")}</div>
-    </div>
+      <p>{definition.definition.join(", ")}</p>
+    </li>
   );
 }
