@@ -54,7 +54,10 @@ export default function WordDescriptionLoader({
     <div>
       <h3>Meaning</h3>
       {isLoading ? (
-        <div className="flex flex-col gap-4 w-full mt-3">
+        <div
+          className="flex flex-col gap-4 w-full"
+          style={{ marginTop: "1rem" }}
+        >
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
