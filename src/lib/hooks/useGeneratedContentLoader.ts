@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-enum ContentType {
+export enum ContentType {
   description = "description",
   synonyms = "synonyms",
 }
@@ -25,10 +25,10 @@ const getErrorContent = (contentType: ContentType) => {
   return "";
 };
 
-export function useContentLoader(
-  initialContent: string,
+export function useGeneratedContentLoader(
+  initialContent: string | undefined,
   contentType: ContentType,
-  wordID: number
+  wordID: string
 ) {
   const [content, setContent] = useState(
     initialContent || getInitialContent(contentType)
@@ -37,7 +37,7 @@ export function useContentLoader(
 
   useEffect(() => {
     if (!content) {
-      const generateContent = async (wordID: number) => {
+      const generateContent = async (wordID: string) => {
         setIsLoading(true);
         try {
           const generateContentRes = await fetch(

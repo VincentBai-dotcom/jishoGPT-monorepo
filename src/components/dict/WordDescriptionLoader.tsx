@@ -3,57 +3,26 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { IWordEntry } from "../../../models/WordEntry";
 import { FaArrowRotateLeft } from "react-icons/fa6";
+import {
+  ContentType,
+  useGeneratedContentLoader,
+} from "@/lib/hooks/useGeneratedContentLoader";
 
 export default function WordDescriptionLoader({
   wordEntry,
 }: {
   wordEntry: IWordEntry;
 }) {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [description, setDescription] = useState<string>(
-    wordEntry.description || ""
+  const descriptionLoader = useGeneratedContentLoader(
+    wordEntry.description,
+    ContentType.description,
+    wordEntry._id
   );
-
-  useEffect(() => {
-    if (!description) {
-      const generateDescription = async (wordEntry: IWordEntry) => {
-        setIsLoading(true);
-        try {
-          const generateDiscriptionRes = await fetch(
-            process.env.NEXT_PUBLIC_API_PATH + "/api/dict/generate/description",
-            {
-              method: "POST",
-              body: JSON.stringify({
-                wordID: wordEntry._id,
-              }),
-            }
-          );
-
-          if (generateDiscriptionRes.ok) {
-            const generateDescription = await generateDiscriptionRes
-              .json()
-              .then((res_json) => res_json["description"]);
-
-            setDescription(generateDescription);
-          } else {
-            setDescription("Word description generation failed :(");
-          }
-        } catch (err) {
-          setDescription("Word description generation failed :(");
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      generateDescription(wordEntry);
-    } else {
-      setIsLoading(false);
-    }
-  }, [wordEntry, description]);
 
   return (
     <div>
       <h3>Meaning</h3>
-      {isLoading ? (
+      {descriptionLoader.isLoading ? (
         <div
           className="flex flex-col gap-4 w-full"
           style={{ marginTop: "1rem" }}
@@ -69,11 +38,11 @@ export default function WordDescriptionLoader({
               whiteSpace: "pre-line",
             }}
           >
-            {description}
+            {descriptionLoader.content}
           </p>
           <button
             className="btn btn-sm btn-primary ml-auto"
-            onClick={() => setDescription("")}
+            onClick={() => descriptionLoader.reloadContent()}
           >
             <FaArrowRotateLeft />
             Regenerate
