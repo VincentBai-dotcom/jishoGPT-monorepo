@@ -11,11 +11,11 @@ export default function WordDescriptionLoader({
 }) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [description, setDescription] = useState<string>(
-    wordEntry.description === undefined ? "" : wordEntry.description
+    wordEntry.description || ""
   );
 
   useEffect(() => {
-    if (description === "") {
+    if (!description) {
       const generateDescription = async (wordEntry: IWordEntry) => {
         setIsLoading(true);
         try {
