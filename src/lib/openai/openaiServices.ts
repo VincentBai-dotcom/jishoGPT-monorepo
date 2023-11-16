@@ -30,3 +30,31 @@ export const generateWordDescription = async (
     return null;
   }
 };
+
+export const generateWordSynonyms = async (
+  word: string,
+  pronunciation: string
+) => {
+  try {
+    const descriptions = await openai.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content: Prompts.synonymPrompt,
+        },
+        {
+          role: "user",
+          content: `${word} (${pronunciation})`,
+        },
+      ],
+      model: "gpt-3.5-turbo",
+      temperature: 0.2,
+      max_tokens: 100,
+    });
+    return descriptions.choices[0].message.content;
+  } catch (err) {
+    console.log("Generation Failed");
+    console.log(err);
+    return null;
+  }
+};
