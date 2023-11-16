@@ -9,10 +9,10 @@ export default function WordDescriptionLoader({
 }: {
   wordEntry: IWordEntry;
 }) {
-  const savedDescription =
-    wordEntry.description === undefined ? "" : wordEntry.description;
-  const [isLoading, setIsLoading] = useState<boolean>(savedDescription === "");
-  const [description, setDescription] = useState<string>(savedDescription);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [description, setDescription] = useState<string>(
+    wordEntry.description === undefined ? "" : wordEntry.description
+  );
 
   useEffect(() => {
     if (description === "") {
