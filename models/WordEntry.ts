@@ -9,6 +9,7 @@ export interface IWordEntry {
   pronunciation: string;
   definitions: [IDefinition];
   description?: string;
+  synonym?: [String];
 }
 
 const WordEntrySchema = new Schema<IWordEntry>({
@@ -25,6 +26,10 @@ const WordEntrySchema = new Schema<IWordEntry>({
     type: String,
     select: false,
   }, // Description of the word in user's language
+  synonyms: {
+    type: [String],
+    select: false,
+  },
 });
 
 // Enforce uniqueness of the entry
