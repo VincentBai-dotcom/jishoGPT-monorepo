@@ -12,7 +12,7 @@ export const generateWordDescription = async (
       messages: [
         {
           role: "system",
-          content: Prompts.wordDescriptionSystemPrompy,
+          content: Prompts.wordDescriptionSystemPrompt,
         },
         {
           role: "user",
