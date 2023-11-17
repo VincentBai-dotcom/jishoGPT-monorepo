@@ -25,7 +25,6 @@ export default function WordSynonymsLoader({
         >
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
-          <div className="skeleton h-4 w-full"></div>
         </div>
       ) : (
         <div className="flex flex-col">
