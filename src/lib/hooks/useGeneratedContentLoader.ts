@@ -1,41 +1,22 @@
 import { useEffect, useState } from "react";
 
-export enum ContentType {
-  description = "description",
-  synonyms = "synonyms",
-}
+type ContentType = "description" | "synonyms";
 
-const getInitialContent = (contentType: ContentType): string | string[] => {
-  switch (contentType) {
-    case "description":
-      return "";
-    case "synonyms":
-      return [];
-  }
-  return "";
-};
+type ContentDataType<T> =
+  | (T extends "description" ? string : T extends "synonyms" ? string[] : never)
+  | undefined;
 
-const getErrorContent = (contentType: ContentType) => {
-  switch (contentType) {
-    case "description":
-      return "Word description generation failed :(";
-    case "synonyms":
-      return ["Word description generation failed :("];
-  }
-  return "";
-};
-
-export function useGeneratedContentLoader(
-  initialContent: string | undefined,
+export function useGeneratedContentLoader<T extends ContentType>(
+  initialContent: ContentDataType<T>,
   contentType: ContentType,
   wordID: string
 ) {
-  const [content, setContent] = useState(
-    initialContent || getInitialContent(contentType)
-  );
+  const [content, setContent] = useState(initialContent);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    setErrorMessage("");
     if (!content) {
       const generateContent = async (wordID: string) => {
         setIsLoading(true);
@@ -58,10 +39,10 @@ export function useGeneratedContentLoader(
 
             setContent(generatedContent);
           } else {
-            setContent(getErrorContent(contentType));
+            setErrorMessage("Generation failed :(");
           }
         } catch (err) {
-          setContent(getErrorContent(contentType));
+          setErrorMessage("Generation failed :(");
         } finally {
           setIsLoading(false);
         }
@@ -73,8 +54,8 @@ export function useGeneratedContentLoader(
   }, [wordID, content, contentType]);
 
   const reloadContent = () => {
-    setContent(getInitialContent(contentType));
+    setContent(undefined);
   };
 
-  return { content, isLoading, reloadContent };
+  return { content, isLoading, reloadContent, errorMessage };
 }

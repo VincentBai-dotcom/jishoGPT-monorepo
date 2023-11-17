@@ -9,7 +9,7 @@ export interface IWordEntry {
   pronunciation: string;
   definitions: [IDefinition];
   description?: string;
-  synonym?: [String];
+  synonyms?: [string];
 }
 
 const WordEntrySchema = new Schema<IWordEntry>({

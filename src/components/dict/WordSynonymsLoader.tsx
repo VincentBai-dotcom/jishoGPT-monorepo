@@ -4,21 +4,21 @@ import { IWordEntry } from "../../../models/WordEntry";
 import { FaArrowRotateLeft } from "react-icons/fa6";
 import { useGeneratedContentLoader } from "@/lib/hooks/useGeneratedContentLoader";
 
-export default function WordDescriptionLoader({
+export default function WordSynonymsLoader({
   wordEntry,
 }: {
   wordEntry: IWordEntry;
 }) {
-  const descriptionLoader = useGeneratedContentLoader<"description">(
-    wordEntry.description,
-    "description",
+  const synonymsLoader = useGeneratedContentLoader<"synonyms">(
+    wordEntry.synonyms,
+    "synonyms",
     wordEntry._id
   );
 
   return (
     <div>
-      <h3>Meaning</h3>
-      {descriptionLoader.isLoading ? (
+      <h3>Synonyms</h3>
+      {synonymsLoader.isLoading ? (
         <div
           className="flex flex-col gap-4 w-full"
           style={{ marginTop: "1rem" }}
@@ -34,11 +34,11 @@ export default function WordDescriptionLoader({
               whiteSpace: "pre-line",
             }}
           >
-            {descriptionLoader.errorMessage || descriptionLoader.content}
+            {synonymsLoader.errorMessage || synonymsLoader.content?.join(", ")}
           </p>
           <button
             className="btn btn-sm btn-primary ml-auto"
-            onClick={() => descriptionLoader.reloadContent()}
+            onClick={() => synonymsLoader.reloadContent()}
           >
             <FaArrowRotateLeft />
             Regenerate
