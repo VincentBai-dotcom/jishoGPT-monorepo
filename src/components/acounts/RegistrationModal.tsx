@@ -96,7 +96,7 @@ export default function RegistrationModal() {
 
       {/* Make sure sign in button is disablled when either onpf the fields are not filled */}
       <button
-        className={`btn btn-neutral w-full mt-3 ${
+        className={`btn btn-primary w-full mt-3 ${
           username !== "" && email !== "" && password !== ""
             ? ""
             : "btn-disabled"

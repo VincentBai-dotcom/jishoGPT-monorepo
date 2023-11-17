@@ -9,11 +9,11 @@ export default function WordDefinitionsBody({
   return (
     <div>
       <h3>Dictionary Definition</h3>
-      <div className="flex flex-col">
+      <ul className="flex flex-col">
         {wordEntry.definitions.map((definition, index) => {
           return <WordDefinitionViewFull definition={definition} key={index} />;
         })}
-      </div>
+      </ul>
     </div>
   );
 }
