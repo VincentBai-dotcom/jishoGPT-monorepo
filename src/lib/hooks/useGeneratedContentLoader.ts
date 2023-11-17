@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 
-type ContentType = "description" | "synonyms";
+type ContentType = "description" | "synonyms" | "usage-context";
 
 type ContentDataType<T> =
-  | (T extends "description" ? string : T extends "synonyms" ? string[] : never)
+  | (T extends "description"
+      ? string
+      : T extends "synonyms"
+      ? string[]
+      : T extends "usage-context"
+      ? string
+      : never)
   | undefined;
 
 export function useGeneratedContentLoader<T extends ContentType>(

@@ -10,6 +10,7 @@ export interface IWordEntry {
   definitions: [IDefinition];
   description?: string;
   synonyms?: [string];
+  usageContext?: string;
 }
 
 const WordEntrySchema = new Schema<IWordEntry>({
@@ -28,6 +29,10 @@ const WordEntrySchema = new Schema<IWordEntry>({
   }, // Description of the word in user's language
   synonyms: {
     type: [String],
+    select: false,
+  },
+  usageContext: {
+    type: String,
     select: false,
   },
 });
