@@ -13,7 +13,7 @@ export default function PasswordInputBox({
     <div className="flex relative">
       <input
         type={showPassword ? "text" : "password"}
-        className="input input-bordered w-full"
+        className="input input-primary input-bordered w-full"
         onChange={onChange}
         value={value}
       />

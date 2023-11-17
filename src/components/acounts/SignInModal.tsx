@@ -85,7 +85,7 @@ export default function SignInModal() {
 
             {/* Make sure sign in button is disablled when either of the fields are not filled */}
             <button
-              className={`btn btn-neutral w-full mt-3 ${
+              className={`btn btn-primary w-full mt-3 ${
                 emailOrUsername !== "" && password !== "" ? "" : "btn-disabled"
               }`}
               type={

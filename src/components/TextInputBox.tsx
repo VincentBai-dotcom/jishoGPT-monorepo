@@ -10,7 +10,7 @@ export default function TextInputBox({
   return (
     <input
       type="text"
-      className="input input-bordered w-full"
+      className="input input-primary input-bordered w-full"
       onChange={onChange}
       value={value}
     />
