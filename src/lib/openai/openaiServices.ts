@@ -76,7 +76,7 @@ export const generateWordUsageContext = async (
         },
       ],
       model: "gpt-3.5-turbo",
-      temperature: 1,
+      temperature: 0.8,
       max_tokens: 350,
     });
     return descriptions.choices[0].message.content;

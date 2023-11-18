@@ -3,6 +3,7 @@ import { IWordEntry } from "../../../../../models/WordEntry";
 import WordDescriptionLoader from "@/components/dict/WordDescriptionLoader";
 import WordDefinitionsBody from "@/components/dict/WordDefinitionsBody";
 import WordSynonymsLoader from "@/components/dict/WordSynonymsLoader";
+import WordUsageContextLoader from "@/components/dict/WordUsageContextLoader";
 
 async function getWordEntryInfo(wordID: string) {
   const res = await fetch(
@@ -39,6 +40,8 @@ export default async function Page({ params }: { params: { wordID: string } }) {
         <WordDefinitionsBody wordEntry={wordEntry} />
         <div className="divider"></div>
         <WordSynonymsLoader wordEntry={wordEntry} />
+        <div className="divider"></div>
+        <WordUsageContextLoader wordEntry={wordEntry} />
       </article>
     </div>
   );

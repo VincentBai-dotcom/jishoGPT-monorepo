@@ -38,12 +38,12 @@ export async function POST(req: Request) {
       timeOutPromise,
     ]);
 
-    console.log("Description generated");
+    console.log("Synonyms generated");
     await WordEntry.updateOne({ _id: wordID }, { synonyms });
     revalidatePath(`/dict/word/${wordEntry._id}`);
     return Response.json({ synonyms });
   } catch (err) {
-    console.log("### Description generation failed");
+    console.log("### Synonyms generation failed");
     console.log(err);
     return Response.json(err, {
       status: 400,

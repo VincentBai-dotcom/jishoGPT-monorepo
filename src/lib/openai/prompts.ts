@@ -18,5 +18,5 @@ export const Prompts = {
     "与えられた日本語の語彙に基づき、最大七つの違い対義語を読点で区切ってリストにしてください。漢字を含め。",
 
   usageContextPrompt:
-    "You are a translator from Japanese to English. Given a Japanese word, give a list of common contexts where it's used, and provide any implications it has within the context. Get straight into the list without giving an introduction. ",
+    "You are a translator from Japanese to English. Given a Japanese word, give a list of about 5 common contexts where it's used, and provide any nuance it has within the context. Get straight into the list without giving an introduction. ",
 };

@@ -10,7 +10,7 @@ import { revalidatePath } from "next/cache";
 
 export async function POST(req: Request) {
   try {
-    console.log("### Start generating synonyms for word");
+    console.log("### Start generating usage context for word");
     await connectToDB();
     const { wordID } = await req.json();
     console.log("Checking if word exists in the database");
@@ -31,20 +31,16 @@ export async function POST(req: Request) {
     });
 
     const usageContext = await Promise.race([
-      generateWordUsageContext(wordEntry.word, wordEntry.pronunciation).then(
-        (res) => {
-          return res?.split(", ");
-        }
-      ),
+      generateWordUsageContext(wordEntry.word, wordEntry.pronunciation),
       timeOutPromise,
     ]);
 
-    console.log("Description generated");
+    console.log("Usage context generated");
     await WordEntry.updateOne({ _id: wordID }, { usageContext });
     revalidatePath(`/dict/word/${wordEntry._id}`);
     return Response.json({ usageContext });
   } catch (err) {
-    console.log("### Description generation failed");
+    console.log("### Usage context generation failed");
     console.log(err);
     return Response.json(err, {
       status: 400,
