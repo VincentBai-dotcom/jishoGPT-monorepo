@@ -11,6 +11,7 @@ export interface IWordEntry {
   description?: string;
   synonyms?: [string];
   usageContext?: string;
+  isVerb?: boolean;
 }
 
 const WordEntrySchema = new Schema<IWordEntry>({
@@ -34,6 +35,9 @@ const WordEntrySchema = new Schema<IWordEntry>({
   usageContext: {
     type: String,
     select: false,
+  },
+  isVerb: {
+    type: Boolean,
   },
 });
 

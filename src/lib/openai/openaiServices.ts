@@ -86,3 +86,24 @@ export const generateWordUsageContext = async (
     return null;
   }
 };
+
+export const isVerb = async (word: string, pronunciation: string) => {
+  try {
+    const descriptions = await openai.chat.completions.create({
+      messages: [
+        {
+          role: "user",
+          content: `Is ${word}(${pronunciation}) a verb?`,
+        },
+      ],
+      model: "gpt-3.5-turbo",
+      temperature: 0.0,
+      max_tokens: 1,
+    });
+    return descriptions.choices[0].message.content?.charAt(0) === "Y";
+  } catch (err) {
+    console.log("Generation Failed");
+    console.log(err);
+    return null;
+  }
+};
