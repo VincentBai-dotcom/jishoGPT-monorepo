@@ -18,6 +18,24 @@ export async function GET(req: NextRequest) {
       });
     }
     console.log("Word found in database");
+
+    if (wordEntry.isVerb === undefined) {
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_API_PATH + "/api/dict/identify-verb",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            wordID: wordEntry._id,
+          }),
+        }
+      );
+      if (res.ok) {
+        wordEntry.isVerb = (await res.json())["isVerb"];
+      } else {
+        throw new Error("Verb identification failed");
+      }
+    }
+
     return Response.json(wordEntry);
   } catch (err) {
     console.log("fetching failed");

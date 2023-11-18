@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-type ContentType = "description" | "synonyms" | "usageContext";
+type ContentType = "description" | "synonyms" | "usageContext" | "conjugation";
 
 type ContentDataType<T> =
   | (T extends "description"
@@ -8,6 +8,8 @@ type ContentDataType<T> =
       : T extends "synonyms"
       ? string[]
       : T extends "usageContext"
+      ? string
+      : T extends "conjugation"
       ? string
       : never)
   | undefined;
