@@ -36,7 +36,7 @@ export const generateWordSynonyms = async (
   pronunciation: string
 ) => {
   try {
-    const descriptions = await openai.chat.completions.create({
+    const synonyms = await openai.chat.completions.create({
       messages: [
         {
           role: "system",
@@ -51,7 +51,7 @@ export const generateWordSynonyms = async (
       temperature: 0.2,
       max_tokens: 100,
     });
-    return descriptions.choices[0].message.content;
+    return synonyms.choices[0].message.content;
   } catch (err) {
     console.log("Generation Failed");
     console.log(err);
@@ -64,7 +64,7 @@ export const generateWordUsageContext = async (
   pronunciation: string
 ) => {
   try {
-    const descriptions = await openai.chat.completions.create({
+    const usageContext = await openai.chat.completions.create({
       messages: [
         {
           role: "system",
@@ -79,7 +79,7 @@ export const generateWordUsageContext = async (
       temperature: 0.8,
       max_tokens: 350,
     });
-    return descriptions.choices[0].message.content;
+    return usageContext.choices[0].message.content;
   } catch (err) {
     console.log("Generation Failed");
     console.log(err);
@@ -92,7 +92,7 @@ export const generateWordConjugation = async (
   pronunciation: string
 ) => {
   try {
-    const descriptions = await openai.chat.completions.create({
+    const conjugations = await openai.chat.completions.create({
       messages: [
         {
           role: "system",
@@ -105,9 +105,9 @@ export const generateWordConjugation = async (
       ],
       model: "gpt-3.5-turbo",
       temperature: 0.1,
-      max_tokens: 350,
+      max_tokens: 500,
     });
-    return descriptions.choices[0].message.content;
+    return conjugations.choices[0].message.content;
   } catch (err) {
     console.log("Generation Failed");
     console.log(err);

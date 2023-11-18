@@ -5,7 +5,7 @@ import WordDefinitionsBody from "@/components/dict/WordDefinitionsBody";
 import WordSynonymsLoader from "@/components/dict/WordSynonymsLoader";
 import WordUsageContextLoader from "@/components/dict/WordUsageContextLoader";
 import WordTagBadgesView from "@/components/dict/WordTagBadgesView";
-import WordConjugationLoader from "@/components/dict/VerbConjugationLoader";
+import WordConjugationLoader from "@/components/dict/WordConjugationLoader";
 
 async function getWordEntryInfo(wordID: string) {
   const res = await fetch(

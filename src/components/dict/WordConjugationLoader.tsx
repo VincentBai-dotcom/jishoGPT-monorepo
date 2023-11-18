@@ -1,15 +1,15 @@
 "use client";
 
 import { IWordEntry } from "../../../models/WordEntry";
-import { FaArrowRotateLeft } from "react-icons/fa6";
 import { useGeneratedContentLoader } from "@/lib/hooks/useGeneratedContentLoader";
+import VerbConjugationLoader from "./VerbConjugationLoader";
 
-export default function VerbConjugationLoader({
+export default function WordConjugationLoader({
   wordEntry,
 }: {
   wordEntry: IWordEntry;
 }) {
-  const isVerbLodaer = useGeneratedContentLoader<"isVerb">(
+  const isVerbLoadaer = useGeneratedContentLoader<"isVerb">(
     wordEntry.isVerb,
     "isVerb",
     wordEntry._id
@@ -17,7 +17,12 @@ export default function VerbConjugationLoader({
 
   return (
     <div>
-      {isVerbLodaer.content && <VerbConjugationLoader wordEntry={wordEntry} />}
+      {isVerbLoadaer.content === true && (
+        <>
+          <div className="divider"></div>
+          <VerbConjugationLoader wordEntry={wordEntry} />
+        </>
+      )}
     </div>
   );
 }
