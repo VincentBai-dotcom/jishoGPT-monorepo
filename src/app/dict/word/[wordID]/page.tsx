@@ -5,7 +5,7 @@ import WordDefinitionsBody from "@/components/dict/WordDefinitionsBody";
 import WordSynonymsLoader from "@/components/dict/WordSynonymsLoader";
 import WordUsageContextLoader from "@/components/dict/WordUsageContextLoader";
 import WordTagBadgesView from "@/components/dict/WordTagBadgesView";
-import WordConjugationLoader from "@/components/dict/WordConjugationLoader";
+import WordConjugationLoader from "@/components/dict/VerbConjugationLoader";
 
 async function getWordEntryInfo(wordID: string) {
   const res = await fetch(
@@ -41,12 +41,7 @@ export default async function Page({ params }: { params: { wordID: string } }) {
         <WordSynonymsLoader wordEntry={wordEntry} />
         <div className="divider"></div>
         <WordUsageContextLoader wordEntry={wordEntry} />
-        {wordEntry.isVerb && (
-          <div>
-            <div className="divider"></div>
-            <WordConjugationLoader wordEntry={wordEntry} />
-          </div>
-        )}
+        <WordConjugationLoader wordEntry={wordEntry} />
       </article>
     </div>
   );

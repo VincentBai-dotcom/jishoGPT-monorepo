@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
-type ContentType = "description" | "synonyms" | "usageContext" | "conjugation";
+type ContentType =
+  | "description"
+  | "synonyms"
+  | "usageContext"
+  | "conjugation"
+  | "isVerb";
 
 type ContentDataType<T> =
   | (T extends "description"
@@ -11,6 +16,8 @@ type ContentDataType<T> =
       ? string
       : T extends "conjugation"
       ? string
+      : T extends "isVerb"
+      ? boolean
       : never)
   | undefined;
 

@@ -1,9 +1,9 @@
 import connectToDB from "@/lib/db";
-import WordEntry from "../../../../../models/WordEntry";
-import { IWordEntry } from "../../../../../models/WordEntry";
+import WordEntry from "../../../../../../models/WordEntry";
+import { IWordEntry } from "../../../../../../models/WordEntry";
 import { verbIdentifier } from "@/lib/openai/openaiServices";
 import { revalidatePath } from "next/cache";
-import { Errors } from "../../../../../errors";
+import { Errors } from "../../../../../../errors";
 
 export async function POST(req: Request) {
   try {
