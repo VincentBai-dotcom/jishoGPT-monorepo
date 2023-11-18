@@ -12,6 +12,7 @@ export interface IWordEntry {
   synonyms?: [string];
   usageContext?: string;
   isVerb?: boolean;
+  conjugation?: string;
 }
 
 const WordEntrySchema = new Schema<IWordEntry>({
@@ -38,6 +39,10 @@ const WordEntrySchema = new Schema<IWordEntry>({
   },
   isVerb: {
     type: Boolean,
+  },
+  conjugation: {
+    type: String,
+    select: false,
   },
 });
 

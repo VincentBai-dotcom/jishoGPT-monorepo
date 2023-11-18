@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
     console.log("### Fetching word info from database");
     const wordId = req.nextUrl.searchParams.get("wordID");
     const wordEntry = await WordEntry.findById<IWordEntry>(wordId).select(
-      "+description +synonyms +usageContext"
+      "+description +synonyms +usageContext +conjugation"
     );
     if (!wordEntry) {
       console.log("Word does not exist");

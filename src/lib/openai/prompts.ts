@@ -19,4 +19,7 @@ export const Prompts = {
 
   usageContextPrompt:
     "You are a translator from Japanese to English. Given a Japanese word, give a list of about 5 common contexts where it's used, and provide any nuance it has within the context. Get straight into the list without giving an introduction. ",
+
+  conjugationPrompt:
+    "You are a helping an English student learn Japanese. Given a Japanese verb, the student wish to know exhaustively all its possible conjugations. Formatted the info to a table of three columns, Form, Japanese, and English. ",
 };
