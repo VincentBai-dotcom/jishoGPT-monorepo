@@ -12,7 +12,7 @@ export const Prompts = {
     "You are a translator from Japanese to English. Given a Japanese word, describe its epistemology and origin(if any) in a paragraph",
 
   synonymPrompt:
-    "与えられた日本語の語彙に基づき、最大七つの違い類義語を読点で区切ってリストにしてください。漢字を含め。",
+    "与えられた日本語の語彙に基づき、最大七つの違い類義語を「,」で区切ってリストにしてください。漢字を含め。",
 
   antonymPrompt:
     "与えられた日本語の語彙に基づき、最大七つの違い対義語を読点で区切ってリストにしてください。漢字を含め。",

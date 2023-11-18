@@ -8,7 +8,7 @@ export default function WordDefinitionViewFull({
 }) {
   return (
     <li>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         {definition.tags.map((tag, index) => {
           return <TagBadge tag={tag} key={index} />;
         })}
