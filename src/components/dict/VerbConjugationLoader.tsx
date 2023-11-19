@@ -3,22 +3,60 @@
 import { IWordEntry } from "../../../models/WordEntry";
 import { FaArrowRotateLeft } from "react-icons/fa6";
 import { useGeneratedContentLoader } from "@/lib/hooks/useGeneratedContentLoader";
+import { remark } from "remark";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import remarkGfm from "remark-gfm";
+import { useEffect, useState } from "react";
 
 export default function VerbConjugationLoader({
   wordEntry,
 }: {
   wordEntry: IWordEntry;
 }) {
+  const [conjugationTableHTML, setConjugationTableHTML] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const conjugationLoader = useGeneratedContentLoader<"conjugation">(
     wordEntry.conjugation,
     "conjugation",
     wordEntry._id
   );
 
+  useEffect(() => {
+    setConjugationTableHTML(conjugationLoader.errorMessage);
+    const markdownToHTML = async () => {
+      try {
+        setIsLoading(true);
+        console.log("fetched content:");
+        console.log(conjugationLoader.content);
+        if (conjugationLoader.content) {
+          const result = await remark()
+            .use(remarkGfm)
+            .use(remarkRehype)
+            .use(rehypeStringify)
+            .process(conjugationLoader.content);
+          setConjugationTableHTML(result.toString());
+          console.log("state:");
+          console.log(conjugationTableHTML);
+        }
+      } catch (err) {
+        setConjugationTableHTML("Generation failed :(");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    markdownToHTML();
+  }, [
+    conjugationLoader.content,
+    conjugationLoader.errorMessage,
+    conjugationTableHTML,
+  ]);
+
   return (
     <div>
       <h3>Conjugations</h3>
-      {conjugationLoader.isLoading ? (
+      {conjugationLoader.isLoading || isLoading ? (
         <div
           className="flex flex-col gap-4 w-full"
           style={{ marginTop: "1rem" }}
@@ -29,13 +67,19 @@ export default function VerbConjugationLoader({
         </div>
       ) : (
         <div className="flex flex-col">
-          <p
+          {/* <p
             style={{
               whiteSpace: "pre-line",
             }}
+            dangerouslySetInnerHTML={{ __html: conjugationTableHTML }}
           >
-            {conjugationLoader.errorMessage || conjugationLoader.content}
-          </p>
+            
+          </p> */}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: conjugationTableHTML,
+            }}
+          />
           <button
             className="btn btn-sm btn-primary ml-auto"
             onClick={() => conjugationLoader.reloadContent()}

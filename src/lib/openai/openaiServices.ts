@@ -105,7 +105,7 @@ export const generateWordConjugation = async (
       ],
       model: "gpt-3.5-turbo",
       temperature: 0.1,
-      max_tokens: 500,
+      max_tokens: 600,
     });
     return conjugations.choices[0].message.content;
   } catch (err) {

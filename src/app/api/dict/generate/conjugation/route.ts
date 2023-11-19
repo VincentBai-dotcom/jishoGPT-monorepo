@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     const timeOutPromise = new Promise((resolve, reject) => {
       setTimeout(() => {
         reject("Reqeust time out");
-      }, 30000);
+      }, 50000);
     });
 
     const conjugation = await Promise.race([
