@@ -28,8 +28,6 @@ export default function VerbConjugationLoader({
     const markdownToHTML = async () => {
       try {
         setIsLoading(true);
-        console.log("fetched content:");
-        console.log(conjugationLoader.content);
         if (conjugationLoader.content) {
           const result = await remark()
             .use(remarkGfm)
@@ -37,8 +35,6 @@ export default function VerbConjugationLoader({
             .use(rehypeStringify)
             .process(conjugationLoader.content);
           setConjugationTableHTML(result.toString());
-          console.log("state:");
-          console.log(conjugationTableHTML);
         }
       } catch (err) {
         setConjugationTableHTML("Generation failed :(");
@@ -67,14 +63,6 @@ export default function VerbConjugationLoader({
         </div>
       ) : (
         <div className="flex flex-col">
-          {/* <p
-            style={{
-              whiteSpace: "pre-line",
-            }}
-            dangerouslySetInnerHTML={{ __html: conjugationTableHTML }}
-          >
-            
-          </p> */}
           <div
             dangerouslySetInnerHTML={{
               __html: conjugationTableHTML,
