@@ -1,21 +1,18 @@
 import connectToDB from "@/lib/db";
 import WordEntry, { IWordEntry } from "../../../../../../models/WordEntry";
-import {
-  generateWordDescription,
-  generateWordSynonyms,
-} from "@/lib/openai/openaiServices";
+import { generateWordConjugation } from "@/lib/openai/openaiServices";
 import { Errors } from "../../../../../../errors";
 import { revalidatePath } from "next/cache";
 
 export async function POST(req: Request) {
   try {
-    console.log("### Start generating synonyms for word");
+    console.log("### Start generating conjugation for word");
     await connectToDB();
     const { wordID } = await req.json();
     console.log("Checking if word exists in the database");
     const wordEntry = await WordEntry.findOne<IWordEntry>({
       _id: wordID,
-    }).select("+synonyms");
+    }).select("+conjugation");
     if (!wordEntry) {
       console.log("The word does not exist in the database. Generation failed");
       return Response.json(Errors.wordEntryDoesNotExistError, { status: 400 });
@@ -26,24 +23,20 @@ export async function POST(req: Request) {
     const timeOutPromise = new Promise((resolve, reject) => {
       setTimeout(() => {
         reject("Reqeust time out");
-      }, 30000);
+      }, 50000);
     });
 
-    const synonyms = await Promise.race([
-      generateWordSynonyms(wordEntry.word, wordEntry.pronunciation).then(
-        (res) => {
-          return res?.split(", ");
-        }
-      ),
+    const conjugation = await Promise.race([
+      generateWordConjugation(wordEntry.word, wordEntry.pronunciation),
       timeOutPromise,
     ]);
 
-    console.log("Synonyms generated");
-    await WordEntry.updateOne({ _id: wordID }, { synonyms });
+    console.log("Conjugation generated");
+    await WordEntry.updateOne({ _id: wordID }, { conjugation });
     revalidatePath(`/dict/word/${wordEntry._id}`);
-    return Response.json({ synonyms });
+    return Response.json({ conjugation });
   } catch (err) {
-    console.log("### Synonyms generation failed");
+    console.log("### Conjugation generation failed");
     console.log(err);
     return Response.json(err, {
       status: 400,

@@ -10,6 +10,9 @@ export interface IWordEntry {
   definitions: [IDefinition];
   description?: string;
   synonyms?: [string];
+  usageContext?: string;
+  isVerb?: boolean;
+  conjugation?: string;
 }
 
 const WordEntrySchema = new Schema<IWordEntry>({
@@ -28,6 +31,17 @@ const WordEntrySchema = new Schema<IWordEntry>({
   }, // Description of the word in user's language
   synonyms: {
     type: [String],
+    select: false,
+  },
+  usageContext: {
+    type: String,
+    select: false,
+  },
+  isVerb: {
+    type: Boolean,
+  },
+  conjugation: {
+    type: String,
     select: false,
   },
 });
