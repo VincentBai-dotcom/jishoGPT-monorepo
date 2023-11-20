@@ -44,7 +44,7 @@ export const generateWordSynonyms = async (
         },
         {
           role: "user",
-          content: `${word}(${pronunciation})`,
+          content: `${word}, pronounced as ${pronunciation}`,
         },
       ],
       model: "gpt-3.5-turbo",
@@ -72,7 +72,7 @@ export const generateWordUsageContext = async (
         },
         {
           role: "user",
-          content: `${word}(${pronunciation})`,
+          content: `${word}, pronounced as ${pronunciation}`,
         },
       ],
       model: "gpt-3.5-turbo",
@@ -100,7 +100,7 @@ export const generateWordConjugation = async (
         },
         {
           role: "user",
-          content: `${word}(${pronunciation})`,
+          content: `${word}, pronounced as ${pronunciation}`,
         },
       ],
       model: "gpt-3.5-turbo",
@@ -121,7 +121,7 @@ export const verbIdentifier = async (word: string, pronunciation: string) => {
       messages: [
         {
           role: "user",
-          content: `Is ${word}(${pronunciation}) a verb?`,
+          content: `Is ${word} pronounced as ${pronunciation} a verb?`,
         },
       ],
       model: "gpt-4-1106-preview",
