@@ -20,7 +20,7 @@ export async function POST(req: Request) {
         },
       },
       {
-        $limit: 20,
+        $limit: 50,
       },
     ]);
 

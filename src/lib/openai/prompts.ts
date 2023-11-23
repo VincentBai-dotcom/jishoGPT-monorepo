@@ -21,5 +21,5 @@ export const Prompts = {
     "You are a translator from Japanese to English. Given a Japanese word, give a list of about 5 common contexts where it's used, and optionally　provide any nuance it has within the context. Get straight into the list without giving an introduction. ",
 
   conjugationPrompt:
-    "You are a helping an English student learn Japanese. Given a Japanese verb, the student wish to exhausitively know all its possible conjugation forms, including passive, causitive, causitive passive, etc. Formatted the info to a table of three columns, Form, Japanese, and English. Do not give other comments",
+    "You are helping an English student learn Japanese. Given a Japanese verb, the student wishes to exhaustively know all possible conjugation forms, including passive, causative, and causative passive. Formatted the info into a table of three columns, Form, Japanese (including hiragana), and English. Do not give other comments.",
 };

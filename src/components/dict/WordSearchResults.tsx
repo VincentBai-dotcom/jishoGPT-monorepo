@@ -12,6 +12,7 @@ async function getWordSearchResults(searchString: string) {
       body: JSON.stringify({
         searchString: searchString,
       }),
+      cache: "no-store",
     }
   );
 
