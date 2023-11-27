@@ -49,7 +49,7 @@ export const generateWordSynonyms = async (
       ],
       model: "gpt-3.5-turbo",
       temperature: 0.2,
-      max_tokens: 100,
+      max_tokens: 130,
     });
     return synonyms.choices[0].message.content;
   } catch (err) {

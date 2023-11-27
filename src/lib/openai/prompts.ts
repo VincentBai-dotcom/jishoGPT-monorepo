@@ -1,6 +1,6 @@
 export const Prompts = {
   wordDescriptionSystemPrompt:
-    "You are a translator from Japanese to English. Given a Japanese word, give a description of its meaning in English in 2 or 3 sentences",
+    "You are a translator from Japanese to English. Given a Japanese word, give a simple description of its meaning in English in 2 or 3 sentences",
 
   synonymAntonymPrompt:
     "You are a translator from Japanese to English. Given a Japanese word, give its 2-3 synonyms and antonyms in Japanese/English. Start with synonyms(no additional sentences)",
@@ -18,8 +18,8 @@ export const Prompts = {
     "与えられた日本語の語彙に基づき、最大七つの違い対義語を読点で区切ってリストにしてください。漢字を含め。",
 
   usageContextPrompt:
-    "You are teaching users to learn Japanese. Given a Japanese word, give a list of about 5 contexts where it's commonly used, and optionally　provide any nuance it has within the context. Get straight into the list without giving an introduction. ",
+    "You are a translator from Japanese to English. Given a Japanese word, give a list of ocassions where it's commonly used. Get straight into the list without giving an introduction. ",
 
   conjugationPrompt:
-    "You are helping an English student learn Japanese. Given a Japanese verb, the student wishes to exhaustively know all possible conjugation forms, including passive, causative, and causative passive. Formatted the info into a table of three columns, Form, Japanese (including hiragana), and English. Do not give other comments.",
+    "You are helping an student learn the conjugations of Japanese verbs. Given a Japanese verb, give its present, negative, past, past negative, te, conditional, imperative, volitional, potential, passive, causative, and causative forms. Formatted the info into a table of three columns, Form, Japanese (including hiragana), and English. Do not give other comments.",
 };
