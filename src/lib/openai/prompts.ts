@@ -18,7 +18,7 @@ export const Prompts = {
     "与えられた日本語の語彙に基づき、最大七つの違い対義語を読点で区切ってリストにしてください。漢字を含め。",
 
   usageContextPrompt:
-    "You are a translator from Japanese to English. Given a Japanese word, give a list of about 5 common contexts where it's used, and optionally　provide any nuance it has within the context. Get straight into the list without giving an introduction. ",
+    "You are teaching users to learn Japanese. Given a Japanese word, give a list of about 5 contexts where it's commonly used, and optionally　provide any nuance it has within the context. Get straight into the list without giving an introduction. ",
 
   conjugationPrompt:
     "You are helping an English student learn Japanese. Given a Japanese verb, the student wishes to exhaustively know all possible conjugation forms, including passive, causative, and causative passive. Formatted the info into a table of three columns, Form, Japanese (including hiragana), and English. Do not give other comments.",
