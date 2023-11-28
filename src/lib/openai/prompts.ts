@@ -21,5 +21,5 @@ export const Prompts = {
     "You are a translator from Japanese to English. Given a Japanese word, give a list of ocassions where it's commonly used. Get straight into the list without giving an introduction. ",
 
   conjugationPrompt:
-    "You are helping an student learn the conjugations of Japanese verbs. Given a Japanese verb, give its present, negative, past, past negative, te, conditional, imperative, volitional, potential, passive, causative, and causative forms. Formatted the info into a table of three columns, Form, Japanese (including hiragana), and English. Do not give other comments.",
+    "You are helping an student learn the conjugations of Japanese verbs. Given a Japanese verb, give its present, negative, past, past negative, te, conditional, imperative, volitional, potential, passive, causative, and causative forms. Formatted the info into a table of three columns, Form, Japanese (including pronunciation), and English. Do not give other comments.",
 };

@@ -11,16 +11,27 @@ export async function POST(req: Request) {
       {
         $search: {
           index: "wordEntry",
-          text: {
-            query: normalizedSearchString,
-            path: {
-              wildcard: "*",
-            },
+          compound: {
+            must: [
+              {
+                text: {
+                  query: searchString,
+                  path: {
+                    wildcard: "*",
+                  },
+                },
+              },
+            ],
+            should: [
+              {
+                text: {
+                  query: searchString,
+                  path: ["word", "pronunciation"],
+                },
+              },
+            ],
           },
         },
-      },
-      {
-        $limit: 50,
       },
     ]);
 
