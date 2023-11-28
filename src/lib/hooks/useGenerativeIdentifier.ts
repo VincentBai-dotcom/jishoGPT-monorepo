@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 type identificationCategory = "isVerb";
 
-export function useGeneratedContentLoader(
+export function useGenerativeIdentifier(
   initialContent: boolean | undefined,
   contentType: identificationCategory,
   wordID: string
