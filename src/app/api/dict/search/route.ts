@@ -33,9 +33,6 @@ export async function POST(req: Request) {
           },
         },
       },
-      {
-        $limit: 50,
-      },
     ]);
 
     // return the entry if it's stored in the database
