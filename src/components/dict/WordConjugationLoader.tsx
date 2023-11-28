@@ -14,6 +14,7 @@ export default function WordConjugationLoader({
     "isVerb",
     wordEntry._id
   );
+  console.log(wordEntry.isVerb);
 
   return (
     <div>

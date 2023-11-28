@@ -7,12 +7,22 @@ export async function POST(req: Request) {
     console.log("### Searching word...");
     const { searchString } = await req.json();
     const normalizedSearchString = searchString.toLowerCase();
-    const searchResult = await WordEntry.find({
-      $or: [
-        { word: normalizedSearchString },
-        { pronunciation: normalizedSearchString },
-      ],
-    });
+    const searchResult = await WordEntry.aggregate([
+      {
+        $search: {
+          index: "wordEntry",
+          text: {
+            query: normalizedSearchString,
+            path: {
+              wildcard: "*",
+            },
+          },
+        },
+      },
+      {
+        $limit: 50,
+      },
+    ]);
 
     // return the entry if it's stored in the database
     if (searchResult !== null) {
