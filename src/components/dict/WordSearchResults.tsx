@@ -5,16 +5,13 @@ import WarningAlert from "../alerts/WarningAlert";
 import InfoAlert from "../alerts/InfoAlert";
 
 async function getWordSearchResults(searchString: string) {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_API_PATH + "/api/dict/search",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        searchString: searchString,
-      }),
-      cache: "no-store",
-    }
-  );
+  const res = await fetch(process.env.NEXT_PUBLIC_API_PATH + "/dict/search", {
+    method: "POST",
+    body: JSON.stringify({
+      searchString: searchString,
+    }),
+    cache: "no-store",
+  });
 
   if (res.ok) {
     return res.json();
