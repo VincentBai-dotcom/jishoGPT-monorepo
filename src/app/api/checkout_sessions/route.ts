@@ -11,9 +11,14 @@ export async function POST(req: Request) {
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.origin}/?success=true`,
-      cancel_url: `${req.headers.origin}/?canceled=true`,
+      success_url: `http://localhost:3000`,
+      cancel_url: `http://localhost:3000`,
       automatic_tax: { enabled: true },
     });
-  } catch (err) {}
+    return Response.redirect(session.url, 303);
+  } catch (err) {
+    return Response.json(err, {
+      status: 500,
+    });
+  }
 }
