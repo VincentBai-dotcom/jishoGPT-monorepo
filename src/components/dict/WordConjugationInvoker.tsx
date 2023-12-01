@@ -1,11 +1,10 @@
 "use client";
 
 import { IWordEntry } from "../../../models/WordEntry";
-import { useGeneratedContentLoader } from "@/lib/hooks/useGeneratedContentLoader";
-import VerbConjugationLoader from "./VerbConjugationLoader";
+import WordConjugationLoader from "./WordConjugationLoader";
 import { useGenerativeIdentifier } from "@/lib/hooks/useGenerativeIdentifier";
 
-export default function WordConjugationLoader({
+export default function WordConjugationInvoker({
   wordEntry,
 }: {
   wordEntry: IWordEntry;
@@ -20,7 +19,7 @@ export default function WordConjugationLoader({
       {verbIdentifier.identification === true && (
         <>
           <div className="divider"></div>
-          <VerbConjugationLoader wordEntry={wordEntry} />
+          <WordConjugationLoader wordEntry={wordEntry} />
         </>
       )}
     </div>

@@ -9,7 +9,7 @@ import rehypeStringify from "rehype-stringify";
 import remarkGfm from "remark-gfm";
 import { useEffect, useState } from "react";
 
-export default function VerbConjugationLoader({
+export default function WordConjugationLoader({
   wordEntry,
 }: {
   wordEntry: IWordEntry;
