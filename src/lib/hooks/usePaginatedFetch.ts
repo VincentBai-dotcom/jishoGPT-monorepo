@@ -19,8 +19,6 @@ export function usePaginatedFetch(
         });
         const res_json = await res.json();
         setData(res_json);
-        // setData(res_json[0]["data"]);
-        // setTotalEntries(res_json[0]["metaData"][0]["total"]);
       } catch (err) {
         setErrorMessage("Fetch Failed");
         console.log(err);

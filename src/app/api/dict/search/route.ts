@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   try {
     await connectToDB();
     console.log("### Searching word...");
-    const { searchString, page = 0 } = await req.json();
+    const { searchString, page = 0, pageSize = 10 } = await req.json();
     const query = {
       index: "wordEntry",
       compound: {
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
       {
         $facet: {
           metaData: [{ $count: "total" }, { $addFields: { page: page } }],
-          data: [{ $skip: 10 * page }, { $limit: 10 }],
+          data: [{ $skip: pageSize * page }, { $limit: pageSize }],
         },
       },
     ]);
