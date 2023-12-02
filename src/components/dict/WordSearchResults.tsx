@@ -35,7 +35,7 @@ export default function WordSearchResults({
       : data[0]["metaData"][0]["total"];
   const totalPage = Math.ceil(totalEntries / pageSize);
   const router = useRouter();
-  const setPage = (newPage: number) => {
+  const setPage = (newPage: number | string) => {
     router.push(
       `/dict/search/${searchString}?` +
         createQueryString([{ name: "page", value: newPage.toString() }])
@@ -45,12 +45,21 @@ export default function WordSearchResults({
   return (
     <div>
       {isLoading ? (
-        <div
-          className="flex flex-col gap-4 w-full"
-          style={{ marginTop: "1rem" }}
-        >
-          <div className="skeleton h-8 w-2/12"></div>
-          <div className="skeleton h-4 w-full"></div>
+        <div className="flex flex-col gap-6 mt-4">
+          <div className="skeleton h-14 max-w-md"></div>
+          {[...Array(pageSize).keys()].map((num, index) => {
+            return (
+              <div
+                className="relative flex flex-col w-full gap-1.5"
+                key={index}
+              >
+                <div className="skeleton h-7 w-40"></div>
+                <div className="skeleton h-7 w-28"></div>
+                <div className="skeleton h-4 max-w-xl"></div>
+                <div className="skeleton h-4 max-w-2xl"></div>
+              </div>
+            );
+          })}
         </div>
       ) : (
         <div className="flex flex-col gap-4 mt-4">
@@ -67,38 +76,48 @@ export default function WordSearchResults({
           ) : (
             <div className=" max-w-md">
               <InfoAlert
-                message={`${totalEntries} results found for \"${searchString}\"`}
+                message={`Showing ${page * pageSize + 1}-${
+                  page * pageSize + searchResults.length
+                } of ${totalEntries} results for \"${searchString}\"`}
               />
             </div>
           )}
           {searchResults.map((wordEntry: IWordEntry, index: number) => {
             return <WordEntryListElement wordEntry={wordEntry} key={index} />;
           })}
-          <div className="join mt-4 ml-auto">
-            <button
-              className={`join-item btn ${page === 0 ? "btn-disabled" : ""}`}
-              onClick={() => setPage(page - 1)}
-            >
-              «
-            </button>
-            <select className="join-item btn" value={page}>
-              {[...Array(totalPage).keys()].map((num, index) => {
-                return (
-                  <option key={index} value={num}>
-                    Page {num + 1}
-                  </option>
-                );
-              })}
-            </select>
-            <button
-              className={`join-item btn ${
-                page + 1 >= totalPage ? "btn-disabled" : ""
-              }`}
-              onClick={() => setPage(page + 1)}
-            >
-              »
-            </button>
-          </div>
+          {totalEntries === 0 || (
+            <div className="join mt-4 ml-auto">
+              <button
+                className={`join-item btn ${page === 0 ? "btn-disabled" : ""}`}
+                onClick={() => setPage(page - 1)}
+              >
+                «
+              </button>
+              <select
+                className="join-item btn"
+                value={page}
+                onChange={(e) => {
+                  setPage(e.target.value);
+                }}
+              >
+                {[...Array(totalPage).keys()].map((num, index) => {
+                  return (
+                    <option key={index} value={num}>
+                      Page {num + 1}
+                    </option>
+                  );
+                })}
+              </select>
+              <button
+                className={`join-item btn ${
+                  page + 1 >= totalPage ? "btn-disabled" : ""
+                }`}
+                onClick={() => setPage(page + 1)}
+              >
+                »
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
