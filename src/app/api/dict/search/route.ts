@@ -6,7 +6,6 @@ export async function POST(req: Request) {
     await connectToDB();
     console.log("### Searching word...");
     const { searchString } = await req.json();
-    const normalizedSearchString = searchString.toLowerCase();
     const searchResult = await WordEntry.aggregate([
       {
         $search: {
