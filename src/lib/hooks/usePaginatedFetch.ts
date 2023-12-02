@@ -5,9 +5,10 @@ export function usePaginatedFetch(
   initialPage?: number
 ) {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [page, setPage] = useState(initialPage || 0);
+  const [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
     const fetchWithPagination = async () => {
@@ -18,7 +19,8 @@ export function usePaginatedFetch(
           body: JSON.stringify({ ...body, page: page }),
         });
         const res_json = await res.json();
-        setData(res_json);
+        setData(res_json["data"]);
+        setTotalPage((res_json["metaData"][0]["total"] + 10 - 1) / 10);
       } catch (err) {
         setErrorMessage("Fetch Failed");
         console.log(err);
