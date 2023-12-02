@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 export function usePaginatedFetch(
   url: string,
-  body: Record<string, any>,
+  body: string,
   initialPage?: number
 ) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [page, setPage] = useState(initialPage || 0);
-  const [totalPage, setTotalPage] = useState(0);
+  const [totalEntries, setTotalEntries] = useState(0);
 
   useEffect(() => {
     const fetchWithPagination = async () => {
@@ -16,11 +16,12 @@ export function usePaginatedFetch(
       try {
         const res = await fetch(process.env.NEXT_PUBLIC_API_PATH + url, {
           method: "POST",
-          body: JSON.stringify({ ...body, page: page }),
+          body: JSON.stringify({ ...JSON.parse(body), page: page }),
         });
+        console.log("Fdsa");
         const res_json = await res.json();
-        setData(res_json["data"]);
-        setTotalPage((res_json["metaData"][0]["total"] + 10 - 1) / 10);
+        setData(res_json[0]["data"]);
+        setTotalEntries(res_json[0]["metaData"][0]["total"]);
       } catch (err) {
         setErrorMessage("Fetch Failed");
         console.log(err);
@@ -31,5 +32,5 @@ export function usePaginatedFetch(
     fetchWithPagination();
   }, [body, page, url]);
 
-  return { isLoading, data, page, setPage, errorMessage };
+  return { isLoading, data, page, setPage, errorMessage, totalEntries };
 }

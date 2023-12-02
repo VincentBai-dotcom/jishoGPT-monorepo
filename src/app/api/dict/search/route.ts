@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   try {
     await connectToDB();
     console.log("### Searching word...");
-    const { searchString, page } = await req.json();
+    const { searchString, page = 0 } = await req.json();
     const query = {
       index: "wordEntry",
       compound: {
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         ],
       },
     };
-    const searchResult = WordEntry.aggregate([
+    const searchResult = await WordEntry.aggregate([
       { $search: query },
       {
         $facet: {
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       },
     ]);
     // return the entry if it's stored in the database
-    return searchResult;
+    return Response.json(searchResult);
   } catch (err) {
     console.log("### Searching failed");
     console.log(err);
