@@ -27,7 +27,7 @@ export function useGeneratedContentLoader<T extends ContentType>(
   wordID: string
 ) {
   const [content, setContent] = useState(initialContent);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -37,8 +37,7 @@ export function useGeneratedContentLoader<T extends ContentType>(
         setIsLoading(true);
         try {
           const generateContentRes = await fetch(
-            process.env.NEXT_PUBLIC_API_PATH +
-              `/api/dict/generate/${contentType}`,
+            process.env.NEXT_PUBLIC_API_PATH + `/dict/generate/${contentType}`,
             {
               method: "POST",
               body: JSON.stringify({

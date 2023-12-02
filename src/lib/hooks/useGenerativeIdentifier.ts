@@ -15,7 +15,7 @@ export function useGenerativeIdentifier(
         try {
           const res = await fetch(
             process.env.NEXT_PUBLIC_API_PATH +
-              `/api/dict/identifier/${contentType}`,
+              `/dict/identifier/${contentType}`,
             {
               method: "POST",
               body: JSON.stringify({

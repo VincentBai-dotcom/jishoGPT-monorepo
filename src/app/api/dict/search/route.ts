@@ -5,44 +5,41 @@ export async function POST(req: Request) {
   try {
     await connectToDB();
     console.log("### Searching word...");
-    const { searchString } = await req.json();
-    const normalizedSearchString = searchString.toLowerCase();
-    const searchResult = await WordEntry.aggregate([
-      {
-        $search: {
-          index: "wordEntry",
-          compound: {
-            must: [
-              {
-                text: {
-                  query: searchString,
-                  path: {
-                    wildcard: "*",
-                  },
-                },
+    const { searchString, page = 0, pageSize = 10 } = await req.json();
+    const query = {
+      index: "wordEntry",
+      compound: {
+        must: [
+          {
+            text: {
+              query: searchString,
+              path: {
+                wildcard: "*",
               },
-            ],
-            should: [
-              {
-                text: {
-                  query: searchString,
-                  path: ["word", "pronunciation"],
-                },
-              },
-            ],
+            },
           },
+        ],
+        should: [
+          {
+            text: {
+              query: searchString,
+              path: ["word", "pronunciation"],
+            },
+          },
+        ],
+      },
+    };
+    const searchResult = await WordEntry.aggregate([
+      { $search: query },
+      {
+        $facet: {
+          metaData: [{ $count: "total" }, { $addFields: { page: page } }],
+          data: [{ $skip: pageSize * page }, { $limit: pageSize }],
         },
       },
     ]);
-
     // return the entry if it's stored in the database
-    if (searchResult !== null) {
-      console.log("word found in database");
-      return Response.json(searchResult);
-    } else {
-      console.log("word not found");
-      return Response.json(searchResult);
-    }
+    return Response.json(searchResult);
   } catch (err) {
     console.log("### Searching failed");
     console.log(err);
