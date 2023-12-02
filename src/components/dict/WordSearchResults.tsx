@@ -59,14 +59,26 @@ export default function WordSearchResults({
           {searchResults.map((wordEntry: IWordEntry, index: number) => {
             return <WordEntryListElement wordEntry={wordEntry} key={index} />;
           })}
-          <div className="join">
+          <div className="join mt-4 ml-auto">
             <button
               className={`join-item btn ${page === 0 ? "btn-disabled" : ""}`}
               onClick={() => setPage(page - 1)}
             >
               «
             </button>
-            <button className="join-item btn">Page {page + 1}</button>
+            <select
+              className="join-item btn"
+              value={page}
+              onChange={(e) => setPage(e.target.value)}
+            >
+              {[...Array(totalPage).keys()].map((num, index) => {
+                return (
+                  <option key={index} value={num}>
+                    Page {num + 1}
+                  </option>
+                );
+              })}
+            </select>
             <button
               className={`join-item btn ${
                 page + 1 >= totalPage ? "btn-disabled" : ""

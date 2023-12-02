@@ -27,7 +27,7 @@ export function useGeneratedContentLoader<T extends ContentType>(
   wordID: string
 ) {
   const [content, setContent] = useState(initialContent);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
