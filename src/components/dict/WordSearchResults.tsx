@@ -5,18 +5,26 @@ import { IWordEntry } from "../../../models/WordEntry";
 import WordEntryListElement from "./WordEntryListElement";
 import WarningAlert from "../alerts/WarningAlert";
 import InfoAlert from "../alerts/InfoAlert";
-import { usePaginatedFetch } from "@/lib/hooks/usePaginatedFetch";
+import { useSearchParams } from "next/navigation";
+import { useFetch } from "@/lib/hooks/useFetch";
+import { useRouter } from "next/navigation";
+import { createQueryString } from "@/lib/createQueryString";
 
 export default function WordSearchResults({
   searchString,
 }: {
   searchString: string;
 }) {
+  const searchParams = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "0")
+    ? parseInt(searchParams.get("page") || "0")
+    : 0;
   const pageSize = 7;
-  const { isLoading, data, page, setPage, errorMessage } = usePaginatedFetch(
+  const { isLoading, data, errorMessage } = useFetch(
     "/dict/search",
     JSON.stringify({
       searchString,
+      page,
       pageSize,
     })
   );
@@ -26,6 +34,13 @@ export default function WordSearchResults({
       ? 0
       : data[0]["metaData"][0]["total"];
   const totalPage = Math.ceil(totalEntries / pageSize);
+  const router = useRouter();
+  const setPage = (newPage: number) => {
+    router.push(
+      `/dict/search/${searchString}?` +
+        createQueryString([{ name: "page", value: newPage.toString() }])
+    );
+  };
 
   return (
     <div>
@@ -66,11 +81,7 @@ export default function WordSearchResults({
             >
               «
             </button>
-            <select
-              className="join-item btn"
-              value={page}
-              onChange={(e) => setPage(e.target.value)}
-            >
+            <select className="join-item btn" value={page}>
               {[...Array(totalPage).keys()].map((num, index) => {
                 return (
                   <option key={index} value={num}>
