@@ -6,20 +6,24 @@ import WordEntryListElement from "./WordEntryListElement";
 import WarningAlert from "../alerts/WarningAlert";
 import InfoAlert from "../alerts/InfoAlert";
 import { usePaginatedFetch } from "@/lib/hooks/usePaginatedFetch";
+import { useCallback } from "react";
 
 export default function WordSearchResults({
   searchString,
 }: {
   searchString: string;
 }) {
-  const { isLoading, data, page, setPage, errorMessage, totalEntries } =
-    usePaginatedFetch(
-      "/dict/search",
-      JSON.stringify({
-        searchString,
-      })
-    );
+  const { isLoading, data, page, setPage, errorMessage } = usePaginatedFetch(
+    "/dict/search",
+    JSON.stringify({
+      searchString,
+    })
+  );
+  const totalEntries =
+    isLoading || errorMessage ? 0 : data[0]["metaData"][0]["total"];
   const totalPage = Math.ceil(totalEntries / 10);
+  const searchResults = isLoading || errorMessage ? [] : data[0]["data"];
+
   return (
     <div>
       {isLoading ? (
@@ -49,7 +53,7 @@ export default function WordSearchResults({
               />
             </div>
           )}
-          {data.map((wordEntry, index) => {
+          {searchResults.map((wordEntry: IWordEntry, index: number) => {
             return <WordEntryListElement wordEntry={wordEntry} key={index} />;
           })}
           <div className="join">

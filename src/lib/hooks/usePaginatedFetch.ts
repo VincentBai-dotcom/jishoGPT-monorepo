@@ -5,10 +5,9 @@ export function usePaginatedFetch(
   initialPage?: number
 ) {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any>();
   const [errorMessage, setErrorMessage] = useState("");
   const [page, setPage] = useState(initialPage || 0);
-  const [totalEntries, setTotalEntries] = useState(0);
 
   useEffect(() => {
     const fetchWithPagination = async () => {
@@ -18,10 +17,10 @@ export function usePaginatedFetch(
           method: "POST",
           body: JSON.stringify({ ...JSON.parse(body), page: page }),
         });
-        console.log("Fdsa");
         const res_json = await res.json();
-        setData(res_json[0]["data"]);
-        setTotalEntries(res_json[0]["metaData"][0]["total"]);
+        setData(res_json);
+        // setData(res_json[0]["data"]);
+        // setTotalEntries(res_json[0]["metaData"][0]["total"]);
       } catch (err) {
         setErrorMessage("Fetch Failed");
         console.log(err);
@@ -32,5 +31,5 @@ export function usePaginatedFetch(
     fetchWithPagination();
   }, [body, page, url]);
 
-  return { isLoading, data, page, setPage, errorMessage, totalEntries };
+  return { isLoading, data, page, setPage, errorMessage };
 }
