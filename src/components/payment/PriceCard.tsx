@@ -5,7 +5,7 @@ export default function PriceCard({
     productName: string;
     price: string;
     description: string;
-    details: [string];
+    details: string[];
     // onSubmit: () => void;
     showUnit?: boolean;
     buttonText?: string;
