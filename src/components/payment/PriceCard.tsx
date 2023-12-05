@@ -6,7 +6,7 @@ export default function PriceCard({
     price: string;
     description: string;
     details: string[];
-    // onSubmit: () => void;
+    onSubmit: () => void;
     showUnit?: boolean;
     buttonText?: string;
     isButtonDisabled?: boolean;
@@ -32,7 +32,7 @@ export default function PriceCard({
         className={`btn btn-primary w-full text-base ${
           params.isButtonDisabled ? "btn-disabled" : ""
         }`}
-        type={params.isButtonDisabled ? "button" : "submit"}
+        onClick={params.onSubmit}
       >
         {params.buttonText || "Subscribe"}
       </button>

@@ -2,11 +2,12 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req: Request) {
   try {
+    const { priceID } = await req.json();
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
           // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-          price: "{{PRICE_ID}}",
+          price: priceID,
           quantity: 1,
         },
       ],
