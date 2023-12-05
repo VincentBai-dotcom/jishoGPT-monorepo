@@ -21,7 +21,7 @@ export default function WordSearchResults({
     : 0;
   const pageSize = 7;
   const { isLoading, data, errorMessage } = useFetch(
-    "/dict/search",
+    "dict/search",
     JSON.stringify({
       searchString,
       page,

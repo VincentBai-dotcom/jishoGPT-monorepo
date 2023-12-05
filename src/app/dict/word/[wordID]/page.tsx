@@ -10,7 +10,7 @@ import WordConjugationInvoker from "@/components/dict/WordConjugationInvoker";
 async function getWordEntryInfo(wordID: string) {
   const res = await fetch(
     process.env.NEXT_PUBLIC_API_PATH +
-      "/dict/word/get?" +
+      "dict/word/get?" +
       new URLSearchParams({
         wordID,
       }),

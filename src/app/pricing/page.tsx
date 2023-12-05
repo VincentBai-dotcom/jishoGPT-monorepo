@@ -25,7 +25,7 @@ export default function Page() {
             process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "placeholder"
           );
           const res = await fetch(
-            process.env.NEXT_PUBLIC_API_PATH + "/stripe/checkout_sessions",
+            process.env.NEXT_PUBLIC_API_PATH + "stripe/checkout_sessions",
             {
               method: "POST",
               body: JSON.stringify({
