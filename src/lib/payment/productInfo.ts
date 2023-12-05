@@ -1,11 +1,11 @@
 export const priceIDs = {
   starterTier: {
-    monthly: "price_1OINJLGsQl5mNBHeUAiDlZZX",
-    yearly: "price_1OINOmGsQl5mNBHeF7sE3DS6",
+    monthly: "price_1OK3pFGsQl5mNBHeT67XcRDW",
+    yearly: "price_1OK3pjGsQl5mNBHeAAIczcTG",
   },
   proTier: {
-    monthly: "price_1OINJhGsQl5mNBHe8AWONJHF",
-    yearly: "price_1OINOmGsQl5mNBHeF7sE3DS6",
+    monthly: "price_1OK3q8GsQl5mNBHefydBsw5J",
+    yearly: "price_1OK3qeGsQl5mNBHeCYmIV7av",
   },
 };
 
