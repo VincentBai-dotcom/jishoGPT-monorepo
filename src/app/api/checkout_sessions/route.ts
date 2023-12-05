@@ -1,8 +1,8 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
 export async function POST(req: Request) {
   try {
     const { priceID } = await req.json();
+    console.log("start payment");
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
@@ -11,13 +11,16 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      mode: "payment",
+      mode: "subscription",
       success_url: `http://localhost:3000`,
-      cancel_url: `http://localhost:3000`,
+      cancel_url: `http://localhost:3000/pricing`,
       automatic_tax: { enabled: true },
     });
-    return Response.redirect(session.url, 303);
+    return Response.json({
+      sessionId: session.id,
+    });
   } catch (err) {
+    console.log(err);
     return Response.json(err, {
       status: 500,
     });

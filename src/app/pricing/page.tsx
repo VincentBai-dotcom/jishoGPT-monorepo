@@ -3,6 +3,8 @@ import { priceIDs, productInfo } from "@/lib/payment/productInfo";
 import PriceCard from "@/components/payment/PriceCard";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { loadStripe } from "@stripe/stripe-js";
+import { notFound } from "next/navigation";
 export default function Page() {
   const [rateOfPayment, setRateOfPayment] = useState<"monthly" | "yearly">(
     "monthly"
@@ -17,13 +19,32 @@ export default function Page() {
         )?.showModal();
       };
     } else if (status === "authenticated" && priceID) {
-      return () => {
-        fetch(process.env.NEXT_PUBLIC_API_PATH + "/checkout_sessions", {
-          method: "POST",
-          body: JSON.stringify({
-            priceID,
-          }),
-        });
+      return async () => {
+        try {
+          const stripe = await loadStripe(
+            process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "placeholder"
+          );
+          const res = await fetch(
+            process.env.NEXT_PUBLIC_API_PATH + "/checkout_sessions",
+            {
+              method: "POST",
+              body: JSON.stringify({
+                priceID,
+              }),
+            }
+          );
+          const { sessionId } = await res.json();
+          console.log(sessionId);
+          const stripeError = await stripe?.redirectToCheckout({ sessionId });
+
+          if (stripeError) {
+            console.error(stripeError);
+            notFound();
+          }
+        } catch (err) {
+          console.log(err);
+          notFound();
+        }
       };
     }
 
