@@ -13,8 +13,8 @@ export async function POST(req: Request) {
         },
       ],
       mode: "subscription",
-      success_url: `http://localhost:3000`,
-      cancel_url: `http://localhost:3000/pricing`,
+      success_url: process.env.NEXT_PUBLIC_BASE_URL,
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}pricing`,
       automatic_tax: { enabled: true },
     });
     return Response.json({
