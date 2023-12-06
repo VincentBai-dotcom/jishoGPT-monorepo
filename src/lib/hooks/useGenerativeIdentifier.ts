@@ -14,8 +14,7 @@ export function useGenerativeIdentifier(
       const generateIdentification = async (wordID: string) => {
         try {
           const res = await fetch(
-            process.env.NEXT_PUBLIC_API_PATH +
-              `/dict/identifier/${contentType}`,
+            process.env.NEXT_PUBLIC_API_PATH + `dict/identifier/${contentType}`,
             {
               method: "POST",
               body: JSON.stringify({

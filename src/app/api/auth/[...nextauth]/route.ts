@@ -1,10 +1,11 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from "../../../../../models/User";
+import User, { IUser } from "../../../../../models/User";
 import connectToDB from "@/lib/db";
 import hashPassword from "@/lib/auth/hashPassword";
+import { AuthOptions } from "next-auth";
 
-export const authOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -32,8 +33,6 @@ export const authOptions = {
           const expectedPassword = hashPassword(password, user.authInfo.salt);
 
           if (expectedPassword !== user.authInfo.password) {
-            console.log(expectedPassword);
-            console.log("Password incorrect");
             return null;
           }
           console.log("Authorization Success");
@@ -46,6 +45,20 @@ export const authOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = token.uid;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.uid = user.id;
+      }
+      return token;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);

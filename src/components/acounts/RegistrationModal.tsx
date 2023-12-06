@@ -32,7 +32,7 @@ export default function RegistrationModal() {
         throw new Error("Invalid email address");
       }
       const registerRes = await fetch(
-        process.env.NEXT_PUBLIC_API_PATH + "/auth/register",
+        process.env.NEXT_PUBLIC_API_PATH + "auth/register",
         {
           method: "POST",
           headers: {

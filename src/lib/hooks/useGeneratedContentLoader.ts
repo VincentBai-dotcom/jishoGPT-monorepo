@@ -37,7 +37,7 @@ export function useGeneratedContentLoader<T extends ContentType>(
         setIsLoading(true);
         try {
           const generateContentRes = await fetch(
-            process.env.NEXT_PUBLIC_API_PATH + `/dict/generate/${contentType}`,
+            process.env.NEXT_PUBLIC_API_PATH + `dict/generate/${contentType}`,
             {
               method: "POST",
               body: JSON.stringify({
