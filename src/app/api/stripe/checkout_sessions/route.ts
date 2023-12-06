@@ -2,7 +2,7 @@ import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 export async function POST(req: Request) {
   try {
-    const { priceID } = await req.json();
+    const { priceID, subscriptionInfo } = await req.json();
     console.log("start payment");
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -16,6 +16,9 @@ export async function POST(req: Request) {
       success_url: process.env.NEXT_PUBLIC_BASE_URL,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}pricing`,
       automatic_tax: { enabled: true },
+      metadata: {
+        ...subscriptionInfo,
+      },
     });
     return Response.json({
       sessionId: session.id,

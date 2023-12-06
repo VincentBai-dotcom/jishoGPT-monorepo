@@ -11,15 +11,16 @@ export default function Page() {
   );
   const { data: session, status } = useSession();
 
-  const priceCardOnSubmit = (priceID?: string) => {
+  const priceCardOnSubmit = (tier?: "starterTier" | "proTier") => {
     if (status === "unauthenticated") {
       return () => {
         (
           document.getElementById("registrationModal") as HTMLDialogElement
         )?.showModal();
       };
-    } else if (status === "authenticated" && priceID) {
+    } else if (status === "authenticated" && tier) {
       return async () => {
+        const priceID = priceIDs[tier][rateOfPayment];
         try {
           const stripe = await loadStripe(
             process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "placeholder"
@@ -30,8 +31,11 @@ export default function Page() {
               method: "POST",
               body: JSON.stringify({
                 priceID,
-                rateOfPayment,
-                userID: session,
+                subscriptionInfo: {
+                  rateOfPayment,
+                  userID: session.user?.id,
+                  tier,
+                },
               }),
             }
           );
@@ -66,13 +70,13 @@ export default function Page() {
         <PriceCard
           params={{
             ...productInfo["starterTier"][rateOfPayment],
-            onSubmit: priceCardOnSubmit(priceIDs["starterTier"][rateOfPayment]),
+            onSubmit: priceCardOnSubmit("starterTier"),
           }}
         />
         <PriceCard
           params={{
             ...productInfo["proTier"][rateOfPayment],
-            onSubmit: priceCardOnSubmit(priceIDs["proTier"][rateOfPayment]),
+            onSubmit: priceCardOnSubmit("proTier"),
           }}
         />
       </div>

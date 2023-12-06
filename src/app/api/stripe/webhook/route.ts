@@ -18,7 +18,7 @@ export async function POST(req: Request) {
   }
   switch (event.type) {
     case "checkout.session.completed":
-      console.log("checkout completed");
+      console.log(event.data.object.metadata);
       break;
     case "invoice.paid":
       break;
