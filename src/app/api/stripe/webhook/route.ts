@@ -21,9 +21,15 @@ export async function POST(req: Request) {
     case "checkout.session.completed":
       const metadata = event.data.object.metadata;
       const subscription = await stripe.subscriptions.retrieve(
-        event.data.object.subscription
+        event.data.object.subscription as string
       );
-      await User.updateOne({ _id: metadata?.userID }, { tier: metadata?.tier });
+      await User.updateOne(
+        { _id: metadata?.userID },
+        {
+          tier: metadata?.tier,
+          subscriptionEndDate: new Date(subscription.billing_cycle_anchor),
+        }
+      );
       break;
     case "invoice.paid":
       break;
