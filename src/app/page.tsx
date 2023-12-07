@@ -1,9 +1,18 @@
 import SearchBar from "@/components/SearchBar";
 import homeBackground from "/public/homeBackground.jpg";
+import SuccessToastMessageWraper from "@/components/toastMessages/SuccessToastMessageWraper";
 
 export default async function Home() {
   return (
     <main className="">
+      <SuccessToastMessageWraper
+        params={[
+          {
+            searchParam: "subscription_success",
+            message: "Subscribed successfully",
+          },
+        ]}
+      />
       <div
         className="hero min-h-screen"
         style={{ backgroundImage: `url(${homeBackground.src})` }}
