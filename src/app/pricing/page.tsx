@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { loadStripe } from "@stripe/stripe-js";
 import { notFound } from "next/navigation";
+import ToastMessageWraper from "@/components/toastsMessage/ToastMessageWraper";
 export default function Page() {
   const [rateOfPayment, setRateOfPayment] = useState<"monthly" | "yearly">(
     "monthly"
@@ -32,7 +33,6 @@ export default function Page() {
               body: JSON.stringify({
                 priceID,
                 subscriptionInfo: {
-                  rateOfPayment,
                   userID: session.user?.id,
                   tier,
                 },
@@ -60,6 +60,15 @@ export default function Page() {
   const priceCards = () => {
     return (
       <div className="flex gap-10">
+        <ToastMessageWraper
+          params={[
+            {
+              searchParam: "subscription_success",
+              successMessage: "Subscribed successfully",
+              failureMessage: "Subscription failed",
+            },
+          ]}
+        />
         <PriceCard
           params={{
             ...productInfo["basicTier"],
