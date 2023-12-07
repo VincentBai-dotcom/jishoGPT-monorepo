@@ -32,7 +32,6 @@ export default function Page() {
               body: JSON.stringify({
                 priceID,
                 subscriptionInfo: {
-                  rateOfPayment,
                   userID: session.user?.id,
                   tier,
                 },

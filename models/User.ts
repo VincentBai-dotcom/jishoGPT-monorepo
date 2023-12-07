@@ -11,7 +11,8 @@ export interface IUser {
     password: string;
     salt: string;
   };
-  userType: string;
+  userType: "normal" | "admin";
+  tier: "basicTier" | "starterTier" | "proTier";
   isSubscribed: boolean;
   starredWords: [Types.ObjectId];
   subscriptionEndDate?: Date;
@@ -45,6 +46,10 @@ const UserSchema = new Schema<IUser>(
     userType: {
       type: String,
       default: "normal",
+    },
+    tier: {
+      type: String,
+      default: "basicTier",
     },
     isSubscribed: {
       type: Boolean,

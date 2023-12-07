@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import User from "../../../../../models/User";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export async function POST(req: Request) {
@@ -18,7 +19,11 @@ export async function POST(req: Request) {
   }
   switch (event.type) {
     case "checkout.session.completed":
-      console.log(event.data.object.metadata);
+      const metadata = event.data.object.metadata;
+      const subscription = await stripe.subscriptions.retrieve(
+        event.data.object.subscription
+      );
+      await User.updateOne({ _id: metadata?.userID }, { tier: metadata?.tier });
       break;
     case "invoice.paid":
       break;
