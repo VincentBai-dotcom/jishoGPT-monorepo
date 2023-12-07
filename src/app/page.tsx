@@ -1,15 +1,16 @@
 import SearchBar from "@/components/SearchBar";
 import homeBackground from "/public/homeBackground.jpg";
-import SuccessToastMessageWraper from "@/components/toastMessages/SuccessToastMessageWraper";
+import ToastMessageWraper from "@/components/toastsMessage/ToastMessageWraper";
 
 export default async function Home() {
   return (
     <main className="">
-      <SuccessToastMessageWraper
+      <ToastMessageWraper
         params={[
           {
             searchParam: "subscription_success",
-            message: "Subscribed successfully",
+            successMessage: "Subscribed successfully",
+            failureMessage: "Subscription failed",
           },
         ]}
       />
