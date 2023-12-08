@@ -4,12 +4,14 @@ declare module "next-auth" {
   interface Session {
     user?: DefaultUser & {
       id: string;
+      tier: string;
+      searchCredit: number;
     };
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    uid: string;
+    userID: string;
   }
 }

@@ -64,11 +64,21 @@ export function useGeneratedContentLoader<T extends ContentType>(
           setIsLoading(false);
         }
       };
-      generateContent(wordID);
+      if (session?.user?.searchCredit !== 0) {
+        generateContent(wordID);
+      } else {
+        setErrorMessage("Insufficient search credit");
+      }
     } else {
       setIsLoading(false);
     }
-  }, [wordID, content, contentType, session?.user?.id]);
+  }, [
+    wordID,
+    content,
+    contentType,
+    session?.user?.id,
+    session?.user?.searchCredit,
+  ]);
 
   const reloadContent = () => {
     setContent(undefined);
