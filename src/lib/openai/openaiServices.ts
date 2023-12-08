@@ -158,8 +158,8 @@ const chargeCalculator = (
 ) => {
   switch (model) {
     case "gpt-3.5-turbo-1106":
-      return (inputToken / 1000) * 0.001 + (outputToken / 1000) * 0.002;
+      return ((inputToken / 1000) * 0.001 + (outputToken / 1000) * 0.002) * 2;
     case "gpt-4-1106-preview":
-      return (inputToken / 1000) * 0.01 + (outputToken / 1000) * 0.03;
+      return ((inputToken / 1000) * 0.01 + (outputToken / 1000) * 0.03) * 2;
   }
 };

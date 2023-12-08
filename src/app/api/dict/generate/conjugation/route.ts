@@ -4,6 +4,7 @@ import { generateWordConjugation } from "@/lib/openai/openaiServices";
 import { Errors } from "../../../../../../errors";
 import { revalidatePath } from "next/cache";
 import User, { IUser } from "../../../../../../models/User";
+import { promiseWithTimeout } from "@/lib/promiseWithTimeout";
 
 export async function POST(req: Request) {
   try {
@@ -21,26 +22,21 @@ export async function POST(req: Request) {
     console.log("Word entry found in the database");
     console.log("generating...");
 
-    const timeOutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => {
-        reject("Reqeust time out");
-      }, 50000);
-    });
-
-    const { conjugation = "", charge = 0 } =
-      (await Promise.race([
+    const { conjugation, charge } =
+      (await promiseWithTimeout(
         generateWordConjugation(wordEntry.word, wordEntry.pronunciation),
-        timeOutPromise,
-      ])) || {};
+        50000
+      )) || {};
 
     console.log("Conjugation generated");
-    const updateConjugation = new Promise(async () => {
+    const updateConjugation = new Promise(async (resolve) => {
       if (conjugation) {
         await WordEntry.updateOne({ _id: wordID }, { conjugation });
       }
+      resolve("");
     });
 
-    const processCharge = new Promise(async () => {
+    const processCharge = new Promise(async (resolve) => {
       if (charge) {
         const user = await User.findOne<IUser>({ _id: userID });
         if (user) {
@@ -50,10 +46,10 @@ export async function POST(req: Request) {
           );
         }
       }
+      resolve("");
     });
-
     await Promise.all([updateConjugation, processCharge]);
-
+    console.log("done1");
     revalidatePath(`/dict/word/${wordEntry._id}`);
     return Response.json({ conjugation });
   } catch (err) {
