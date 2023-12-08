@@ -24,7 +24,7 @@ export default function Page() {
             {
               method: "POST",
               body: JSON.stringify({
-                priceID: "price_1OKsVpGsQl5mNBHeGI4Ggfew",
+                priceID: "price_1OKtUrGsQl5mNBHeQsFe18dJ",
                 userID: session.user?.id,
               }),
             }

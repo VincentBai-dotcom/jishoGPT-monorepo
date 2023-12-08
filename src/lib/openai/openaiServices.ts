@@ -23,6 +23,12 @@ export const generateWordDescription = async (
       temperature: 0.2,
       max_tokens: 140,
     });
+    console.log(
+      `Prompt token for descriptions: ${descriptions.usage?.prompt_tokens}`
+    );
+    console.log(
+      `Completion token for descriptions: ${descriptions.usage?.completion_tokens}`
+    );
     return descriptions.choices[0].message.content;
   } catch (err) {
     console.log("Generation Failed");
@@ -51,6 +57,11 @@ export const generateWordSynonyms = async (
       temperature: 0.2,
       max_tokens: 130,
     });
+
+    console.log(`Prompt token for synonyms: ${synonyms.usage?.prompt_tokens}`);
+    console.log(
+      `Completion token for synonyms: ${synonyms.usage?.completion_tokens}`
+    );
     return synonyms.choices[0].message.content;
   } catch (err) {
     console.log("Generation Failed");
@@ -79,6 +90,12 @@ export const generateWordUsageContext = async (
       temperature: 0.8,
       max_tokens: 350,
     });
+    console.log(
+      `Prompt token for context: ${usageContext.usage?.prompt_tokens}`
+    );
+    console.log(
+      `Completion token for context: ${usageContext.usage?.completion_tokens}`
+    );
     return usageContext.choices[0].message.content;
   } catch (err) {
     console.log("Generation Failed");
@@ -107,6 +124,12 @@ export const generateWordConjugation = async (
       temperature: 0.1,
       max_tokens: 600,
     });
+    console.log(
+      `Prompt token for conjugations: ${conjugations.usage?.prompt_tokens}`
+    );
+    console.log(
+      `Completion token for conjugations: ${conjugations.usage?.completion_tokens}`
+    );
     return conjugations.choices[0].message.content;
   } catch (err) {
     console.log("Generation Failed");
@@ -135,3 +158,9 @@ export const verbIdentifier = async (word: string, pronunciation: string) => {
     return null;
   }
 };
+
+const chargeCalculator = (
+  inputToken: number,
+  outputToken: number,
+  model: "gpt-3.5-turbo" | "gpt-4-1106-preview"
+) => {};

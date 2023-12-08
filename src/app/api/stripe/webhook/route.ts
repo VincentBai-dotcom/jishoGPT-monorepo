@@ -3,13 +3,11 @@ import User from "../../../../../models/User";
 import connectToDB from "@/lib/db";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-const processSubscription = async (
-  dataObject: Stripe.CheckoutSessionCompletedEvent.Data["object"]
-) => {
+const processSubscription = async (session: Stripe.Checkout.Session) => {
   try {
-    const metadata = dataObject.metadata;
+    const metadata = session.metadata;
     const subscription = await stripe.subscriptions.retrieve(
-      dataObject.subscription as string
+      session.subscription as string
     );
     await connectToDB();
     await User.updateOne(
@@ -25,9 +23,22 @@ const processSubscription = async (
   }
 };
 
-const processSearchCredit = async (
-  dataObject: Stripe.CheckoutSessionCompletedEvent.Data["object"]
-)
+const processSearchCredit = async (session: Stripe.Checkout.Session) => {
+  console.log("start handling search credit");
+  console.log(session.amount_subtotal);
+  try {
+    const userID = session.metadata?.userID;
+    await connectToDB();
+    await User.updateOne(
+      { _id: userID },
+      {
+        $inc: { searchCredit: session.amount_subtotal },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export async function POST(req: Request) {
   const payload = await req.text();
@@ -45,7 +56,15 @@ export async function POST(req: Request) {
   }
   switch (event.type) {
     case "checkout.session.completed":
-      await processSubscription(event.data.object);
+      const session = event.data.object;
+      const lineItems = await stripe.checkout.sessions.listLineItems(
+        session.id
+      );
+      if (lineItems.data[0].price?.id === "price_1OKtUrGsQl5mNBHeQsFe18dJ") {
+        await processSearchCredit(session);
+      } else {
+        await processSubscription(session);
+      }
       break;
     case "invoice.paid":
       break;

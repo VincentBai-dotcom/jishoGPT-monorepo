@@ -54,7 +54,7 @@ const UserSchema = new Schema<IUser>(
     },
     searchCredit: {
       type: Number,
-      default: 1,
+      default: 100, // number is in cents
     },
     isSubscribed: {
       type: Boolean,
