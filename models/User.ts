@@ -11,7 +11,8 @@ export interface IUser {
     password: string;
     salt: string;
   };
-  userType: "normal" | "admin";
+  searchCredit: number;
+  role: "user" | "admin";
   tier: "basicTier" | "starterTier" | "proTier";
   isSubscribed: boolean;
   starredWords: [Types.ObjectId];
@@ -43,13 +44,17 @@ const UserSchema = new Schema<IUser>(
       },
       required: true,
     },
-    userType: {
+    role: {
       type: String,
-      default: "normal",
+      default: "user",
     },
     tier: {
       type: String,
       default: "basicTier",
+    },
+    searchCredit: {
+      type: Number,
+      default: 100, // number is in cents
     },
     isSubscribed: {
       type: Boolean,

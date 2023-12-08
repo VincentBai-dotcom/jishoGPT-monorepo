@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 type ContentType =
@@ -29,6 +30,7 @@ export function useGeneratedContentLoader<T extends ContentType>(
   const [content, setContent] = useState(initialContent);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     setErrorMessage("");
@@ -42,6 +44,7 @@ export function useGeneratedContentLoader<T extends ContentType>(
               method: "POST",
               body: JSON.stringify({
                 wordID,
+                userID: session?.user?.id,
               }),
             }
           );
@@ -61,11 +64,21 @@ export function useGeneratedContentLoader<T extends ContentType>(
           setIsLoading(false);
         }
       };
-      generateContent(wordID);
+      if (session?.user?.searchCredit !== 0) {
+        generateContent(wordID);
+      } else {
+        setErrorMessage("Insufficient search credit");
+      }
     } else {
       setIsLoading(false);
     }
-  }, [wordID, content, contentType]);
+  }, [
+    wordID,
+    content,
+    contentType,
+    session?.user?.id,
+    session?.user?.searchCredit,
+  ]);
 
   const reloadContent = () => {
     setContent(undefined);

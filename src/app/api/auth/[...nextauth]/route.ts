@@ -31,7 +31,6 @@ export const authOptions: AuthOptions = {
           }
 
           const expectedPassword = hashPassword(password, user.authInfo.salt);
-
           if (expectedPassword !== user.authInfo.password) {
             return null;
           }
@@ -47,14 +46,21 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     session: async ({ session, token }) => {
-      if (session?.user) {
-        session.user.id = token.uid;
+      if (!session.user) {
+        return session;
+      }
+      session.user.id = token.userID;
+      await connectToDB();
+      const user = await User.findOne({ _id: token.userID });
+      if (user) {
+        session.user.searchCredit = user.searchCredit;
+        session.user.tier = user.tier;
       }
       return session;
     },
     jwt: async ({ user, token }) => {
       if (user) {
-        token.uid = user.id;
+        token.userID = user.id;
       }
       return token;
     },
