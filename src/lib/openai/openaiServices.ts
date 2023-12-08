@@ -8,7 +8,8 @@ export const generateWordDescription = async (
   pronunciation: string
 ) => {
   try {
-    const descriptions = await openai.chat.completions.create({
+    const model = "gpt-4-1106-preview";
+    const completions = await openai.chat.completions.create({
       messages: [
         {
           role: "system",
@@ -19,21 +20,18 @@ export const generateWordDescription = async (
           content: `${word}, pronounced as ${pronunciation}`,
         },
       ],
-      model: "gpt-4-1106-preview",
+      model: model,
       temperature: 0.2,
       max_tokens: 140,
     });
-    console.log(
-      `Prompt token for descriptions: ${descriptions.usage?.prompt_tokens}`
-    );
-    console.log(
-      `Completion token for descriptions: ${descriptions.usage?.completion_tokens}`
-    );
-    return descriptions.choices[0].message.content;
+
+    const inputToken = completions.usage?.prompt_tokens;
+    const outputToken = completions.usage?.completion_tokens;
+    const charge = chargeCalculator(inputToken || 0, outputToken || 0, model);
+    return { description: completions.choices[0].message.content, charge };
   } catch (err) {
     console.log("Generation Failed");
     console.log(err);
-    return null;
   }
 };
 
@@ -42,7 +40,8 @@ export const generateWordSynonyms = async (
   pronunciation: string
 ) => {
   try {
-    const synonyms = await openai.chat.completions.create({
+    const model = "gpt-3.5-turbo-1106";
+    const completions = await openai.chat.completions.create({
       messages: [
         {
           role: "system",
@@ -53,20 +52,17 @@ export const generateWordSynonyms = async (
           content: `${word}, pronounced as ${pronunciation}`,
         },
       ],
-      model: "gpt-3.5-turbo",
+      model: model,
       temperature: 0.2,
       max_tokens: 130,
     });
-
-    console.log(`Prompt token for synonyms: ${synonyms.usage?.prompt_tokens}`);
-    console.log(
-      `Completion token for synonyms: ${synonyms.usage?.completion_tokens}`
-    );
-    return synonyms.choices[0].message.content;
+    const inputToken = completions.usage?.prompt_tokens;
+    const outputToken = completions.usage?.completion_tokens;
+    const charge = chargeCalculator(inputToken || 0, outputToken || 0, model);
+    return { synonyms: completions.choices[0].message.content, charge };
   } catch (err) {
     console.log("Generation Failed");
     console.log(err);
-    return null;
   }
 };
 
@@ -75,7 +71,8 @@ export const generateWordUsageContext = async (
   pronunciation: string
 ) => {
   try {
-    const usageContext = await openai.chat.completions.create({
+    const model = "gpt-3.5-turbo-1106";
+    const completions = await openai.chat.completions.create({
       messages: [
         {
           role: "system",
@@ -86,21 +83,17 @@ export const generateWordUsageContext = async (
           content: `${word}, pronounced as ${pronunciation}`,
         },
       ],
-      model: "gpt-3.5-turbo",
+      model: model,
       temperature: 0.8,
       max_tokens: 350,
     });
-    console.log(
-      `Prompt token for context: ${usageContext.usage?.prompt_tokens}`
-    );
-    console.log(
-      `Completion token for context: ${usageContext.usage?.completion_tokens}`
-    );
-    return usageContext.choices[0].message.content;
+    const inputToken = completions.usage?.prompt_tokens;
+    const outputToken = completions.usage?.completion_tokens;
+    const charge = chargeCalculator(inputToken || 0, outputToken || 0, model);
+    return { usageContext: completions.choices[0].message.content, charge };
   } catch (err) {
     console.log("Generation Failed");
     console.log(err);
-    return null;
   }
 };
 
@@ -109,7 +102,8 @@ export const generateWordConjugation = async (
   pronunciation: string
 ) => {
   try {
-    const conjugations = await openai.chat.completions.create({
+    const model = "gpt-3.5-turbo-1106";
+    const completions = await openai.chat.completions.create({
       messages: [
         {
           role: "system",
@@ -120,21 +114,20 @@ export const generateWordConjugation = async (
           content: `${word}, pronounced as ${pronunciation}`,
         },
       ],
-      model: "gpt-3.5-turbo",
+      model: model,
       temperature: 0.1,
       max_tokens: 600,
     });
-    console.log(
-      `Prompt token for conjugations: ${conjugations.usage?.prompt_tokens}`
-    );
-    console.log(
-      `Completion token for conjugations: ${conjugations.usage?.completion_tokens}`
-    );
-    return conjugations.choices[0].message.content;
+    const inputToken = completions.usage?.prompt_tokens;
+    const outputToken = completions.usage?.completion_tokens;
+    const charge = chargeCalculator(inputToken || 0, outputToken || 0, model);
+    return {
+      conjugation: completions.choices[0].message.content || "",
+      charge,
+    };
   } catch (err) {
     console.log("Generation Failed");
     console.log(err);
-    return null;
   }
 };
 
@@ -155,12 +148,18 @@ export const verbIdentifier = async (word: string, pronunciation: string) => {
   } catch (err) {
     console.log("Generation Failed");
     console.log(err);
-    return null;
   }
 };
 
 const chargeCalculator = (
   inputToken: number,
   outputToken: number,
-  model: "gpt-3.5-turbo" | "gpt-4-1106-preview"
-) => {};
+  model: "gpt-3.5-turbo-1106" | "gpt-4-1106-preview"
+) => {
+  switch (model) {
+    case "gpt-3.5-turbo-1106":
+      return (inputToken / 1000) * 0.001 + (outputToken / 1000) * 0.002;
+    case "gpt-4-1106-preview":
+      return (inputToken / 1000) * 0.01 + (outputToken / 1000) * 0.03;
+  }
+};
