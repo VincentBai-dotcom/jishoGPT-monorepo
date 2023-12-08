@@ -3,6 +3,32 @@ import User from "../../../../../models/User";
 import connectToDB from "@/lib/db";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
+const processSubscription = async (
+  dataObject: Stripe.CheckoutSessionCompletedEvent.Data["object"]
+) => {
+  try {
+    const metadata = dataObject.metadata;
+    const subscription = await stripe.subscriptions.retrieve(
+      dataObject.subscription as string
+    );
+    await connectToDB();
+    await User.updateOne(
+      { _id: metadata?.userID },
+      {
+        tier: metadata?.tier,
+        subscriptionEndDate: new Date(subscription.current_period_end * 1000),
+        isSubscribed: true,
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const processSearchCredit = async (
+  dataObject: Stripe.CheckoutSessionCompletedEvent.Data["object"]
+)
+
 export async function POST(req: Request) {
   const payload = await req.text();
   const sig = req.headers.get("stripe-signature") as string;
@@ -19,25 +45,7 @@ export async function POST(req: Request) {
   }
   switch (event.type) {
     case "checkout.session.completed":
-      try {
-        const metadata = event.data.object.metadata;
-        const subscription = await stripe.subscriptions.retrieve(
-          event.data.object.subscription as string
-        );
-        await connectToDB();
-        await User.updateOne(
-          { _id: metadata?.userID },
-          {
-            tier: metadata?.tier,
-            subscriptionEndDate: new Date(
-              subscription.current_period_end * 1000
-            ),
-            isSubscribed: true,
-          }
-        );
-      } catch (err) {
-        console.log(err);
-      }
+      await processSubscription(event.data.object);
       break;
     case "invoice.paid":
       break;
