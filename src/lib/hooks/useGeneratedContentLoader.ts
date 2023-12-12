@@ -30,7 +30,7 @@ export function useGeneratedContentLoader<T extends ContentType>(
   const [content, setContent] = useState(initialContent);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   useEffect(() => {
     setErrorMessage("");
@@ -39,7 +39,8 @@ export function useGeneratedContentLoader<T extends ContentType>(
         setIsLoading(true);
         try {
           const generateContentRes = await fetch(
-            process.env.NEXT_PUBLIC_API_PATH + `dict/generate/${contentType}`,
+            process.env.NEXT_PUBLIC_API_PATH +
+              `dict/generated-content/${contentType}`,
             {
               method: "POST",
               body: JSON.stringify({
