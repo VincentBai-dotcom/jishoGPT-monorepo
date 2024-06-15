@@ -2,6 +2,7 @@
 import React, { useRef, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const searchTypes = ["All", "Word", "Kanji"] as const;
 
@@ -14,11 +15,17 @@ export default function SearchBar() {
 
   const UListRef = useRef<HTMLUListElement>(null);
 
+  const { data: session, status } = useSession();
+
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchString !== "") {
+    if (status === "unauthenticated") {
+      (
+        document.getElementById("registrationModal") as HTMLDialogElement
+      )?.showModal();
+    } else if (searchString !== "") {
       router.replace(`/dict/search/${searchString}`);
     }
   };

@@ -12,11 +12,11 @@ export default async function NavBar() {
         </Link>
       </div>
       <div className="navbar-end">
-        <ul className="menu menu-horizontal px-1">
+        {/* <ul className="menu menu-horizontal px-1">
           <li>
             <Link href="/pricing">Pricing</Link>
           </li>
-        </ul>
+        </ul> */}
         <UserOperationModule />
       </div>
     </div>
