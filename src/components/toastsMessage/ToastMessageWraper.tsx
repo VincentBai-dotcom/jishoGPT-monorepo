@@ -15,11 +15,10 @@ export default function ToastMessageWraper({
     }
   ];
 }) {
-  const MessagesLoader = () => {
-    const searchParams = useSearchParams();
-
-    return params.map(
-      ({ searchParam, successMessage, failureMessage }, index) => {
+  const searchParams = useSearchParams();
+  return (
+    <div className="toast">
+      {params.map(({ searchParam, successMessage, failureMessage }, index) => {
         return (
           <div key={index}>
             <SuccessToastMessage
@@ -40,12 +39,7 @@ export default function ToastMessageWraper({
             />
           </div>
         );
-      }
-    );
-  };
-  return (
-    <div className="toast">
-      <MessagesLoader />{" "}
+      })}
     </div>
   );
 }
