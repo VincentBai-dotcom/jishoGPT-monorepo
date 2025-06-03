@@ -9,6 +9,39 @@ A modern Japanese dictionary application powered by GPT, built with [Next.js](ht
 - User authentication with NextAuth
 - Stripe integration for premium features
 - Responsive design with Tailwind CSS and DaisyUI
+- Real-time word suggestions
+- History tracking for searched words
+- Customizable user preferences
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+- Node.js 18.0.0 or later
+- npm, yarn, pnpm, or bun
+- MongoDB (local or Atlas)
+- OpenAI API key
+- Stripe account (for payment features)
+
+## Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key
+
+# MongoDB
+MONGODB_URI=your_mongodb_uri
+
+# NextAuth
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+
+# Stripe
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+```
 
 ## Getting Started
 
@@ -36,6 +69,10 @@ You can start editing the main page by modifying [`src/app/page.tsx`](src/app/pa
 - [`src/lib/`](src/lib/) - Utility functions and configurations
 - [`models/`](models/) - Database models for User, WordEntry, and Definition
 - [`public/`](public/) - Static assets
+- [`src/styles/`](src/styles/) - Global styles and Tailwind configuration
+- [`src/types/`](src/types/) - TypeScript type definitions
+- [`src/hooks/`](src/hooks/) - Custom React hooks
+- [`src/utils/`](src/utils/) - Helper functions and utilities
 
 ## Technology Stack
 
@@ -46,6 +83,44 @@ You can start editing the main page by modifying [`src/app/page.tsx`](src/app/pa
 - **Database**: MongoDB with Mongoose
 - **Payments**: Stripe
 - **Font Optimization**: [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) with Inter
+- **State Management**: React Context + Zustand
+- **Form Handling**: React Hook Form + Zod
+- **Testing**: Jest + React Testing Library
+
+## Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please make sure to update tests as appropriate and follow our code style guidelines.
+
+## Testing
+
+Run the test suite:
+
+```bash
+npm test
+# or
+yarn test
+# or
+pnpm test
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+If you encounter any issues or have questions, please:
+- Open an issue in the GitHub repository
+- Join our Discord community
+- Contact us at support@jishogpt.com
 
 ## Learn More
 
