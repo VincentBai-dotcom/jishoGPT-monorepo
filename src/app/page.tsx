@@ -1,19 +1,22 @@
 import SearchBar from "@/components/SearchBar";
 import homeBackground from "/public/homeBackground.jpg";
 import ToastMessageWraper from "@/components/toastsMessage/ToastMessageWraper";
+import { Suspense } from "react";
 
 export default async function Home() {
   return (
     <main className="">
-      <ToastMessageWraper
-        params={[
-          {
-            searchParam: "subscription_success",
-            successMessage: "Subscribed successfully",
-            failureMessage: "Subscription failed",
-          },
-        ]}
-      />
+      <Suspense>
+        <ToastMessageWraper
+          params={[
+            {
+              searchParam: "subscription_success",
+              successMessage: "Subscribed successfully",
+              failureMessage: "Subscription failed",
+            },
+          ]}
+        />
+      </Suspense>
       <div
         className="hero min-h-screen"
         style={{ backgroundImage: `url(${homeBackground.src})` }}

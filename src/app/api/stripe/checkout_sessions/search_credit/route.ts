@@ -13,8 +13,8 @@ export async function POST(req: Request) {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}pricing/?payment_success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}pricing`,
+      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}?payment_success=true`,
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
       automatic_tax: { enabled: true },
       metadata: {
         userID,
